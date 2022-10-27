@@ -1,11 +1,24 @@
 // import propTypes from 'prop-types'
+import burgerIngredientsStyles from './burger-ingredients.module.css'
+import IngredientsCategories from './IngredientCategories'
+import Buns from './Buns'
+import Sauces from './Sauces'
+import Mains from './Mains'
 
 const BurgerIngredients = (props) => {
-    console.log(props.data)
+    const {data} = props
+    console.log(data)
+
     return (
-        <main>
-            {/* <h2>Hello Ingredients</h2> */}
-        </main>
+        <>
+            <div className={burgerIngredientsStyles.container}>
+                <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+                <IngredientsCategories />
+                <Buns data={data}/>
+                <Sauces data={data}/>
+                <Mains data={data}/>
+            </div>
+        </>
     )
 }
 

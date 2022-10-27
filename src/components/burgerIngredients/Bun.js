@@ -1,0 +1,22 @@
+import burgerIngredientsStyles from './burger-ingredients.module.css'
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+
+const Bun = (props) => {
+    const { bun } = props
+    return (
+        <>
+            <li className={burgerIngredientsStyles.listItem}>
+                <div className='ml-4 mr-4'>
+                    <img src={bun.image} alt='bun'/>
+                </div>
+                <div className={`${burgerIngredientsStyles.price} mt-1 mb-1`}>
+                    <p className="text text_type_digits-default pr-2">{bun.price}</p>
+                    <CurrencyIcon type="primary" />
+                </div>
+                <p className='pb-6'>{bun.name}</p>
+            </li>
+        </>
+    )
+}
+
+export default Bun;

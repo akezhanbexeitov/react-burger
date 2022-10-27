@@ -8,7 +8,16 @@ function App() {
   return (
     <React.Fragment>
       <AppHeader />
-      <BurgerIngredients data={data}/>
+      <main className="text text_type_main-default">
+        <div className='container'>
+          <section className='mr-10'>
+            <BurgerIngredients data={data}/>
+          </section>
+          <section>
+              Constructor
+          </section>
+        </div>
+      </main>
     </React.Fragment>
   );
 }

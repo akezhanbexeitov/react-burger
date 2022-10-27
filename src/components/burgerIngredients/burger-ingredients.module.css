@@ -1,0 +1,28 @@
+.container {
+    width: 660px;
+}
+
+.list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* .listItem:not(:last-child) {
+    margin-right: 24px;
+} */
+
+.listItem {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+}

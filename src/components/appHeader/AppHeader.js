@@ -3,9 +3,9 @@ import headerStyles from './app-header.module.css'
 
 const AppHeader = () => {
     return (
-        <header className='text text_type_main-default p-4'>
+        <header className='text text_type_main-default '>
             <div className={headerStyles.container}>
-                <nav className={headerStyles.navigation}>
+                <nav>
                     <ul className={headerStyles.list}>
                         <li className={`${headerStyles.item} p-5`}> {/* Add "a" tag later */}
                             <BurgerIcon type="primary" />
