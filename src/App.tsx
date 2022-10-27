@@ -3,6 +3,7 @@ import './App.css';
 import data from './utils/data'
 import AppHeader from './components/appHeader/AppHeader';
 import BurgerIngredients from './components/burgerIngredients/BurgerIngredients';
+import BurgerConstructor from './components/burgerConstructor/BurgerConstructor';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
             <BurgerIngredients data={data}/>
           </section>
           <section>
-              Constructor
+              <BurgerConstructor data={data}/>
           </section>
         </div>
       </main>

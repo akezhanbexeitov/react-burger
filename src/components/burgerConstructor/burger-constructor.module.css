@@ -1,0 +1,29 @@
+.container {
+    width: 660px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.item:first-child,
+.item:last-child {
+    padding-left: 32px;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
