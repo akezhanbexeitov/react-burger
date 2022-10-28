@@ -14,7 +14,7 @@ const Sauces = (props) => {
                     } else {
                         return null
                     }
-                }).map(item => <Sauce key={item['id']} sauce={item}/>)}
+                }).map((item, index) => <Sauce key={index} sauce={item}/>)}
             </ul>
         </>
     )

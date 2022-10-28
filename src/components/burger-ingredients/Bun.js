@@ -36,6 +36,8 @@ const dataStructure = propTypes.shape({
     __v: propTypes.number
 })
 
-Bun.propTypes = dataStructure;
+Bun.propTypes = {
+    bun: dataStructure
+}
 
 export default Bun;
