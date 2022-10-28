@@ -11,10 +11,10 @@ function App() {
       <AppHeader />
       <main className="text text_type_main-default">
         <div className='container'>
-          <section className='mr-10'>
+          <section className='mr-5'>
             <BurgerIngredients data={data}/>
           </section>
-          <section>
+          <section className='ml-5'>
               <BurgerConstructor data={data}/>
           </section>
         </div>

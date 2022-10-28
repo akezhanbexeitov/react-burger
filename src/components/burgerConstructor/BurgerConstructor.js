@@ -8,7 +8,7 @@ const BurgerConstructor = (props) => {
 
     return (
         <>
-            <div className={`${burgerConstructorStyles.container} pl-4 pr-4 pt-25 pb-10`}>
+            <div className={`${burgerConstructorStyles.container} pt-25 pb-10`}>
                 <IngredientConstructor data={data}/>
             </div>
             <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
