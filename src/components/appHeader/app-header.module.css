@@ -1,7 +1,6 @@
 .container {
-    max-width: 1440px;
+    max-width: 1280px;
     margin: 0 auto;
-    border: 1px solid white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +16,16 @@
 
 .item {
     list-style-type: none;
-    display: flex;
-    align-items: center;
 }
 
+.link {
+    display: flex;
+    align-items: center;
+    border-radius: 40px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    margin-right: 13.2%;
+}
