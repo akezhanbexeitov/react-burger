@@ -1,4 +1,4 @@
-// import propTypes from 'prop-types'
+import propTypes from 'prop-types'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './IngredientCategories'
 import Buns from './Buns'
@@ -7,7 +7,6 @@ import Mains from './Mains'
 
 const BurgerIngredients = (props) => {
     const {data} = props
-    console.log(data)
 
     return (
         <div className={burgerIngredientsStyles.container}>
@@ -22,20 +21,23 @@ const BurgerIngredients = (props) => {
     )
 }
 
-// const dataStructure = propTypes.shape({
-//     "_id": propTypes.string,
-//     "name": propTypes.string,
-//     "type": propTypes.string,
-//     "proteins": propTypes.number,
-//     "fat": propTypes.number,
-//     "carbohydrates": propTypes.number,
-//     "calories": propTypes.number,
-//     "price": propTypes.number,
-//     "image": propTypes.string,
-//     "image_mobile": propTypes.string,
-//     "image_large": propTypes.string,
-//     "__v": propTypes.number
-// })
-// BurgerIngredients.propTypes = propTypes.arrayOf(dataStructure)
+const dataStructure = propTypes.shape({
+    _id: propTypes.string,
+    name: propTypes.string,
+    types: propTypes.string,
+    proteins: propTypes.number,
+    fat: propTypes.number,
+    carbohydrates: propTypes.number,
+    calories: propTypes.number,
+    price: propTypes.number,
+    image: propTypes.string,
+    image_mobile: propTypes.string,
+    image_large: propTypes.string,
+    __v: propTypes.number
+})
+
+BurgerIngredients.propTypes = {
+    data: propTypes.arrayOf(dataStructure)
+}
 
 export default BurgerIngredients;

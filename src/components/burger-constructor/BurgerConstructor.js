@@ -1,10 +1,10 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './IngredientConstructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import propTypes from 'prop-types'
 
 const BurgerConstructor = (props) => {
     const { data } = props
-    console.log(data)
 
     return (
         <>
@@ -19,8 +19,26 @@ const BurgerConstructor = (props) => {
                 </Button>
             </div>
         </>
-
     )
+}
+
+const dataStructure = propTypes.shape({
+    _id: propTypes.string,
+    name: propTypes.string,
+    types: propTypes.string,
+    proteins: propTypes.number,
+    fat: propTypes.number,
+    carbohydrates: propTypes.number,
+    calories: propTypes.number,
+    price: propTypes.number,
+    image: propTypes.string,
+    image_mobile: propTypes.string,
+    image_large: propTypes.string,
+    __v: propTypes.number
+})
+
+BurgerConstructor.propTypes = {
+    data: propTypes.arrayOf(dataStructure)
 }
 
 export default BurgerConstructor;

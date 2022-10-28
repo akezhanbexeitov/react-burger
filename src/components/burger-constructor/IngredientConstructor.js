@@ -1,5 +1,6 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
+import propTypes from 'prop-types'
 
 const IngredientConstructor = (props) => {
   const { data } = props
@@ -86,6 +87,25 @@ const IngredientConstructor = (props) => {
       </ul>
     </>
   )
+}
+
+const dataStructure = propTypes.shape({
+  _id: propTypes.string,
+  name: propTypes.string,
+  types: propTypes.string,
+  proteins: propTypes.number,
+  fat: propTypes.number,
+  carbohydrates: propTypes.number,
+  calories: propTypes.number,
+  price: propTypes.number,
+  image: propTypes.string,
+  image_mobile: propTypes.string,
+  image_large: propTypes.string,
+  __v: propTypes.number
+})
+
+IngredientConstructor.propTypes = {
+  data: propTypes.arrayOf(dataStructure)
 }
 
 export default IngredientConstructor;

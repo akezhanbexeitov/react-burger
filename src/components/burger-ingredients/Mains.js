@@ -1,5 +1,6 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import Main from './Main'
+import propTypes from 'prop-types'
 
 const Mains = (props) => {
     const { data } = props
@@ -13,10 +14,29 @@ const Mains = (props) => {
                     } else {
                         return null
                     }
-                }).map(item => <Main key={item.id} main={item}/>)}
+                }).map(item => <Main key={item['id']} main={item}/>)}
             </ul>
         </>
     )
+}
+
+const dataStructure = propTypes.shape({
+    _id: propTypes.string,
+    name: propTypes.string,
+    types: propTypes.string,
+    proteins: propTypes.number,
+    fat: propTypes.number,
+    carbohydrates: propTypes.number,
+    calories: propTypes.number,
+    price: propTypes.number,
+    image: propTypes.string,
+    image_mobile: propTypes.string,
+    image_large: propTypes.string,
+    __v: propTypes.number
+})
+
+Mains.propTypes = {
+    data: propTypes.arrayOf(dataStructure)
 }
 
 export default Mains;

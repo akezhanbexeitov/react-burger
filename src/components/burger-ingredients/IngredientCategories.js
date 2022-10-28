@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tab,  } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const IngredientsCategories = () => {
     const [current, setCurrent] = React.useState('one')
