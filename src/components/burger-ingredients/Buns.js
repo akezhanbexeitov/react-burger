@@ -13,7 +13,7 @@ const Buns = (props) => {
                     } else {
                         return null
                     }
-                }).map((item, index) => <Bun key={index} bun={item}/>)}
+                }).map(item => <Bun key={item.id} bun={item}/>)}
             </ul>
         </>
     )

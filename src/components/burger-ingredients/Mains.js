@@ -1,23 +1,22 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import Sauce from './Sauce'
+import Main from './Main'
 
-const Sauces = (props) => {
+const Mains = (props) => {
     const { data } = props
     return (
         <>
-            <h2 className='mt-10 mb-6'>Соусы</h2>
+            <h2 className='mt-10 mb-6'>Начинки</h2>
             <ul className={`${burgerIngredientsStyles.list} pl-4 pr-4`}>
                 {data.filter(item => {
-                    if (item.type === 'sauce') {
+                    if (item.type === 'main') {
                         return item
                     } else {
                         return null
                     }
-                }).map((item, index) => <Sauce key={index} sauce={item}/>)}
+                }).map(item => <Main key={item.id} main={item}/>)}
             </ul>
         </>
     )
 }
 
-export default Sauces;
-    
+export default Mains;

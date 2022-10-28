@@ -38,4 +38,4 @@ const BurgerIngredients = (props) => {
 // })
 // BurgerIngredients.propTypes = propTypes.arrayOf(dataStructure)
 
-export default BurgerIngredients
+export default BurgerIngredients;
