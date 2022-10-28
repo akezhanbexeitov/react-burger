@@ -6,7 +6,7 @@ const Buns = (props) => {
     return (
         <>
             <h2 className='mt-10 mb-6'>Булки</h2>
-            <ul className={`${burgerIngredientsStyles.list} pl-4 pr-4`}>
+            <ul className={burgerIngredientsStyles.list}>
                 {data.filter(item => {
                     if (item.type === 'bun') {
                         return item
