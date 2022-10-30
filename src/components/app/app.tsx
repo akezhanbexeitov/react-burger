@@ -7,7 +7,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 function App() {
   return (
-    <React.Fragment>
+    <>
       <AppHeader />
       <main className="text text_type_main-default">
         <div className={appStyles.container}>
@@ -19,7 +19,7 @@ function App() {
           </section>
         </div>
       </main>
-    </React.Fragment>
+    </>
   );
 }
 
