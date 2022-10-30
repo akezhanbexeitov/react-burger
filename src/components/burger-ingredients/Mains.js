@@ -22,7 +22,7 @@ const Mains = (props) => {
 }
 
 Mains.propTypes = {
-    data: propTypes.arrayOf(ingredientType)
+    data: propTypes.arrayOf(ingredientType).isRequired
 }
 
 export default Mains;

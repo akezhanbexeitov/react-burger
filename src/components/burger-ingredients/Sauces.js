@@ -22,7 +22,7 @@ const Sauces = (props) => {
 }
 
 Sauces.propTypes = {
-    data: propTypes.arrayOf(ingredientType)
+    data: propTypes.arrayOf(ingredientType).isRequired
 }
 
 export default Sauces;
