@@ -15,7 +15,7 @@ const Mains = (props) => {
                     } else {
                         return null
                     }
-                }).map((item, index) => <Main key={index} main={item}/>)}
+                }).map(item => <Main key={item['_id']} main={item}/>)}
             </ul>
         </>
     )
