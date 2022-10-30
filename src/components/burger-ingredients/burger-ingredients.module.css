@@ -2,6 +2,11 @@
     max-width: 600px;
 }
 
+.categories {
+    display: flex;
+    justify-content: space-between;
+}
+
 .ingredients {
     max-height: 716px;
     overflow: scroll;

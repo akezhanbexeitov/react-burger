@@ -26,7 +26,6 @@ const IngredientList = (props) => {
                     )
                 })}
             </ul>
-            
         </>
     )
 }
