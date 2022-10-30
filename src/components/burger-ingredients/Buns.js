@@ -1,5 +1,6 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import Bun from './bun'
+import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
 
 const Buns = (props) => {
@@ -20,23 +21,8 @@ const Buns = (props) => {
     )
 }
 
-const dataStructure = propTypes.shape({
-    _id: propTypes.string,
-    name: propTypes.string,
-    types: propTypes.string,
-    proteins: propTypes.number,
-    fat: propTypes.number,
-    carbohydrates: propTypes.number,
-    calories: propTypes.number,
-    price: propTypes.number,
-    image: propTypes.string,
-    image_mobile: propTypes.string,
-    image_large: propTypes.string,
-    __v: propTypes.number
-})
-
 Buns.propTypes = {
-    data: propTypes.arrayOf(dataStructure)
+    data: propTypes.arrayOf(ingredientType)
 }
 
 export default Buns;
