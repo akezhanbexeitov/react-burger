@@ -1,21 +1,35 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import Main from './main'
-import propTypes from 'prop-types'
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientType from '../../utils/types'
+import propTypes from 'prop-types'
 
 const Mains = (props) => {
-    const { data } = props
+    const { data, title } = props
     return (
         <>
-            <h2 className='mt-10 mb-6'>Начинки</h2>
-            <ul className={`${burgerIngredientsStyles.list} pl-4 pr-4`}>
+            <h2 className='mt-10 mb-6'>{title}</h2>
+            <ul className={burgerIngredientsStyles.list}>
                 {data.filter(item => {
                     if (item.type === 'main') {
                         return item
                     } else {
                         return null
                     }
-                }).map(item => <Main key={item['_id']} main={item}/>)}
+                }).map(item => {
+                    return (
+                        <li className={burgerIngredientsStyles.listItem} key={item['_id']}>
+                            <Counter count={1} size="default" />
+                            <div className='ml-4 mr-4'>
+                                <img src={item.image} alt={item.name}/>
+                            </div>
+                            <div className={`${burgerIngredientsStyles.price} mt-1 mb-1`}>
+                                <p className="text text_type_digits-default pr-2">{item.price}</p>
+                                <CurrencyIcon type="primary" />
+                            </div>
+                            <p className={burgerIngredientsStyles.description}>{item.name}</p>
+                        </li>
+                    )
+                })}
             </ul>
         </>
     )

@@ -14,9 +14,9 @@ const BurgerIngredients = (props) => {
             <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
             <IngredientsCategories />
             <div className={burgerIngredientsStyles.ingredients}>
-                <Buns data={data}/>
-                <Sauces data={data}/>
-                <Mains data={data}/>
+                <Buns data={data} title='Булки'/>
+                <Sauces data={data} title='Соусы'/>
+                <Mains data={data} title='Начинки'/>
             </div>
         </div>
     )
