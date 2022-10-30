@@ -1,5 +1,5 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import Sauce from './Sauce'
+import Sauce from './sauce'
 import propTypes from 'prop-types'
 
 const Sauces = (props) => {

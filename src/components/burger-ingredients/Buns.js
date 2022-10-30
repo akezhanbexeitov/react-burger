@@ -1,5 +1,5 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import Bun from './Bun'
+import Bun from './bun'
 import propTypes from 'prop-types'
 
 const Buns = (props) => {

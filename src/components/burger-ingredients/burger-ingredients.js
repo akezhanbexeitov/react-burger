@@ -1,9 +1,9 @@
 import propTypes from 'prop-types'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import IngredientsCategories from './IngredientCategories'
-import Buns from './Buns'
-import Sauces from './Sauces'
-import Mains from './Mains'
+import IngredientsCategories from './ingredient-categories'
+import Buns from './buns'
+import Sauces from './sauces'
+import Mains from './mains'
 
 const BurgerIngredients = (props) => {
     const {data} = props

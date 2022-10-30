@@ -1,16 +1,16 @@
 import React from 'react';
-import './App.css';
-import data from './utils/data'
-import AppHeader from './components/app-header/AppHeader';
-import BurgerIngredients from './components/burger-ingredients/BurgerIngredients';
-import BurgerConstructor from './components/burger-constructor/BurgerConstructor';
+import appStyles from './app.module.css';
+import data from '../../utils/data'
+import AppHeader from '../app-header/app-header';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 function App() {
   return (
     <React.Fragment>
       <AppHeader />
       <main className="text text_type_main-default">
-        <div className='container'>
+        <div className={appStyles.container}>
           <section className='mr-5'>
             <BurgerIngredients data={data}/>
           </section>
