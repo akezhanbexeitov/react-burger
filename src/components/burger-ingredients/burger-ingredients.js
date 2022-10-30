@@ -1,22 +1,23 @@
 import propTypes from 'prop-types'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
-import Buns from './buns'
-import Sauces from './sauces'
-import Mains from './mains'
+import IngredientList from './ingredient-list'
 import ingredientType from '../../utils/types'
 
 const BurgerIngredients = (props) => {
     const {data} = props
+    const buns = data.filter(item => item.type === 'bun' ? item : null)
+    const sauces = data.filter(item => item.type === 'sauce' ? item : null)
+    const mains = data.filter(item => item.type === 'main' ? item : null)
 
     return (
         <div className={burgerIngredientsStyles.container}>
             <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
             <IngredientsCategories />
             <div className={burgerIngredientsStyles.ingredients}>
-                <Buns data={data} title='Булки'/>
-                <Sauces data={data} title='Соусы'/>
-                <Mains data={data} title='Начинки'/>
+                <IngredientList data={buns} title='Булки'/>
+                <IngredientList data={sauces} title='Соусы'/>
+                <IngredientList data={mains} title='Начинки'/>
             </div>
         </div>
     )
