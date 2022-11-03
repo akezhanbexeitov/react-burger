@@ -1,21 +1,30 @@
-import React from 'react';
 import appStyles from './app.module.css';
-import data from '../../utils/data'
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    const url = 'https://norma.nomoreparties.space/api/ingredients'
+    fetch(url)
+      .then(response => response.json())
+      .then(actualData => setData(actualData.data))
+      .catch(err => console.log(err.message))
+  }, [])
+
   return (
     <>
       <AppHeader />
       <main className="text text_type_main-default">
         <div className={appStyles.container}>
           <section className='mr-5'>
-            <BurgerIngredients data={data}/>
+            {data && <BurgerIngredients data={data}/>}
           </section>
           <section className='ml-5'>
-              <BurgerConstructor data={data}/>
+            {data && <BurgerConstructor data={data}/>}
           </section>
         </div>
       </main>
