@@ -4,14 +4,16 @@ import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
 import Modal from '../modal/Modal'
 import { useState } from 'react'
+import IngredientDetails from '../ingredient-details/IngredientDetails'
 
 const IngredientList = (props) => {
     const { data, title } = props
     const [isOpen, setIsOpen] = useState(false)
+    const [ingredient, setIngredient] = useState({})
 
     const modal = (
         <Modal header="Детали ингредиента" setIsOpen={setIsOpen}>
-            <h1>Hello</h1>
+            <IngredientDetails ingredient={ingredient}/>
         </Modal>
     )
     
@@ -21,7 +23,10 @@ const IngredientList = (props) => {
             <ul className={burgerIngredientsStyles.list}>
                 {data.map(item => {
                     return (
-                        <li className={burgerIngredientsStyles.listItem} key={item['_id']} onClick={() => setIsOpen(true)}>
+                        <li className={burgerIngredientsStyles.listItem} key={item['_id']} onClick={() => {
+                            setIsOpen(true)
+                            setIngredient({...item})
+                        }}>
                             <Counter count={1} size="default" />
                             <div className='ml-4 mr-4'>
                                 <img src={item.image} alt={item.name}/>

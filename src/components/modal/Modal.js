@@ -5,7 +5,8 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 const modalRoot = document.getElementById('react-modals')
 
 const Modal = (props) => {
-    const { children, header, setIsOpen } = props
+    const { header, setIsOpen, children } = props
+
     return PortalReactDOM.createPortal(
         <div className={`${modalStyles.modal} pl-10 pr-10 pt-10 pb-15`}>
             <div className={modalStyles.header}>
