@@ -2,9 +2,18 @@ import burgerIngredientsStyles from './burger-ingredients.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
+import Modal from '../modal/Modal'
+import { useState } from 'react'
 
 const IngredientList = (props) => {
     const { data, title } = props
+    const [isOpen, setIsOpen] = useState(false)
+
+    const modal = (
+        <Modal header="Детали ингредиента" setIsOpen={setIsOpen}>
+            <h1>Hello</h1>
+        </Modal>
+    )
     
     return (
         <>
@@ -12,7 +21,7 @@ const IngredientList = (props) => {
             <ul className={burgerIngredientsStyles.list}>
                 {data.map(item => {
                     return (
-                        <li className={burgerIngredientsStyles.listItem} key={item['_id']}>
+                        <li className={burgerIngredientsStyles.listItem} key={item['_id']} onClick={() => setIsOpen(true)}>
                             <Counter count={1} size="default" />
                             <div className='ml-4 mr-4'>
                                 <img src={item.image} alt={item.name}/>
@@ -26,6 +35,8 @@ const IngredientList = (props) => {
                     )
                 })}
             </ul>
+            {isOpen && modal}
+
         </>
     )
 }
