@@ -11,7 +11,7 @@ const Modal = (props) => {
         <div className={`${modalStyles.modal} pl-10 pr-10 pt-10 pb-15`}>
             <div className={modalStyles.header}>
                 <header className='text text_type_main-large'>{header}</header>
-                <div onClick={() => setIsOpen(false)}>
+                <div className={modalStyles.close} onClick={() => setIsOpen(false)}>
                     <CloseIcon type="primary" />
                 </div>
             </div>
