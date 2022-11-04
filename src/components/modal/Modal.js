@@ -1,5 +1,6 @@
 import modalStyles from './modal.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import propTypes from 'prop-types'
 
 const Modal = (props) => {
     const { header, setIsOpen, children } = props
@@ -15,6 +16,12 @@ const Modal = (props) => {
             <main>{children}</main>
         </div>
     )
+}
+
+Modal.propTypes = {
+    children: propTypes.node.isRequired,
+    header: propTypes.string,
+    setIsOpen: propTypes.func.isRequired
 }
 
 export default Modal;
