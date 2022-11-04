@@ -12,11 +12,11 @@ const WithOverlayModal = withOverlay(Modal)
 const IngredientList = (props) => {
     const { data, title } = props
     const [isOpen, setIsOpen] = useState(false)
-    const [ingredient, setIngredient] = useState({})
+    const [ingredient, setIngredient] = useState(null)
 
     const modal = (
         <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
-            <IngredientDetails ingredient={ingredient}/>
+            {ingredient && <IngredientDetails ingredient={ingredient}/>}
         </WithOverlayModal>
     )
     

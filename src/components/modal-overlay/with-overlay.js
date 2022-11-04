@@ -12,7 +12,6 @@ const withOverlay = WrappedComponent => props => {
         const handleEsc = (e) => {
             if (e.key === 'Escape') {
                 setIsOpen(false)
-                console.log('escape')
             }
         };
         window.addEventListener('keyup', handleEsc);
