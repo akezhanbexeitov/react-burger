@@ -6,7 +6,7 @@ import ingredientType from '../../utils/types'
 import { useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
-import withOverlay from '../hocs/with-overlay'
+import withOverlay from '../modal-overlay/with-overlay'
 
 const WithOverlayModal = withOverlay(Modal)
 
