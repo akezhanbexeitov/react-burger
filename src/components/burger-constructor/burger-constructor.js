@@ -4,17 +4,20 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import propTypes from 'prop-types'
 import ingredientType from '../../utils/types'
 import { useState } from 'react'
-import Modal from '../modal/Modal'
+import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
+import withOverlay from '../hocs/with-overlay'
+
+const WithOverlayModal = withOverlay(Modal)
 
 const BurgerConstructor = (props) => {
     const { data } = props
     const [isOpen, setIsOpen] = useState(false)
 
     const modal = (
-        <Modal setIsOpen={setIsOpen}>
+        <WithOverlayModal setIsOpen={setIsOpen}>
             <OrderDetails />
-        </Modal>
+        </WithOverlayModal>
     )
 
     return (

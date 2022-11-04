@@ -2,9 +2,12 @@ import burgerIngredientsStyles from './burger-ingredients.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
-import Modal from '../modal/Modal'
+import Modal from '../modal/modal'
 import { useState } from 'react'
 import IngredientDetails from '../ingredient-details/IngredientDetails'
+import withOverlay from '../hocs/with-overlay'
+
+const WithOverlayModal = withOverlay(Modal)
 
 const IngredientList = (props) => {
     const { data, title } = props
@@ -12,9 +15,9 @@ const IngredientList = (props) => {
     const [ingredient, setIngredient] = useState({})
 
     const modal = (
-        <Modal header="Детали ингредиента" setIsOpen={setIsOpen}>
+        <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
             <IngredientDetails ingredient={ingredient}/>
-        </Modal>
+        </WithOverlayModal>
     )
     
     return (
@@ -41,7 +44,6 @@ const IngredientList = (props) => {
                 })}
             </ul>
             {isOpen && modal}
-
         </>
     )
 }
