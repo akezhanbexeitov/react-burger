@@ -4,7 +4,7 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import propTypes from 'prop-types'
 import ingredientType from '../../utils/types'
 import { useState } from 'react'
-import Modal from '../modal/changemodal'
+import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
 
