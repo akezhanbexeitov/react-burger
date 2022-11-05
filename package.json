@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ya.praktikum/react-developer-burger-ui-components": "1.13.5"
+    "@ya.praktikum/react-developer-burger-ui-components": "1.13.5",
+    "normalize.css": "8.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.5",

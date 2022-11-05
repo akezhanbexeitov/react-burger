@@ -3,6 +3,7 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { useEffect, useState } from 'react';
+import 'normalize.css'
 
 function App() {
   const [data, setData] = useState(null)
