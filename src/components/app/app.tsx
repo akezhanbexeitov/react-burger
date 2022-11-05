@@ -10,7 +10,12 @@ function App() {
   useEffect(() => {
     const url = 'https://norma.nomoreparties.space/api/ingredients'
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        return Promise.reject(`Ошибка ${response.status}`)
+      })
       .then(actualData => setData(actualData.data))
       .catch(err => console.log(err.message))
   }, [])
