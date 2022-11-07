@@ -1,0 +1,31 @@
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list {
+    margin:0;
+    padding: 0;
+    text-indent: 0;
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    list-style-type: none;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    border-radius: 40px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    margin-right: 13.2%;
+}

@@ -1,0 +1,15 @@
+.modal {
+    background-color: var(--modal-background-color);
+    border-radius: 40px;
+    width: 640px;
+}
+
+.close {
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
