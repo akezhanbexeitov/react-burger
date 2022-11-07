@@ -9,6 +9,8 @@ const withOverlay = WrappedComponent => props => {
     const { setIsOpen } = props
 
     useEffect(() => {
+        if (!setIsOpen) return;
+        
         const handleEsc = (e) => {
             if (e.key === 'Escape') {
                 setIsOpen(false)
