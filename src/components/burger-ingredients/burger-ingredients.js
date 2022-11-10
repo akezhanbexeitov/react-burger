@@ -7,7 +7,7 @@ import IngredientList from './ingredient-list'
 // import ingredientType from '../../utils/types'
 
 const BurgerIngredients = () => {
-    const data = useContext(IngredientContext)
+    const { data } = useContext(IngredientContext)
     const buns = data.filter(item => item.type === 'bun' ? item : null)
     const sauces = data.filter(item => item.type === 'sauce' ? item : null)
     const mains = data.filter(item => item.type === 'main' ? item : null)

@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import IngredientContext from '../contexts/ingredient-context'
 
 const IngredientConstructor = () => {
-  const data = useContext(IngredientContext)
+  const { data, ingredientState } = useContext(IngredientContext)
 
   return (
     <ul className={burgerConstructorStyles.list}>
@@ -20,7 +20,26 @@ const IngredientConstructor = () => {
         />
       </li>
       <div className={burgerConstructorStyles.ingredients}>
-        {data.filter(item => {
+        {ingredientState.length > 0
+          ? ingredientState.map((item, index) => {
+              return (
+                <li className={burgerConstructorStyles.item} key={index}>
+                  <DragIcon type="primary" />
+                  <ConstructorElement
+                    text={item.name}
+                    price={item.price}
+                    thumbnail={item.image}
+                  />
+                </li>
+              )})
+          : <li className={burgerConstructorStyles.item}>
+              <ConstructorElement
+                text="Пример"
+              />
+            </li>
+        
+        }
+        {/* {data.filter(item => {
                   if (item.type !== 'bun') {
                       return item
                   } else {
@@ -37,7 +56,7 @@ const IngredientConstructor = () => {
                     />
                   </li>
                 )
-            })}
+            })} */}
       </div>
       <li className={burgerConstructorStyles.bun}>
         <ConstructorElement

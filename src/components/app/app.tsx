@@ -2,12 +2,30 @@ import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import 'normalize.css'
 import IngredientContext from '../contexts/ingredient-context';
 
+const initialState: any = [];
+
+function reducer(state: any, action: any) {
+  switch (action.type) {
+    case 'add':
+      return [
+      ...state,
+      {
+        image: action.payload.image,
+        name: action.payload.name,
+        price: action.payload.price,
+      }]
+    default: 
+      throw new Error(`Wrong type of action: ${action.type}`);
+  }
+}
+
 function App() {
   const [data, setData] = useState(null)
+  const [ingredientState, ingredientDispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
     const url = 'https://norma.nomoreparties.space/api/ingredients'
@@ -25,7 +43,7 @@ function App() {
   return (
     <>
       <AppHeader />
-      <IngredientContext.Provider value={data}>
+      <IngredientContext.Provider value={{data, ingredientDispatch, ingredientState}}>
         <main className="text text_type_main-default">
           <div className={appStyles.container}>
             <section className='mr-5'>
