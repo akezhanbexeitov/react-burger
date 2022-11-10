@@ -1,8 +1,8 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import propTypes from 'prop-types'
-import ingredientType from '../../utils/types'
+// import propTypes from 'prop-types'
+// import ingredientType from '../../utils/types'
 import { useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
@@ -10,8 +10,7 @@ import withOverlay from '../modal-overlay/with-overlay'
 
 const WithOverlayModal = withOverlay(Modal)
 
-const BurgerConstructor = (props) => {
-    const { data } = props
+const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const modal = (
@@ -23,7 +22,7 @@ const BurgerConstructor = (props) => {
     return (
         <>
             <div className={`${burgerConstructorStyles.container} pt-25 pb-10`}>
-                <IngredientConstructor data={data}/>
+                <IngredientConstructor />
             </div>
             <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
                 <p className="text text_type_digits-medium mr-2">610</p>
@@ -39,8 +38,8 @@ const BurgerConstructor = (props) => {
     )
 }
 
-BurgerConstructor.propTypes = {
-    data: propTypes.arrayOf(ingredientType)
-}
+// BurgerConstructor.propTypes = {
+//     data: propTypes.arrayOf(ingredientType)
+// }
 
 export default BurgerConstructor;

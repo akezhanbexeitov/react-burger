@@ -10,7 +10,7 @@ import withOverlay from '../modal-overlay/with-overlay'
 const WithOverlayModal = withOverlay(Modal)
 
 const IngredientList = (props) => {
-    const { data, title } = props
+    const { ingredientType, title } = props
     const [isOpen, setIsOpen] = useState(false)
     const [ingredient, setIngredient] = useState(null)
 
@@ -24,7 +24,7 @@ const IngredientList = (props) => {
         <>
             <h2 className='mt-10 mb-6'>{title}</h2>
             <ul className={burgerIngredientsStyles.list}>
-                {data.map(item => {
+                {ingredientType.map(item => {
                     return (
                         <li className={burgerIngredientsStyles.listItem} key={item['_id']} onClick={() => {
                             setIsOpen(true)
@@ -49,7 +49,7 @@ const IngredientList = (props) => {
 }
 
 IngredientList.propTypes = {
-    data: propTypes.arrayOf(ingredientType).isRequired,
+    ingredientType: propTypes.arrayOf(ingredientType).isRequired,
     title: propTypes.string.isRequired
 }
 

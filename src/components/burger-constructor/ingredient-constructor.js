@@ -2,9 +2,11 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import burgerConstructorStyles from './burger-constructor.module.css'
 import propTypes from 'prop-types'
 import ingredientType from '../../utils/types'
+import { useContext } from 'react'
+import IngredientContext from '../contexts/ingredient-context'
 
-const IngredientConstructor = (props) => {
-  const { data } = props
+const IngredientConstructor = () => {
+  const data = useContext(IngredientContext)
 
   return (
     <ul className={burgerConstructorStyles.list}>
@@ -14,7 +16,7 @@ const IngredientConstructor = (props) => {
           isLocked={true}
           text="Краторная булка N-200i (верх)"
           price={200}
-          thumbnail={data[14].image}
+          thumbnail={data[0].image}
         />
       </li>
       <div className={burgerConstructorStyles.ingredients}>
@@ -43,7 +45,7 @@ const IngredientConstructor = (props) => {
           isLocked={true}
           text="Краторная булка N-200i (низ)"
           price={200}
-          thumbnail={data[14].image}
+          thumbnail={data[0].image}
         />
       </li>
     </ul>
