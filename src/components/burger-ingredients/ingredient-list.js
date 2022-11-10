@@ -14,7 +14,7 @@ const IngredientList = (props) => {
     const { ingredientType, title } = props
     const [isOpen, setIsOpen] = useState(false)
     const [ingredient, setIngredient] = useState(null)
-    const {ingredientDispatch} = useContext(IngredientContext)
+    const { ingredientDispatch, bunDispatch } = useContext(IngredientContext)
 
     const modal = (
         <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
@@ -36,7 +36,17 @@ const IngredientList = (props) => {
                                 payload: {
                                     image: item.image,
                                     name: item.name,
-                                    price: item.price
+                                    price: item.price,
+                                    type: item.type
+                                }
+                            })
+                            bunDispatch({
+                                type: 'add', 
+                                payload: {
+                                    image: item.image,
+                                    name: item.name,
+                                    price: item.price,
+                                    type: item.type
                                 }
                             })
                         }}>

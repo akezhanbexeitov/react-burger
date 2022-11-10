@@ -6,19 +6,25 @@ import { useContext } from 'react'
 import IngredientContext from '../contexts/ingredient-context'
 
 const IngredientConstructor = () => {
-  const { data, ingredientState } = useContext(IngredientContext)
+  const { ingredientState, bunState } = useContext(IngredientContext)
+  console.log(bunState)
 
   return (
     <ul className={burgerConstructorStyles.list}>
-      <li className={burgerConstructorStyles.bun}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={data[0].image}
-        />
-      </li>
+      {Object.keys(bunState).length > 0 
+        ? <li className={burgerConstructorStyles.bun}>
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bunState.name} (верх)`}
+              price={bunState.price}
+              thumbnail={bunState.image}
+            />
+          </li>
+        : <li className={burgerConstructorStyles.emptyTop}>
+            <p>Выберите булку</p>
+          </li>
+      }
       <div className={burgerConstructorStyles.ingredients}>
         {ingredientState.length > 0
           ? ingredientState.map((item, index) => {
@@ -35,18 +41,22 @@ const IngredientConstructor = () => {
           : <li className={burgerConstructorStyles.empty}>
               <p>Выберите начинку</p>
             </li>
-        
         }
       </div>
-      <li className={burgerConstructorStyles.bun}>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={data[0].image}
-        />
-      </li>
+      {Object.keys(bunState).length > 0 
+        ? <li className={burgerConstructorStyles.bun}>
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bunState.name} (низ)`}
+              price={bunState.price}
+              thumbnail={bunState.image}
+            />
+          </li>
+        : <li className={burgerConstructorStyles.emptyBottom}>
+            <p>Выберите булку</p>
+          </li>
+      }
     </ul>
   )
 }
