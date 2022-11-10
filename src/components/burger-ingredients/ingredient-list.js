@@ -3,7 +3,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
 import Modal from '../modal/modal'
-import { useCallback, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import IngredientContext from '../contexts/ingredient-context'

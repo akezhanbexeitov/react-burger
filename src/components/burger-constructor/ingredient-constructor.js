@@ -32,31 +32,11 @@ const IngredientConstructor = () => {
                   />
                 </li>
               )})
-          : <li className={burgerConstructorStyles.item}>
-              <ConstructorElement
-                text="Пример"
-              />
+          : <li className={burgerConstructorStyles.empty}>
+              <p>Выберите начинку</p>
             </li>
         
         }
-        {/* {data.filter(item => {
-                  if (item.type !== 'bun') {
-                      return item
-                  } else {
-                      return null
-                  }
-              }).map(item => {
-                return(
-                  <li className={burgerConstructorStyles.item} key={item['_id']}>
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                      text={item.name}
-                      price={item.price}
-                      thumbnail={item.image}
-                    />
-                  </li>
-                )
-            })} */}
       </div>
       <li className={burgerConstructorStyles.bun}>
         <ConstructorElement
