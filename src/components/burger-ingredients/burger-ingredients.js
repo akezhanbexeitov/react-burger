@@ -1,10 +1,8 @@
-// import propTypes from 'prop-types'
 import { useContext } from 'react'
 import IngredientContext from '../contexts/ingredient-context'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
 import IngredientList from './ingredient-list'
-// import ingredientType from '../../utils/types'
 
 const BurgerIngredients = () => {
     const { data } = useContext(IngredientContext)
@@ -24,9 +22,5 @@ const BurgerIngredients = () => {
         </div>
     )
 }
-
-// BurgerIngredients.propTypes = {
-//     data: propTypes.arrayOf(ingredientType).isRequired
-// }
 
 export default BurgerIngredients;

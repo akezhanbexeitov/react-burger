@@ -1,8 +1,6 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-// import propTypes from 'prop-types'
-// import ingredientType from '../../utils/types'
 import { useContext, useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
@@ -23,10 +21,8 @@ const BurgerConstructor = () => {
     )
 
     const calculateTotalPrice = (bun, ingredients) => {
-        let total = 0
-        const bunsPrice = bun.price * 2
+        let total = bun.price * 2
         ingredients.map(item => total += item.price)
-        total += bunsPrice
         return total
     }
 
@@ -53,9 +49,5 @@ const BurgerConstructor = () => {
         </>
     )
 }
-
-// BurgerConstructor.propTypes = {
-//     data: propTypes.arrayOf(ingredientType)
-// }
 
 export default BurgerConstructor;

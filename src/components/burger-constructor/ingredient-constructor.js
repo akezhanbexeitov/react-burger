@@ -1,7 +1,5 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
-import propTypes from 'prop-types'
-import ingredientType from '../../utils/types'
 import { useContext } from 'react'
 import IngredientContext from '../contexts/ingredient-context'
 
@@ -59,10 +57,6 @@ const IngredientConstructor = () => {
       }
     </ul>
   )
-}
-
-IngredientConstructor.propTypes = {
-  data: propTypes.arrayOf(ingredientType)
 }
 
 export default IngredientConstructor;
