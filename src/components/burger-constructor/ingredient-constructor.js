@@ -25,9 +25,9 @@ const IngredientConstructor = () => {
       }
       <div className={burgerConstructorStyles.ingredients}>
         {ingredients.length > 0
-          ? ingredients.map((item, index) => {
+          ? ingredients.map(item => {
               return (
-                <li className={burgerConstructorStyles.item} key={index}>
+                <li className={burgerConstructorStyles.item} key={item.key}>
                   <DragIcon type="primary" />
                   <ConstructorElement
                     text={item.name}

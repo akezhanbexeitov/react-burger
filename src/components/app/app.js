@@ -32,7 +32,8 @@ function ingredientConstructorReducer(state, action) {
               name: action.payload.name,
               image: action.payload.image,
               price: action.payload.price,
-              id: action.payload.id
+              id: action.payload.id,
+              key: action.payload.key
             }
           ]
         }

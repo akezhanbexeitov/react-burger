@@ -7,6 +7,7 @@ import { useContext, useState } from 'react'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import IngredientContext from '../contexts/ingredient-context'
+import { v4 as uuidv4 } from 'uuid';
 
 const WithOverlayModal = withOverlay(Modal)
 
@@ -38,7 +39,8 @@ const IngredientList = (props) => {
                                     name: item.name,
                                     price: item.price,
                                     type: item.type,
-                                    id: item['_id']
+                                    id: item['_id'],
+                                    key: uuidv4()
                                 }
                             })
                         }}>
