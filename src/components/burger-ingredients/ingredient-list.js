@@ -14,7 +14,7 @@ const IngredientList = (props) => {
     const { ingredientType, title } = props
     const [isOpen, setIsOpen] = useState(false)
     const [ingredient, setIngredient] = useState(null)
-    const { ingredientDispatch, bunDispatch } = useContext(IngredientContext)
+    const { ingredientConstructorDispatch } = useContext(IngredientContext)
 
     const modal = (
         <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
@@ -31,16 +31,7 @@ const IngredientList = (props) => {
                         <li className={burgerIngredientsStyles.listItem} key={item['_id']} onClick={() => {
                             setIsOpen(true)
                             setIngredient({...item})
-                            ingredientDispatch({
-                                type: 'add', 
-                                payload: {
-                                    image: item.image,
-                                    name: item.name,
-                                    price: item.price,
-                                    type: item.type
-                                }
-                            })
-                            bunDispatch({
+                            ingredientConstructorDispatch({
                                 type: 'add', 
                                 payload: {
                                     image: item.image,

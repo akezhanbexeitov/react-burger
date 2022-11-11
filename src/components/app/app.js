@@ -6,38 +6,34 @@ import { useEffect, useReducer, useState } from 'react';
 import 'normalize.css'
 import IngredientContext from '../contexts/ingredient-context';
 
-const ingredientInitialState = [];
-const bunInitialState = {}
+const ingredientConstructorInitialState = {
+  bun: {},
+  ingredients: []
+};
 
-function ingredientReducer(state, action) {
+function ingredientConstructorReducer(state, action) {
   switch (action.type) {
     case 'add':
       if (action.payload.type === 'bun') {
-        return [...state]
-      } else {
-        return [
+        return {
           ...state,
-          {
-            image: action.payload.image,
+          bun: {
             name: action.payload.name,
-            price: action.payload.price,
-        }]
-      }
-    default: 
-      throw new Error(`Wrong type of action: ${action.type}`);
-  }
-}
-
-function bunReducer(state, action) {
-  switch (action.type) {
-    case 'add':
-      if (action.payload.type !== 'bun') {
-        return {...state}
+            image: action.payload.image,
+            price: action.payload.price
+          }
+        }
       } else {
         return {
-          image: action.payload.image,
-          name: action.payload.name,
-          price: action.payload.price
+          ...state,
+          ingredients: [
+            ...state.ingredients,
+            {
+              name: action.payload.name,
+              image: action.payload.image,
+              price: action.payload.price
+            }
+          ]
         }
       }
     default:
@@ -47,8 +43,7 @@ function bunReducer(state, action) {
 
 function App() {
   const [data, setData] = useState(null)
-  const [ingredientState, ingredientDispatch] = useReducer(ingredientReducer, ingredientInitialState)
-  const [bunState, bunDispatch] = useReducer(bunReducer, bunInitialState)
+  const [ingredientConstructorState, ingredientConstructorDispatch] = useReducer(ingredientConstructorReducer, ingredientConstructorInitialState)
 
   useEffect(() => {
     const url = 'https://norma.nomoreparties.space/api/ingredients'
@@ -66,7 +61,7 @@ function App() {
   return (
     <>
       <AppHeader />
-      <IngredientContext.Provider value={{data, ingredientDispatch, ingredientState, bunDispatch, bunState}}>
+      <IngredientContext.Provider value={{data, ingredientConstructorDispatch, ingredientConstructorState}}>
         <main className="text text_type_main-default">
           <div className={appStyles.container}>
             <section className='mr-5'>

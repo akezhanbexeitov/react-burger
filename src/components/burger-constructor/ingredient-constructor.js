@@ -6,19 +6,19 @@ import { useContext } from 'react'
 import IngredientContext from '../contexts/ingredient-context'
 
 const IngredientConstructor = () => {
-  const { ingredientState, bunState } = useContext(IngredientContext)
-  console.log(bunState)
+  const { ingredientConstructorState } = useContext(IngredientContext)
+  const { bun, ingredients } = ingredientConstructorState
 
   return (
     <ul className={burgerConstructorStyles.list}>
-      {Object.keys(bunState).length > 0 
+      {Object.keys(bun).length > 0 
         ? <li className={burgerConstructorStyles.bun}>
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={`${bunState.name} (верх)`}
-              price={bunState.price}
-              thumbnail={bunState.image}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           </li>
         : <li className={burgerConstructorStyles.emptyTop}>
@@ -26,8 +26,8 @@ const IngredientConstructor = () => {
           </li>
       }
       <div className={burgerConstructorStyles.ingredients}>
-        {ingredientState.length > 0
-          ? ingredientState.map((item, index) => {
+        {ingredients.length > 0
+          ? ingredients.map((item, index) => {
               return (
                 <li className={burgerConstructorStyles.item} key={index}>
                   <DragIcon type="primary" />
@@ -43,14 +43,14 @@ const IngredientConstructor = () => {
             </li>
         }
       </div>
-      {Object.keys(bunState).length > 0 
+      {Object.keys(bun).length > 0 
         ? <li className={burgerConstructorStyles.bun}>
             <ConstructorElement
               type="bottom"
               isLocked={true}
-              text={`${bunState.name} (низ)`}
-              price={bunState.price}
-              thumbnail={bunState.image}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           </li>
         : <li className={burgerConstructorStyles.emptyBottom}>
