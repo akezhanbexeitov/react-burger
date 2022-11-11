@@ -37,7 +37,8 @@ const IngredientList = (props) => {
                                     image: item.image,
                                     name: item.name,
                                     price: item.price,
-                                    type: item.type
+                                    type: item.type,
+                                    id: item['_id']
                                 }
                             })
                         }}>
