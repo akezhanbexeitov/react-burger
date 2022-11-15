@@ -11,15 +11,18 @@ const BurgerIngredients = () => {
     const mains = data.filter(item => item.type === 'main' ? item : null)
 
     return (
-        <div className={burgerIngredientsStyles.container}>
-            <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-            <IngredientsCategories />
-            <div className={burgerIngredientsStyles.ingredients}>
-                <IngredientList ingredientType={buns} title='Булки'/>
-                <IngredientList ingredientType={sauces} title='Соусы'/>
-                <IngredientList ingredientType={mains} title='Начинки'/>
+        <section className='mr-5'>
+            <div className={burgerIngredientsStyles.container}>
+                <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+                <IngredientsCategories />
+                <div className={burgerIngredientsStyles.ingredients}>
+                    <IngredientList ingredientType={buns} title='Булки'/>
+                    <IngredientList ingredientType={sauces} title='Соусы'/>
+                    <IngredientList ingredientType={mains} title='Начинки'/>
+                </div>
             </div>
-        </div>
+        </section>
+
     )
 }
 

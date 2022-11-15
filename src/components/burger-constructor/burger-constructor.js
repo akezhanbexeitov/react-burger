@@ -27,7 +27,7 @@ const BurgerConstructor = () => {
     }
 
     return (
-        <>
+        <section className='ml-5'>
             <div className={`${burgerConstructorStyles.container} pt-25 pb-10`}>
                 <IngredientConstructor />
             </div>
@@ -46,7 +46,7 @@ const BurgerConstructor = () => {
                 </div>
             </div>
             {isOpen && modal}
-        </>
+        </section>
     )
 }
 

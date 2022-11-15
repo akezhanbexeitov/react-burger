@@ -63,12 +63,8 @@ function App() {
       <IngredientContext.Provider value={{data, ingredientConstructorDispatch, ingredientConstructorState}}>
         <main className="text text_type_main-default">
           <div className={appStyles.container}>
-            <section className='mr-5'>
-              {data && <BurgerIngredients />}
-            </section>
-            <section className='ml-5'>
-              {data && <BurgerConstructor />}
-            </section>
+            {data && <BurgerIngredients />}
+            {data && <BurgerConstructor />}
           </div>
         </main>
       </IngredientContext.Provider>
