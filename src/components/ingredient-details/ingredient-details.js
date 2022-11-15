@@ -8,7 +8,7 @@ const IngredientDetails = (props) => {
         <div className={ingredientDetailsStyles.container}>
             <div className={ingredientDetailsStyles.main}>
                 <div className='mb-4'>
-                    <img src={ingredient.image_large} alt={ingredient.name}/>
+                    <img src={ingredient.image_large} alt={ingredient.name} width='480px' height='240px'/>
                 </div>
                 <h2 className={`${ingredientDetailsStyles.name} text text_type_main-medium mb-8`}>{ingredient.name}</h2>
                 <div>
