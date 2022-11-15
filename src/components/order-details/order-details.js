@@ -3,6 +3,7 @@ import orderDetailsStyles from './order-details.module.css'
 import { useContext, useEffect, useState } from 'react'
 import IngredientContext from '../../contexts/ingredient-context'
 import * as constants from '../../constants/constants'
+import request from '../../utils/server-requests'
 
 const OrderDetails = () => {
     const { ingredientConstructorState } = useContext(IngredientContext)
@@ -10,10 +11,11 @@ const OrderDetails = () => {
     const [orderNumber, setOrderNumber] = useState(0)
 
     useEffect(() => {
+        const url = `${constants.BASE_URL}/orders`
+
         const body = {
             ingredients: []
         }
-        
         ingredients.map(item => body.ingredients.push(item.id))
 
         const requestOptions = {
@@ -24,10 +26,7 @@ const OrderDetails = () => {
             body: JSON.stringify(body)
         }
 
-        const url = `${constants.BASE_URL}/orders`
-
-        fetch(url, requestOptions)
-            .then(response => response.json())
+        request(url, requestOptions)
             .then(result => setOrderNumber(result.order.number))
             .catch(error => console.log(error.message));
     }, [ingredients])

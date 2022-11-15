@@ -6,6 +6,7 @@ import { useEffect, useReducer, useState } from 'react';
 import 'normalize.css'
 import IngredientContext from '../../contexts/ingredient-context';
 import * as constants from '../../constants/constants'
+import request from '../../utils/server-requests';
 
 const ingredientConstructorInitialState = {
   bun: {},
@@ -50,14 +51,8 @@ function App() {
 
   useEffect(() => {
     const url = `${constants.BASE_URL}/ingredients`
-    
-    fetch(url)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        return Promise.reject(`Ошибка ${response.status}`)
-      })
+
+    request(url)
       .then(actualData => setData(actualData.data))
       .catch(err => console.log(err.message))
   }, [])
