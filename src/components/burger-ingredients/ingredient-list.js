@@ -3,7 +3,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
 import Modal from '../modal/modal'
-import { useContext, useState } from 'react'
+import { forwardRef, useContext, useState } from 'react'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import IngredientContext from '../../contexts/ingredient-context'
@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const WithOverlayModal = withOverlay(Modal)
 
-const IngredientList = (props) => {
+const IngredientList = forwardRef((props, ref) => {
     const { ingredientType, title } = props
     const [isOpen, setIsOpen] = useState(false)
     const [ingredient, setIngredient] = useState(null)
@@ -25,7 +25,7 @@ const IngredientList = (props) => {
     
     return (
         <>
-            <h2 className='mt-10 mb-6'>{title}</h2>
+            <h2 ref={ref} className='mt-10 mb-6'>{title}</h2>
             <ul className={burgerIngredientsStyles.list}>
                 {ingredientType.map(item => {
                     return (
@@ -60,7 +60,7 @@ const IngredientList = (props) => {
             {isOpen && modal}
         </>
     )
-}
+})
 
 IngredientList.propTypes = {
     ingredientType: propTypes.arrayOf(ingredientType).isRequired,
