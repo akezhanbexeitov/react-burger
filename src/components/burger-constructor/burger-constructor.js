@@ -14,7 +14,7 @@ const WithOverlayModal = withOverlay(Modal)
 
 const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const { ingredientConstructorState } = useContext(IngredientContext)
+    const { ingredientConstructorState, ingredientConstructorDispatch } = useContext(IngredientContext)
     const { bun, ingredients } = ingredientConstructorState
     const [orderNumber, setOrderNumber] = useState(0)
     const [isLoading, setIsLoading] = useState(false);
@@ -47,6 +47,7 @@ const BurgerConstructor = () => {
                 setOrderNumber(result.order.number)
                 setIsLoading(false)
             })
+            .then(ingredientConstructorDispatch({ type: 'reset' }))
             .catch(error => console.log(error.message));
     }
 
@@ -78,7 +79,7 @@ const BurgerConstructor = () => {
                         setIsOpen(true)
                         sendOrder()
                     }} 
-                    disabled={false}
+                    disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
                 >
                     Оформить заказ
                 </Button>

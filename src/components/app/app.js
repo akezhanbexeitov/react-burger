@@ -40,6 +40,11 @@ function ingredientConstructorReducer(state, action) {
           ]
         }
       }
+    case 'reset':
+      return {
+        bun: {},
+        ingredients: []
+      }
     default:
       throw new Error(`Wrong type of action: ${action.type}`);
   }

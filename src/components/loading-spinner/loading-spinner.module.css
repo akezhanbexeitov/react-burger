@@ -3,8 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30em;
-    height: 30em;
+    width: 640px;
+    height: 520px;
 }
 
 @keyframes spinner {
