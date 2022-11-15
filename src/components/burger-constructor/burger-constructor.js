@@ -6,6 +6,9 @@ import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import IngredientContext from '../../contexts/ingredient-context'
+import * as constants from '../../constants/constants'
+import request from '../../utils/server-requests'
+import LoadingSpinner from '../loading-spinner/loading-spinner'
 
 const WithOverlayModal = withOverlay(Modal)
 
@@ -13,12 +16,39 @@ const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
     const { ingredientConstructorState } = useContext(IngredientContext)
     const { bun, ingredients } = ingredientConstructorState
+    const [orderNumber, setOrderNumber] = useState(0)
+    const [isLoading, setIsLoading] = useState(false);
 
     const modal = (
         <WithOverlayModal setIsOpen={setIsOpen}>
-            <OrderDetails />
+            {isLoading ? <LoadingSpinner /> : <OrderDetails orderNumber={orderNumber}/>}
         </WithOverlayModal>
     )
+
+    const sendOrder = () => {
+        setIsLoading(true)
+        const url = `${constants.BASE_URL}/orders`
+
+        const body = {
+            ingredients: []
+        }
+        ingredients.map(item => body.ingredients.push(item.id))
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        }
+
+        request(url, requestOptions)
+            .then(result => {
+                setOrderNumber(result.order.number)
+                setIsLoading(false)
+            })
+            .catch(error => console.log(error.message));
+    }
 
     const calculateTotalPrice = (bun, ingredients) => {
         let total = bun.price * 2
@@ -39,11 +69,19 @@ const BurgerConstructor = () => {
                     }
                 </p>
                 <CurrencyIcon type="primary" />
-                <div onClick={() => setIsOpen(true)}>
-                    <Button className='button button_type_primary button_size_medium ml-10' type="primary" size="medium" htmlType='submit'>
-                        Оформить заказ
-                    </Button>
-                </div>
+                <Button 
+                    className='button button_type_primary button_size_medium ml-10' 
+                    type="primary" 
+                    size="medium" 
+                    htmlType='submit' 
+                    onClick={() => {
+                        setIsOpen(true)
+                        sendOrder()
+                    }} 
+                    disabled={false}
+                >
+                    Оформить заказ
+                </Button>
             </div>
             {isOpen && modal}
         </section>

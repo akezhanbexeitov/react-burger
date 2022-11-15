@@ -1,37 +1,8 @@
 import orderAcceptedImage from '../../images/graphics.svg'
 import orderDetailsStyles from './order-details.module.css'
-import { useContext, useEffect, useState } from 'react'
-import IngredientContext from '../../contexts/ingredient-context'
-import * as constants from '../../constants/constants'
-import request from '../../utils/server-requests'
+import propTypes from 'prop-types'
 
-const OrderDetails = () => {
-    const { ingredientConstructorState } = useContext(IngredientContext)
-    const { ingredients } = ingredientConstructorState
-    const [orderNumber, setOrderNumber] = useState(0)
-
-    useEffect(() => {
-        const url = `${constants.BASE_URL}/orders`
-
-        const body = {
-            ingredients: []
-        }
-        ingredients.map(item => body.ingredients.push(item.id))
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }
-
-        request(url, requestOptions)
-            .then(result => setOrderNumber(result.order.number))
-            .catch(error => console.log(error.message));
-    }, [ingredients])
-
-
+const OrderDetails = ({ orderNumber }) => {
     return (
         <div className={orderDetailsStyles.main}>
             <h2 className="text text_type_digits-large mb-8">{orderNumber}</h2>
@@ -41,6 +12,10 @@ const OrderDetails = () => {
             <p className="text text_type_main-default text_color_inactive mt-2 mb-15">Дождитесь готовности на орбитальной станции</p>
         </div>
     )
+}
+
+OrderDetails.propTypes = {
+    orderNumber: propTypes.number
 }
 
 export default OrderDetails;
