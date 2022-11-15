@@ -1,7 +1,8 @@
 import orderAcceptedImage from '../../images/graphics.svg'
 import orderDetailsStyles from './order-details.module.css'
 import { useContext, useEffect, useState } from 'react'
-import IngredientContext from '../contexts/ingredient-context'
+import IngredientContext from '../../contexts/ingredient-context'
+import * as constants from '../../constants/constants'
 
 const OrderDetails = () => {
     const { ingredientConstructorState } = useContext(IngredientContext)
@@ -23,7 +24,7 @@ const OrderDetails = () => {
             body: JSON.stringify(body)
         }
 
-        const url = 'https://norma.nomoreparties.space/api/orders'
+        const url = `${constants.BASE_URL}/orders`
 
         fetch(url, requestOptions)
             .then(response => response.json())

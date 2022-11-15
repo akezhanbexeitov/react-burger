@@ -4,7 +4,8 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { useEffect, useReducer, useState } from 'react';
 import 'normalize.css'
-import IngredientContext from '../contexts/ingredient-context';
+import IngredientContext from '../../contexts/ingredient-context';
+import * as constants from '../../constants/constants'
 
 const ingredientConstructorInitialState = {
   bun: {},
@@ -48,7 +49,8 @@ function App() {
   const [ingredientConstructorState, ingredientConstructorDispatch] = useReducer(ingredientConstructorReducer, ingredientConstructorInitialState)
 
   useEffect(() => {
-    const url = 'https://norma.nomoreparties.space/api/ingredients'
+    const url = `${constants.BASE_URL}/ingredients`
+    
     fetch(url)
       .then(response => {
         if (response.ok) {

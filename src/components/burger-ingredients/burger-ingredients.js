@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import IngredientContext from '../contexts/ingredient-context'
+import IngredientContext from '../../contexts/ingredient-context'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
 import IngredientList from './ingredient-list'

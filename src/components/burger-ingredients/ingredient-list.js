@@ -6,7 +6,7 @@ import Modal from '../modal/modal'
 import { useContext, useState } from 'react'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import withOverlay from '../modal-overlay/with-overlay'
-import IngredientContext from '../contexts/ingredient-context'
+import IngredientContext from '../../contexts/ingredient-context'
 import { v4 as uuidv4 } from 'uuid';
 
 const WithOverlayModal = withOverlay(Modal)

@@ -5,7 +5,7 @@ import { useContext, useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
-import IngredientContext from '../contexts/ingredient-context'
+import IngredientContext from '../../contexts/ingredient-context'
 
 const WithOverlayModal = withOverlay(Modal)
 

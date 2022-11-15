@@ -1,7 +1,7 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
 import { useContext } from 'react'
-import IngredientContext from '../contexts/ingredient-context'
+import IngredientContext from '../../contexts/ingredient-context'
 
 const IngredientConstructor = () => {
   const { ingredientConstructorState } = useContext(IngredientContext)
