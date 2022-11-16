@@ -19,3 +19,7 @@ code {
   --modal-overlay-background-color: rgba(0, 0, 0, 0.6);
   --constructor-background-color: #2f2f37;
 }
+
+#root {
+  max-height: 100vh;
+}

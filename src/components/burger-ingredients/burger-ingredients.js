@@ -22,7 +22,6 @@ const BurgerIngredients = () => {
                     <IngredientList ref={bunsRef} ingredientType={buns} title='Булки'/>
                     <IngredientList ref={saucesRef} ingredientType={sauces} title='Соусы'/>
                     <IngredientList ref={mainsRef} ingredientType={mains} title='Начинки'/>
-                    {console.log(mainsRef)}
                 </div>
             </div>
         </section>
