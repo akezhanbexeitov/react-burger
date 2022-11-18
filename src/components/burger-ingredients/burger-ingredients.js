@@ -3,6 +3,7 @@ import IngredientContext from '../../contexts/ingredient-context'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
 import IngredientList from './ingredient-list'
+import { useSelector } from 'react-redux'
 
 const BurgerIngredients = () => {
     const { data } = useContext(IngredientContext)
@@ -12,6 +13,8 @@ const BurgerIngredients = () => {
     const buns = useMemo(() => data.filter(item => item.type === 'bun' ? item : null), [data])
     const sauces = useMemo(() => data.filter(item => item.type === 'sauce' ? item : null), [data])
     const mains = useMemo(() => data.filter(item => item.type === 'main' ? item : null), [data])
+    const store = useSelector(store => store)
+    console.log(store)
 
     return (
         <section className='mr-5'>

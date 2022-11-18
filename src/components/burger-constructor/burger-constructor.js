@@ -1,21 +1,23 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
-import IngredientContext from '../../contexts/ingredient-context'
 import * as constants from '../../constants/constants'
 import request from '../../utils/server-requests'
 import LoadingSpinner from '../loading-spinner/loading-spinner'
+import { useDispatch, useSelector } from 'react-redux'
 
 const WithOverlayModal = withOverlay(Modal)
 
 const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const { ingredientConstructorState, ingredientConstructorDispatch } = useContext(IngredientContext)
-    const { bun, ingredients } = ingredientConstructorState
+    const bun = useSelector(store => store.bun)
+    const ingredients = useSelector(store => store.ingredients)
+    console.log(ingredients)
+    const dispatch = useDispatch()
     const [orderNumber, setOrderNumber] = useState(0)
     const [isLoading, setIsLoading] = useState(false);
 
@@ -47,7 +49,7 @@ const BurgerConstructor = () => {
                 setOrderNumber(result.order.number)
                 setIsLoading(false)
             })
-            .then(ingredientConstructorDispatch({ type: 'reset' }))
+            .then(dispatch({ type: 'reset' }))
             .catch(error => console.log(error.message));
     }
 

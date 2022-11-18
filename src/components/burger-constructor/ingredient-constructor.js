@@ -1,11 +1,10 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
-import { useContext } from 'react'
-import IngredientContext from '../../contexts/ingredient-context'
+import { useSelector } from 'react-redux'
 
 const IngredientConstructor = () => {
-  const { ingredientConstructorState } = useContext(IngredientContext)
-  const { bun, ingredients } = ingredientConstructorState
+  const bun = useSelector(store => store.bun)
+  const ingredients = useSelector(store => store.ingredients)
 
   return (
     <ul className={burgerConstructorStyles.list}>
