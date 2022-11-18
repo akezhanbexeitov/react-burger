@@ -7,11 +7,7 @@ import 'normalize.css'
 import IngredientContext from '../../contexts/ingredient-context';
 import * as constants from '../../constants/constants'
 import request from '../../utils/server-requests';
-import { createStore } from 'redux'
-import rootReducer from '../../services/reducers/reducers';
-import { Provider } from 'react-redux';
 
-const store = createStore(rootReducer)
 
 function App() {
   const [data, setData] = useState(null)
@@ -27,7 +23,6 @@ function App() {
   return (
     <>
       <AppHeader />
-      <Provider store={store}>
         <IngredientContext.Provider value={{data}}>
           <main className="text text_type_main-default">
             <div className={appStyles.container}>
@@ -35,9 +30,7 @@ function App() {
               {data && <BurgerConstructor />}
             </div>
           </main>
-        </IngredientContext.Provider>
-      </Provider>
-      
+        </IngredientContext.Provider>      
     </>
   );
 }
