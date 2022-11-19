@@ -1,11 +1,11 @@
-import { useContext, useMemo, useRef } from 'react'
-import IngredientContext from '../../contexts/ingredient-context'
+import { useMemo, useRef } from 'react'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
 import IngredientList from './ingredient-list'
+import { useSelector } from 'react-redux'
 
 const BurgerIngredients = () => {
-    const { data } = useContext(IngredientContext)
+    const data = useSelector(store => store.ingredientsList.ingredients)
     const bunsRef = useRef(null)
     const saucesRef = useRef(null)
     const mainsRef = useRef(null)

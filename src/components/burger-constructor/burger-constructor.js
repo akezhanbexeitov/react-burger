@@ -17,7 +17,6 @@ const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
-    console.log(ingredients)
     const dispatch = useDispatch()
     const [orderNumber, setOrderNumber] = useState(0)
     const [isLoading, setIsLoading] = useState(false);

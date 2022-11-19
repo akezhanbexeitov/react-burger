@@ -1,4 +1,4 @@
-import * as ingredients from '../actions/ingredients'
+import * as ingredients from '../actions/ingredients-list'
 
 const initialState = {
     ingredients: [],
