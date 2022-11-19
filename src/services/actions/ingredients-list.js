@@ -23,4 +23,5 @@ export const getIngredients = () => dispatch => {
                 }
             })
         })
+        .catch(error => console.log(error.message))
 }

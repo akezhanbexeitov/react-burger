@@ -6,7 +6,7 @@ const initialState = {
     ingredientsFailed: false
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+const ingredientsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ingredients.GET_INGREDIENTS_REQUEST: {
             return {
@@ -16,7 +16,6 @@ export const ingredientsReducer = (state = initialState, action) => {
         }
         case ingredients.GET_INGREDIENTS_SUCCESS: {
             return {
-                ...state,
                 ingredientsRequest: false,
                 ingredientsFailed: false,
                 ingredients: action.payload.ingredients
@@ -35,3 +34,5 @@ export const ingredientsReducer = (state = initialState, action) => {
         }
     }
 }
+
+export default ingredientsReducer

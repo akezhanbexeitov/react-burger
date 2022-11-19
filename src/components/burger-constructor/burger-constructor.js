@@ -5,53 +5,26 @@ import { useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
-import * as constants from '../../constants/constants'
-import request from '../../utils/server-requests'
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
+import { postOrder } from '../../services/actions/order-details'
 
 const WithOverlayModal = withOverlay(Modal)
 
 const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const isLoading = useSelector(store => store.orderDetails.orderRequest)
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
-    const [orderNumber, setOrderNumber] = useState(0)
-    const [isLoading, setIsLoading] = useState(false);
+    const orderNumber = useSelector(store => store.orderDetails.orderNumber)
 
     const modal = (
         <WithOverlayModal setIsOpen={setIsOpen}>
             {isLoading ? <LoadingSpinner /> : <OrderDetails orderNumber={orderNumber}/>}
         </WithOverlayModal>
     )
-
-    const sendOrder = () => {
-        setIsLoading(true)
-        const url = `${constants.BASE_URL}/orders`
-
-        const body = {
-            ingredients: []
-        }
-        ingredients.map(item => body.ingredients.push(item.id))
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }
-
-        request(url, requestOptions)
-            .then(result => {
-                setOrderNumber(result.order.number)
-                setIsLoading(false)
-            })
-            .then(dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR }))
-            .catch(error => console.log(error.message));
-    }
 
     const calculateTotalPrice = (bun, ingredients) => {
         let total = bun.price * 2
@@ -79,7 +52,8 @@ const BurgerConstructor = () => {
                     htmlType='submit' 
                     onClick={() => {
                         setIsOpen(true)
-                        sendOrder()
+                        dispatch(postOrder(ingredients))
+                        dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
                     }} 
                     disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
                 >
