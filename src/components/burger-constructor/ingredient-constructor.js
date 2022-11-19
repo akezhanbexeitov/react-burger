@@ -1,13 +1,34 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
 import { useSelector } from 'react-redux'
+import { useDrop } from 'react-dnd'
+import { useDispatch } from 'react-redux'
+import { v4 as uuidv4 } from 'uuid';
+import { ADD_INGREDIENT_TO_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
 
 const IngredientConstructor = () => {
   const bun = useSelector(store => store.ingredientsConstructor.bun)
   const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+  const dispatch = useDispatch()
+  const [, dropRef] = useDrop({
+    accept: 'ingredient',
+    drop(ingredient) {
+      dispatch({
+        type: ADD_INGREDIENT_TO_CONSTRUCTOR,
+        payload: {
+          image: ingredient.image,
+          name: ingredient.name,
+          price: ingredient.price,
+          type: ingredient.type,
+          id: ingredient['_id'],
+          key: uuidv4()
+        }})
+    }
+  })
+  
 
   return (
-    <ul className={burgerConstructorStyles.list}>
+    <ul ref={dropRef} className={burgerConstructorStyles.list}>
       {Object.keys(bun).length > 0 
         ? <li className={burgerConstructorStyles.bun}>
             <ConstructorElement
