@@ -9,13 +9,14 @@ import * as constants from '../../constants/constants'
 import request from '../../utils/server-requests'
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import { useDispatch, useSelector } from 'react-redux'
+import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
 
 const WithOverlayModal = withOverlay(Modal)
 
 const BurgerConstructor = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const bun = useSelector(store => store.bun)
-    const ingredients = useSelector(store => store.ingredients)
+    const bun = useSelector(store => store.ingredientsConstructor.bun)
+    const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     console.log(ingredients)
     const dispatch = useDispatch()
     const [orderNumber, setOrderNumber] = useState(0)
@@ -49,7 +50,7 @@ const BurgerConstructor = () => {
                 setOrderNumber(result.order.number)
                 setIsLoading(false)
             })
-            .then(dispatch({ type: 'reset' }))
+            .then(dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR }))
             .catch(error => console.log(error.message));
     }
 

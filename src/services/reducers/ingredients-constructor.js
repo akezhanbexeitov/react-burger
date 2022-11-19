@@ -1,11 +1,13 @@
+import * as ingredientsConstructor from "../actions/ingredients-constructor";
+
 const initialState = {
     bun: {},
     ingredients: []
   };
 
-const rootReducer = (state = initialState, action) => {
+export const ingredientsConstructorReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'add':
+      case ingredientsConstructor.ADD_INGREDIENT_TO_CONSTRUCTOR:
         if (action.payload.type === 'bun') {
           return {
             ...state,
@@ -30,7 +32,7 @@ const rootReducer = (state = initialState, action) => {
             ]
           }
         }
-      case 'reset':
+      case ingredientsConstructor.RESET_INGREDIENTS_FROM_CONSTRUCTOR:
         return {
           bun: {},
           ingredients: []
@@ -39,5 +41,4 @@ const rootReducer = (state = initialState, action) => {
         return state;
     }
   }
-
-export default rootReducer
+  

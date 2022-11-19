@@ -3,11 +3,13 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
 import Modal from '../modal/modal'
-import { forwardRef, useState } from 'react'
+import { forwardRef, useCallback, useState } from 'react'
 import IngredientDetails from '../ingredient-details/ingredient-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux'
+import { ADD_INGREDIENT_TO_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
+import {useSelector} from 'react-redux'
 
 const WithOverlayModal = withOverlay(Modal)
 
@@ -16,6 +18,7 @@ const IngredientList = forwardRef((props, ref) => {
     const [isOpen, setIsOpen] = useState(false)
     const [ingredient, setIngredient] = useState(null)
     const dispatch = useDispatch()
+    console.log(useSelector(store => store))
 
     const modal = (
         <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
@@ -33,7 +36,7 @@ const IngredientList = forwardRef((props, ref) => {
                             setIsOpen(true)
                             setIngredient({...item})
                             dispatch({
-                                type: 'add',
+                                type: ADD_INGREDIENT_TO_CONSTRUCTOR,
                                 payload: {
                                     image: item.image,
                                     name: item.name,

@@ -8,7 +8,6 @@ import IngredientContext from '../../contexts/ingredient-context';
 import * as constants from '../../constants/constants'
 import request from '../../utils/server-requests';
 
-
 function App() {
   const [data, setData] = useState(null)
 

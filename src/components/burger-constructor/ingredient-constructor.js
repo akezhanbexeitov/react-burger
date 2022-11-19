@@ -3,8 +3,8 @@ import burgerConstructorStyles from './burger-constructor.module.css'
 import { useSelector } from 'react-redux'
 
 const IngredientConstructor = () => {
-  const bun = useSelector(store => store.bun)
-  const ingredients = useSelector(store => store.ingredients)
+  const bun = useSelector(store => store.ingredientsConstructor.bun)
+  const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
 
   return (
     <ul className={burgerConstructorStyles.list}>
