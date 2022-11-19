@@ -1,4 +1,4 @@
-import { ADD_INGREDIENT_DETAILS } from "../actions/ingredient-details"
+import { ADD_INGREDIENT_DETAILS, RESET_INGREDIENT_DETAILS } from "../actions/ingredient-details"
 
 const initialState = {
     name: '',
@@ -19,6 +19,16 @@ const ingredientDetailsReducer = (state = initialState, action) => {
                 proteins: action.payload.proteins,
                 fat: action.payload.fat,
                 carbohydrates: action.payload.carbohydrates,
+            }
+        }
+        case RESET_INGREDIENT_DETAILS: {
+            return {
+                name: '',
+                image_large: '',
+                calories: 0,
+                proteins: 0,
+                fat: 0,
+                carbohydrates: 0
             }
         }
         default: {
