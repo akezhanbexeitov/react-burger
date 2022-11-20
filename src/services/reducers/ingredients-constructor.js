@@ -15,7 +15,8 @@ const ingredientsConstructorReducer = (state = initialState, action) => {
               name: action.payload.name,
               image: action.payload.image,
               price: action.payload.price,
-              id: action.payload.id
+              id: action.payload.id,
+              count: 2
             }
           }
         } else {
@@ -29,7 +30,6 @@ const ingredientsConstructorReducer = (state = initialState, action) => {
                 price: action.payload.price,
                 id: action.payload.id,
                 key: action.payload.key,
-                count: 1
               }
             ]
           }

@@ -8,7 +8,6 @@ const Ingredient = ({ setIsOpen, ingredient }) => {
     const dispatch = useDispatch()
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
-    console.log(ingredients)
     const [{ isDragging }, dragRef] = useDrag({
         type: 'ingredient',
         item: ingredient,
@@ -17,13 +16,14 @@ const Ingredient = ({ setIsOpen, ingredient }) => {
         })
     })
 
-    const countBuns = () => {
-        return bun.name === ingredient.name ? <Counter count={1} size="default" /> : null
-    }
-
-    const countIngredients = () => {
+    const countIngredient = () => {
         let count = 0
-        return ingredients.map(item => item.name === ingredient.name ? <Counter count={++count} size="default" /> : null)         
+        ingredients.map(item => {
+            if (ingredient.name === item.name) {
+                count += 1
+            }
+        })
+        return count
     }
 
     return (
@@ -31,8 +31,8 @@ const Ingredient = ({ setIsOpen, ingredient }) => {
             setIsOpen(true)
             dispatch(addIngredientDetails(ingredient))
         }}>
-            { countBuns() }
-            { countIngredients() }
+            { ingredient.name === bun.name ? (bun.count > 0 ? <Counter count={bun.count} size="default" /> : null) : (countIngredient() > 0 ? <Counter count={countIngredient()} size="default" /> : null)}
+            {  }
             <div className='ml-4 mr-4'>
                 <img src={ingredient.image} alt={ingredient.name}/>
             </div>

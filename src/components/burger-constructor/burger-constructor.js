@@ -26,8 +26,8 @@ const BurgerConstructor = () => {
         </WithOverlayModal>
     )
 
-    const calculateTotalPrice = (bun, ingredients) => {
-        let total = bun.price * 2
+    const calculateTotalPrice = (bunPrice = 0, ingredients) => {
+        let total = bunPrice * 2
         ingredients.map(item => total += item.price)
         return total
     }
@@ -38,9 +38,10 @@ const BurgerConstructor = () => {
                 <IngredientConstructor />
             </div>
             <div className={`${burgerConstructorStyles.price} pl-4 pr-4`}>
-                <p className="text text_type_digits-medium mr-2">{
+                <p className="text text_type_digits-medium mr-2">
+                    {
                         (Object.keys(bun).length > 0 || ingredients.length > 0) 
-                        ? calculateTotalPrice(bun, ingredients) 
+                        ? calculateTotalPrice(bun.price, ingredients) 
                         : 0
                     }
                 </p>
