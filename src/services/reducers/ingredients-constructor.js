@@ -39,6 +39,11 @@ const ingredientsConstructorReducer = (state = initialState, action) => {
           bun: {},
           ingredients: []
         }
+      case ingredientsConstructor.DELETE_INGREDIENT_FROM_CONSTRUCTOR: 
+        return {
+          ...state,
+          ingredients: state.ingredients.filter(item => item.key !== action.payload.key)
+        }
       default:
         return state;
     }

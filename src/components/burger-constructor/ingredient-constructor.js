@@ -3,7 +3,7 @@ import burgerConstructorStyles from './burger-constructor.module.css'
 import { useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
-import { addIngredientToConstructor } from '../../services/actions/ingredients-constructor'
+import { addIngredientToConstructor, DELETE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
 
 const IngredientConstructor = () => {
   const bun = useSelector(store => store.ingredientsConstructor.bun)
@@ -42,6 +42,12 @@ const IngredientConstructor = () => {
                     text={item.name}
                     price={item.price}
                     thumbnail={item.image}
+                    handleClose={() => dispatch({
+                      type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
+                        payload: {
+                          key: item.key
+                        }
+                    })}
                   />
                 </li>
               )})
