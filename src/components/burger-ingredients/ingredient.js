@@ -18,11 +18,7 @@ const Ingredient = ({ setIsOpen, ingredient }) => {
 
     const countIngredient = () => {
         let count = 0
-        ingredients.map(item => {
-            if (ingredient.name === item.name) {
-                count += 1
-            }
-        })
+        ingredients.map(item => ingredient.name === item.name ? count += 1 : null)
         return count
     }
 
