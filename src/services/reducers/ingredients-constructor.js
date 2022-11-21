@@ -46,9 +46,10 @@ const ingredientsConstructorReducer = (state = initialState, action) => {
         }
       case ingredientsConstructor.MOVE_INGREDIENT_IN_CONSTRUCTOR:
         const ingredients = [...state.ingredients];
+        ingredients.splice(action.payload.toIndex, 0, ingredients.splice(action.payload.fromIndex, 1)[0])
         return {
           ...state,
-          ingredients: ingredients.splice(action.payload.toIndex, 0, ingredients.splice(action.payload.fromIndex, 1)[0])
+          ingredients
         }
       default:
         return state;
