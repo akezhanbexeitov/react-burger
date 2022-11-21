@@ -20,14 +20,13 @@ const IngredientConstructor = () => {
 
   const findIngredient = useCallback(key => {
     const ingredient = ingredients.filter(item => item.key === key)[0]
-    return {
-      ingredient, 
+    return { 
       index: ingredients.indexOf(ingredient)
     }
   }, [ingredients])
 
   const moveIngredient = useCallback((key, atIndex) => {
-    const { ingredient, index } = findIngredient(key)
+    const { index } = findIngredient(key)
     dispatch({
       type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
       payload: {

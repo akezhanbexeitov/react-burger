@@ -53,7 +53,7 @@ const BurgerConstructor = () => {
                     htmlType='submit' 
                     onClick={() => {
                         setIsOpen(true)
-                        dispatch(postOrder(ingredients))
+                        dispatch(postOrder(bun, ingredients))
                         dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
                     }} 
                     disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}

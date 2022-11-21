@@ -53,19 +53,3 @@ const ConstructorItem = ({ id, ingredient, moveIngredient, findIngredient }) => 
 }
 
 export default ConstructorItem
-
-
-
-
-
-
-
-// export const Card = memo(function Card({ id, text, moveCard, findCard }) {
-//   const originalIndex = findCard(id).index
-  
-//   return (
-//     <div >
-//       {text}
-//     </div>
-//   )
-// })
