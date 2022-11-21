@@ -1,7 +1,7 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
@@ -32,6 +32,8 @@ const BurgerConstructor = () => {
         return total
     }
 
+    const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
+
     return (
         <section className='ml-5'>
             <div className={`${burgerConstructorStyles.container} pt-25 pb-10`}>
@@ -41,7 +43,7 @@ const BurgerConstructor = () => {
                 <p className="text text_type_digits-medium mr-2">
                     {
                         (Object.keys(bun).length > 0 || ingredients.length > 0) 
-                        ? calculateTotalPrice(bun.price, ingredients) 
+                        ? memoizedTotalPrice
                         : 0
                     }
                 </p>
