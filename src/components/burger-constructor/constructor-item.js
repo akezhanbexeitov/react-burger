@@ -3,8 +3,10 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { DELETE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
 import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
+import propTypes from 'prop-types'
 
-const ConstructorItem = ({ id, ingredient, moveIngredient, findIngredient }) => {
+const ConstructorItem = (props) => {
+    const { id, ingredient, moveIngredient, findIngredient } = props
     const dispatch = useDispatch()
     const originalIndex = findIngredient(ingredient.key).index 
     const [{ isDragging }, drag] = useDrag(() => ({
@@ -38,18 +40,33 @@ const ConstructorItem = ({ id, ingredient, moveIngredient, findIngredient }) => 
         <li ref={(node) => drag(drop(node))} style={{ opacity }} className={burgerConstructorStyles.item}>
             <DragIcon type="primary" />
             <ConstructorElement
-            text={ingredient.name}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            handleClose={() => dispatch({
-                type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
-                payload: {
-                    key: ingredient.key
-                }
+                text={ingredient.name}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+                handleClose={() => dispatch({
+                    type: DELETE_INGREDIENT_FROM_CONSTRUCTOR,
+                    payload: {
+                        key: ingredient.key
+                    }
             })}
             />
         </li>
     )
+}
+
+const ingredientType = propTypes.shape({
+    id: propTypes.string.isRequired,
+    image: propTypes.string.isRequired,
+    key: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
+    price: propTypes.number.isRequired
+})
+
+ConstructorItem.propTypes = {
+    findIngredient: propTypes.func,
+    id: propTypes.string,
+    ingredient: ingredientType,
+    moveIngredient: propTypes.func,
 }
 
 export default ConstructorItem

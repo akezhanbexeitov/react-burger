@@ -56,7 +56,12 @@ const IngredientConstructor = () => {
         {ingredients.length > 0
           ? ingredients.map(item => {
               return (
-                <ConstructorItem ingredient={item} key={item.key} id={item.key} moveIngredient={moveIngredient} findIngredient={findIngredient}/>
+                <ConstructorItem 
+                  ingredient={item} 
+                  key={item.key} 
+                  id={item.key} 
+                  moveIngredient={moveIngredient} 
+                  findIngredient={findIngredient}/>
               )})
           : <li className={burgerConstructorStyles.empty}>
               <p>Выберите начинку</p>
