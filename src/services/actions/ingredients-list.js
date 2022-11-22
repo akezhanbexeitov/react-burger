@@ -23,5 +23,5 @@ export const getIngredients = () => dispatch => {
                 }
             })
         })
-        .catch(error => console.log(error.message))
+        .catch(error => dispatch({ type: GET_INGREDIENTS_FAILED }) && console.log(error))
 }

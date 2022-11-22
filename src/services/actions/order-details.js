@@ -34,5 +34,5 @@ export const postOrder = (bun, ingredients) => dispatch => {
                 }
             })
         })
-        .catch(error => console.log(error.message))
+        .catch(error => dispatch({ type: POST_ORDER_FAILED }) && console.log(error))
 }
