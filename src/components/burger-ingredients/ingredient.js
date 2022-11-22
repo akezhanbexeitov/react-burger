@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import propTypes from 'prop-types'
 import ingredientType from '../../utils/types'
+import { DND_TYPES } from '../../constants/constants'
 
 const Ingredient = (props) => {
     const { setIsOpen, ingredient } = props
@@ -12,7 +13,7 @@ const Ingredient = (props) => {
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const [{ isDragging }, dragRef] = useDrag({
-        type: 'ingredient',
+        type: DND_TYPES.ingredient,
         item: ingredient,
         collect: monitor => ({
             isDragging: monitor.isDragging()

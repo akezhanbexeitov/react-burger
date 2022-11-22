@@ -1,3 +1,4 @@
+import { INGREDIENT_TYPE } from "../../constants/constants";
 import * as ingredientsConstructor from "../actions/burger-constructor";
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
 const burgerConstructorReducer = (state = initialState, action) => {
     switch (action.type) {
       case ingredientsConstructor.ADD_INGREDIENT_TO_CONSTRUCTOR:
-        if (action.payload.type === 'bun') {
+        if (action.payload.type === INGREDIENT_TYPE) {
           return {
             ...state,
             bun: {

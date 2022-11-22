@@ -4,13 +4,14 @@ import { DELETE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/burge
 import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import propTypes from 'prop-types'
+import { DND_TYPES } from '../../constants/constants'
 
 const ConstructorItem = (props) => {
     const { id, ingredient, moveIngredient, findIngredient } = props
     const dispatch = useDispatch()
     const originalIndex = findIngredient(ingredient.key).index 
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: 'ingredientConstructorType',
+        type: DND_TYPES.burgerConstructor,
         item: { id, originalIndex },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
@@ -25,7 +26,7 @@ const ConstructorItem = (props) => {
     }))
 
     const [, drop] = useDrop(() => ({
-        accept: 'ingredientConstructorType',
+        accept: DND_TYPES.burgerConstructor,
         hover({ id: draggedId }) {
             if (draggedId !== id) {
                 const { index: overIndex } = findIngredient(id)
