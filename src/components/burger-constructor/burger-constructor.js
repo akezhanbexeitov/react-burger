@@ -32,6 +32,12 @@ const BurgerConstructor = () => {
         return total
     }
 
+    const clickHandler = () => {
+        setIsOpen(true)
+        dispatch(postOrder(bun, ingredients))
+        dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
+    }
+
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
 
     return (
@@ -53,11 +59,7 @@ const BurgerConstructor = () => {
                     type="primary" 
                     size="medium" 
                     htmlType='submit' 
-                    onClick={() => {
-                        setIsOpen(true)
-                        dispatch(postOrder(bun, ingredients))
-                        dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
-                    }} 
+                    onClick={clickHandler} 
                     disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
                 >
                     Оформить заказ
