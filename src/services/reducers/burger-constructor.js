@@ -1,11 +1,11 @@
-import * as ingredientsConstructor from "../actions/ingredients-constructor";
+import * as ingredientsConstructor from "../actions/burger-constructor";
 
 const initialState = {
     bun: {},
     ingredients: []
   };
 
-const ingredientsConstructorReducer = (state = initialState, action) => {
+const burgerConstructorReducer = (state = initialState, action) => {
     switch (action.type) {
       case ingredientsConstructor.ADD_INGREDIENT_TO_CONSTRUCTOR:
         if (action.payload.type === 'bun') {
@@ -56,4 +56,4 @@ const ingredientsConstructorReducer = (state = initialState, action) => {
     }
   }
   
-export default ingredientsConstructorReducer
+export default burgerConstructorReducer

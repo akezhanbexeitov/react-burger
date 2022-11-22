@@ -7,7 +7,7 @@ import OrderDetails from '../order-details/order-details'
 import withOverlay from '../modal-overlay/with-overlay'
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
+import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import { postOrder } from '../../services/actions/order-details'
 
 const WithOverlayModal = withOverlay(Modal)

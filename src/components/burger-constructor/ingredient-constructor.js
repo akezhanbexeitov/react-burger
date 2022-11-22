@@ -3,7 +3,7 @@ import burgerConstructorStyles from './burger-constructor.module.css'
 import { useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
-import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../../services/actions/ingredients-constructor'
+import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import ConstructorItem from './constructor-item'
 import { useCallback } from 'react'
 
