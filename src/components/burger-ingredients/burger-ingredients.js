@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, memo } from 'react'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientsCategories from './ingredient-categories'
 import IngredientList from './ingredient-list'
@@ -29,4 +29,4 @@ const BurgerIngredients = () => {
     )
 }
 
-export default BurgerIngredients;
+export default memo(BurgerIngredients);
