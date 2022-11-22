@@ -3,8 +3,11 @@ import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
+import propTypes from 'prop-types'
+import ingredientType from '../../utils/types'
 
-const Ingredient = ({ setIsOpen, ingredient }) => {
+const Ingredient = (props) => {
+    const { setIsOpen, ingredient } = props
     const dispatch = useDispatch()
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
@@ -39,6 +42,11 @@ const Ingredient = ({ setIsOpen, ingredient }) => {
             <p className={burgerIngredientsStyles.description}>{ingredient.name}</p>
         </li>
     )
+}
+
+Ingredient.propTypes = {
+    ingredient: ingredientType,
+    setIsOpen: propTypes.func.isRequired
 }
 
 export default Ingredient

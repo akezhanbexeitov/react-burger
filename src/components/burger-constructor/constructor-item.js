@@ -63,10 +63,10 @@ const ingredientType = propTypes.shape({
 })
 
 ConstructorItem.propTypes = {
-    findIngredient: propTypes.func,
-    id: propTypes.string,
-    ingredient: ingredientType,
-    moveIngredient: propTypes.func,
+    findIngredient: propTypes.func.isRequired,
+    id: propTypes.string.isRequired,
+    ingredient: ingredientType.isRequired,
+    moveIngredient: propTypes.func.isRequired,
 }
 
 export default ConstructorItem
