@@ -1,57 +1,90 @@
-import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
-import propTypes from 'prop-types'
-import ingredientType from '../../utils/types'
+import { useSelector } from 'react-redux'
+import { useDrop } from 'react-dnd'
+import { useDispatch } from 'react-redux'
+import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../../services/actions/burger-constructor'
+import ConstructorItem from './constructor-item'
+import { useCallback } from 'react'
+import { DND_TYPES } from '../../constants/constants'
 
-const IngredientConstructor = (props) => {
-  const { data } = props
+const IngredientConstructor = () => {
+  const bun = useSelector(store => store.ingredientsConstructor.bun)
+  const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+  const dispatch = useDispatch()
+  const [, dropRef] = useDrop({
+    accept: DND_TYPES.ingredient,
+    drop(ingredient) {
+      dispatch(addIngredientToConstructor(ingredient))
+    }
+  })
+
+  const findIngredient = useCallback(key => {
+    const ingredient = ingredients.filter(item => item.key === key)[0]
+    return { 
+      index: ingredients.indexOf(ingredient)
+    }
+  }, [ingredients])
+
+  const moveIngredient = useCallback((key, atIndex) => {
+    const { index } = findIngredient(key)
+    dispatch({
+      type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
+      payload: {
+        fromIndex: atIndex,
+        toIndex: index
+      }
+    })
+  }, [findIngredient, dispatch])
 
   return (
-    <ul className={burgerConstructorStyles.list}>
-      <li className={burgerConstructorStyles.bun}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={data[14].image}
-        />
-      </li>
+    <ul ref={dropRef} className={burgerConstructorStyles.list}>
+      {Object.keys(bun).length > 0 
+        ? <li className={burgerConstructorStyles.bun}>
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={`${bun.name} (верх)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          </li>
+        : <li className={burgerConstructorStyles.emptyTop}>
+            <p>Выберите булку</p>
+          </li>
+      }
       <div className={burgerConstructorStyles.ingredients}>
-        {data.filter(item => {
-                  if (item.type !== 'bun') {
-                      return item
-                  } else {
-                      return null
-                  }
-              }).map(item => {
-                return(
-                  <li className={burgerConstructorStyles.item} key={item['_id']}>
-                    <DragIcon type="primary" />
-                    <ConstructorElement
-                      text={item.name}
-                      price={item.price}
-                      thumbnail={item.image}
-                    />
-                  </li>
-                )
-            })}
+        {ingredients.length > 0
+          ? ingredients.map(item => {
+              return (
+                <ConstructorItem 
+                  ingredient={item} 
+                  key={item.key} 
+                  id={item.key} 
+                  moveIngredient={moveIngredient} 
+                  findIngredient={findIngredient}/>
+              )})
+          : <li className={burgerConstructorStyles.empty}>
+              <p>Выберите начинку</p>
+            </li>
+        }
       </div>
-      <li className={burgerConstructorStyles.bun}>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={data[14].image}
-        />
-      </li>
+      {Object.keys(bun).length > 0 
+        ? <li className={burgerConstructorStyles.bun}>
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={`${bun.name} (низ)`}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          </li>
+        : <li className={burgerConstructorStyles.emptyBottom}>
+            <p>Выберите булку</p>
+          </li>
+      }
     </ul>
   )
-}
-
-IngredientConstructor.propTypes = {
-  data: propTypes.arrayOf(ingredientType)
 }
 
 export default IngredientConstructor;
