@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Register from '../../pages/register/register';
+import Login from '../../pages/login/login';
 
 function App() {
   const dispatch = useDispatch()
@@ -22,10 +25,22 @@ function App() {
       <AppHeader />
       <main className="text text_type_main-default">
         <div className={appStyles.container}>
-          <DndProvider backend={HTML5Backend}>        
-            {data && <BurgerIngredients />}
-            {data && <BurgerConstructor />}
-          </DndProvider>
+          <Router>
+            <Switch>
+              <Route path='/' exact={true}>
+                <DndProvider backend={HTML5Backend}>  
+                  {data && <BurgerIngredients />}
+                  {data && <BurgerConstructor />}
+                </DndProvider>
+              </Route>
+              <Route path='/login' exact={true}>
+                <Login />
+              </Route>
+              <Route path='/register' exact={true}>
+                <Register />
+              </Route>
+            </Switch>
+          </Router>
         </div>
       </main>
     </>
