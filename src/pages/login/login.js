@@ -6,27 +6,20 @@ import { Link } from 'react-router-dom'
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const onChange = e => {
-        if (e.target.name === 'email') {
-            setEmail(e.target.value)
-        } else if (e.target.name === 'password') {
-            setPassword(e.target.value)
-        }
-    }
 
     return (
         <div className={loginStyles.wrapper}>
             <div className={loginStyles.container}>
                 <h2 className={`${loginStyles.heading} mb-6`}>Вход</h2>
                 <EmailInput
-                    onChange={onChange}
+                    onChange={e => setEmail(e.target.value)}
                     value={email}
                     name={'email'}
                     isIcon={false}
                     extraClass='mb-6'
                 />
                 <PasswordInput
-                    onChange={onChange}
+                    onChange={e => setPassword(e.target.value)}
                     value={password}
                     name={'password'}
                     extraClass="mb-6"
