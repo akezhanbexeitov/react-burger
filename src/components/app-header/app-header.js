@@ -3,7 +3,7 @@ import headerStyles from './app-header.module.css'
 
 const AppHeader = () => {
     return (
-        <header className='text text_type_main-default'>
+        <header className={`${headerStyles.header} text text_type_main-default`}>
             <div className={`${headerStyles.container} pt-4 pb-4`}>
                 <nav>
                     <ul className={headerStyles.list}>
