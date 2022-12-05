@@ -1,0 +1,9 @@
+.section {
+    flex: 1;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.section:nth-child(2) {
+    flex: 2;
+}
