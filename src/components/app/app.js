@@ -12,6 +12,7 @@ import { Switch, Route } from 'react-router-dom'
 import Register from '../../pages/register/register';
 import Login from '../../pages/login/login';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
 
 function App() {
   const dispatch = useDispatch()
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route exact path='/forgot-password'>
               <ForgotPassword />
+            </Route>
+            <Route exact path='/reset-password'>
+              <ResetPassword />
             </Route>
           </Switch>
         </div>
