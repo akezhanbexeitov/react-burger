@@ -10,6 +10,7 @@ const Profile = () => {
     return (
         <>
            <section className={`${profileStyles.section} mr-15`}>
+                {/* TODO: change h2 tags to Links */}
                 <h2>Профиль</h2>
                 <h2 className='text_color_inactive'>История заказов</h2>
                 <h2 className='text_color_inactive mb-20'>Выход</h2>
