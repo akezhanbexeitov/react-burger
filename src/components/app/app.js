@@ -14,6 +14,7 @@ import Login from '../../pages/login/login';
 import ForgotPassword from '../../pages/forgot-password/forgot-password';
 import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
+import Feed from '../../pages/feed/feed';
 
 function App() {
   const dispatch = useDispatch()
@@ -49,6 +50,9 @@ function App() {
             </Route>
             <Route exact path='/profile'>
               <Profile />
+            </Route>
+            <Route exact path='/feed'>
+              <Feed />
             </Route>
           </Switch>
         </div>

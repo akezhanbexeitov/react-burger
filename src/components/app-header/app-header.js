@@ -5,6 +5,7 @@ import { Link, useRouteMatch } from 'react-router-dom'
 const AppHeader = () => {
     const isConstructor = !!useRouteMatch({ path: '/', exact: true});
     const isProfile = !!useRouteMatch('/profile');
+    const isFeed = !!useRouteMatch('/feed');
 
     return (
         <header className={`${headerStyles.header} text text_type_main-default`}>
@@ -13,24 +14,15 @@ const AppHeader = () => {
                     <ul className={headerStyles.list}>
                         <li className={headerStyles.item}>
                             <Link className={`${headerStyles.link} p-5`} to='/'>
-                                { 
-                                    isConstructor 
-                                    ? <>
-                                        <BurgerIcon type="primary" />
-                                        <p className="ml-2">Конструктор</p>
-                                    </> 
-                                    : <>
-                                        <BurgerIcon type="secondary" />
-                                        <p className="text_color_inactive ml-2">Конструктор</p>
-                                    </> 
-                                }
+                                <BurgerIcon type={isConstructor ? 'primary' : 'secondary'} />
+                                <p className={isConstructor ? 'ml-2' : 'text_color_inactive ml-2'}>Конструктор</p>
                             </Link>
                         </li>
                         <li className={`${headerStyles.item} ml-2`}>
-                            <a className={`${headerStyles.link} p-5`} href='https://practicum.yandex.ru/'>
-                                <ListIcon type="secondary" />
-                                <p className="text_color_inactive ml-2">Лента заказов</p>
-                            </a>
+                            <Link className={`${headerStyles.link} p-5`} to='/feed'>
+                                <ListIcon type={isFeed ? 'primary' : 'secondary'} />
+                                <p className={isFeed ? 'ml-2' : 'text_color_inactive ml-2'}>Лента заказов</p>    
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -39,17 +31,8 @@ const AppHeader = () => {
                 </Link>
                 <div className={headerStyles.item}>
                     <Link className={`${headerStyles.link} p-5`} to='/profile'>
-                        { 
-                            isProfile 
-                            ? <>
-                                <ProfileIcon type="primary" />
-                                <p className="ml-2">Личный кабинет</p>
-                            </> 
-                            : <>
-                                <ProfileIcon type="secondary" />
-                                <p className="text_color_inactive ml-2">Личный кабинет</p>
-                            </> 
-                        }
+                        <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
+                        <p className={isProfile ? 'ml-2' : 'text_color_inactive ml-2'}>Личный кабинет</p>
                     </Link>
                 </div>      
             </div>
