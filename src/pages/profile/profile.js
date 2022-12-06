@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import profileStyles from './profile.module.css'
-import { EmailInput, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components'
+import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 const Profile = () => {
     const [name, setName] = useState('Mark')
@@ -44,7 +44,24 @@ const Profile = () => {
                     placeholder='Пароль'
                     extraClass="mb-6"
                 />
+                <div className={profileStyles.buttons}>
+                    <Button 
+                        htmlType="button" 
+                        type="secondary" 
+                        size="medium" 
+                    >
+                        Отмена
+                    </Button>
+                    <Button 
+                        htmlType="button" 
+                        type="primary" 
+                        size="medium" 
+                    >
+                        Сохранить
+                    </Button>
+                </div>
             </section>
+            <section className={profileStyles.section}></section>
         </>
     )
 }
