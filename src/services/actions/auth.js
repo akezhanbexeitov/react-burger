@@ -4,8 +4,11 @@ export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
 export const REGISTER_USER_FAILED = 'REGISTER_USER_FAILED'
 
-export const setCookie = (name, value, props) => {
-    props = props || {};
+export const setCookie = (name, value, props = {}) => {
+    props = {
+        path: '/',
+        ...props
+    };
     let exp = props.expires;
     if (typeof exp == 'number' && exp) {
       const d = new Date();
