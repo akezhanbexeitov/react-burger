@@ -18,7 +18,7 @@ const initialState = {
     getUserFailed: false
 }
 
-const registerReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case register.REGISTER_USER_REQUEST: {
             return {
@@ -48,4 +48,4 @@ const registerReducer = (state = initialState, action) => {
     }
 }
 
-export default registerReducer
+export default authReducer

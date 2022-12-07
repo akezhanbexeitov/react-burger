@@ -1,19 +1,15 @@
 import registerStyles from './register.module.css'
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { register } from '../../services/actions/auth'
+import { registerUser } from '../../services/actions/auth'
 
 const Register = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-
-    const registerUser = (email, password, name) => {
-        dispatch(register(email, password, name))
-    }
 
     return (
         <div className={registerStyles.wrapper}>
@@ -48,7 +44,7 @@ const Register = () => {
                     type="primary" 
                     size="medium" 
                     extraClass='mb-20'
-                    onClick={() => registerUser(email, password, name)}
+                    onClick={() => dispatch(registerUser(email, password, name))}
                 > {/* TODO: fix this button */}
                     Зарегистрироваться
                 </Button>
