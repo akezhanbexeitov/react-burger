@@ -1,14 +1,15 @@
 import loginStyles from './login.module.css'
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
+    const user = useSelector(store => store.auth.user)
 
     return (
         <div className={loginStyles.wrapper}>
@@ -44,6 +45,7 @@ const Login = () => {
                     <p className="text text_type_main-default text_color_inactive">Забыли пароль?</p>
                     <Link className={loginStyles.link} to='/forgot-password'>Восстановить пароль</Link>
                 </div>
+                { user ? <Redirect to='/'/> : null }
             </div>
         </div>
     )
