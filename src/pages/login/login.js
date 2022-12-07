@@ -2,10 +2,13 @@ import loginStyles from './login.module.css'
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../services/actions/auth'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
 
     return (
         <div className={loginStyles.wrapper}>
@@ -24,7 +27,13 @@ const Login = () => {
                     name={'password'}
                     extraClass="mb-6"
                 />
-                <Button htmlType="button" type="primary" size="medium" extraClass='mb-20'> {/* TODO: fix this button */}
+                <Button 
+                    htmlType="button" 
+                    type="primary" 
+                    size="medium" 
+                    extraClass='mb-20'
+                    onClick={() => dispatch(loginUser(email, password))}
+                > {/* TODO: fix this button */}
                     Войти
                 </Button>
                 <div className={`${loginStyles.paragraph} mb-4`}>

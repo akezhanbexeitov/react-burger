@@ -1,7 +1,7 @@
-import * as register from '../actions/auth'
+import * as auth from '../actions/auth'
 
 const initialState = {
-    isAuth: false,
+    isAuthChecked: false,
 
     user: null,
 
@@ -20,26 +20,48 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case register.REGISTER_USER_REQUEST: {
+        case auth.REGISTER_USER_REQUEST: {
             return {
                 ...state,
                 registerUserRequest: true,
                 registerUserFailed: false
             }
         }
-        case register.REGISTER_USER_SUCCESS: {
+        case auth.REGISTER_USER_SUCCESS: {
             return {
                 ...state,
-                isAuth: true,
+                isAuthChecked: true,
                 registerUserRequest: false,
                 user: action.payload.user,
             }
         }
-        case register.REGISTER_USER_FAILED: {
+        case auth.REGISTER_USER_FAILED: {
             return {
                 ...state,
                 registerUserFailed: true,
                 registerUserRequest: false
+            }
+        }
+        case auth.LOGIN_USER_REQUEST: {
+            return {
+                ...state,
+                loginUserRequest: true,
+                loginUserFailed: false
+            }
+        }
+        case auth.LOGIN_USER_SUCCESS: {
+            return {
+                ...state,
+                isAuthChecked: true,
+                loginUserRequest: false,
+                user: action.payload.user,
+            }
+        }
+        case auth.LOGIN_USER_FAILED: {
+            return {
+                ...state,
+                loginUserFailed: true,
+                loginUserRequest: false
             }
         }
         default: {
