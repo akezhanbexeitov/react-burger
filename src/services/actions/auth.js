@@ -27,6 +27,13 @@ export const setCookie = (name, value, props) => {
     document.cookie = updatedCookie;
 } 
 
+export function getCookie(name) {
+    const matches = document.cookie.match(
+      new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+    );
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+} 
+
 export const registerUser = (email, password, name) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
     const url = `${BASE_URL_AUTH}/register`
