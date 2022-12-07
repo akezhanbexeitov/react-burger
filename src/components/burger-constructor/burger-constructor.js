@@ -9,6 +9,7 @@ import LoadingSpinner from '../loading-spinner/loading-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import { postOrder } from '../../services/actions/order-details'
+import { useHistory } from 'react-router-dom'
 
 const WithOverlayModal = withOverlay(Modal)
 
@@ -19,6 +20,8 @@ const BurgerConstructor = () => {
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
     const orderNumber = useSelector(store => store.orderDetails.orderNumber)
+    const user = useSelector(store => store.auth.user)
+    const history = useHistory()
 
     const modal = (
         <WithOverlayModal setIsOpen={setIsOpen}>
@@ -33,9 +36,13 @@ const BurgerConstructor = () => {
     }
 
     const clickHandler = () => {
-        setIsOpen(true)
-        dispatch(postOrder(bun, ingredients))
-        dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
+        if (user) {
+            setIsOpen(true)
+            dispatch(postOrder(bun, ingredients))
+            dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
+        } else { 
+            history.push('/login')
+        }
     }
 
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
@@ -58,7 +65,7 @@ const BurgerConstructor = () => {
                     className='button button_type_primary button_size_medium ml-10' 
                     type="primary" 
                     size="medium" 
-                    htmlType='submit' 
+                    htmlType='button' 
                     onClick={clickHandler} 
                     disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
                 >
