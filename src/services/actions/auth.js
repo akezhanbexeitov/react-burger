@@ -8,6 +8,8 @@ export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED'
 
+export const LOGOUT_USER = 'LOGOUT_USER'
+
 export const setCookie = (name, value, props = {}) => {
     props = {
         path: '/',
@@ -128,4 +130,24 @@ export const loginUser = (email, password) => dispatch => {
             })
         })
         .catch(error => dispatch({ type: LOGIN_USER_FAILED }) && console.log(error))
+}
+
+export const logoutUser = () => dispatch => {
+    const url = `${BASE_URL_AUTH}/logout`
+    const body = { token: localStorage.getItem('refreshToken') }
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+    fetch(url, requestOptions)
+        .then(res => {
+            if (res.ok) {
+                dispatch({ type: LOGOUT_USER })
+            }
+            return Promise.reject(`Ошибка ${res.status}`)
+        })
+        .catch(error => console.log(error))
 }

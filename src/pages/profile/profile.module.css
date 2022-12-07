@@ -4,6 +4,10 @@
     margin-bottom: 120px;
 }
 
+.logout {
+    cursor: pointer;
+}
+
 .buttons {
     display: flex;
     justify-content: flex-end;
