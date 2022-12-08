@@ -28,7 +28,7 @@ const AppHeader = () => {
                         </li>
                     </ul>
                 </nav>
-                <Link to='/'>
+                <Link className={headerStyles.logo} to='/'>
                     <Logo />
                 </Link>
                 <div className={headerStyles.item}>
