@@ -35,7 +35,7 @@ const Login = () => {
                         size="medium" 
                         extraClass='mb-20'
                         onClick={() => dispatch(loginUser(email, password))}
-                    > {/* TODO: fix this button */}
+                    > 
                         Войти
                     </Button>
                 </form>
