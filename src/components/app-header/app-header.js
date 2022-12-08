@@ -1,11 +1,13 @@
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import headerStyles from './app-header.module.css'
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const AppHeader = () => {
     const isConstructor = !!useRouteMatch({ path: '/', exact: true});
     const isProfile = !!useRouteMatch('/profile');
     const isFeed = !!useRouteMatch('/feed');
+    const user = useSelector(store => store.auth.user)
 
     return (
         <header className={`${headerStyles.header} text text_type_main-default`}>
@@ -32,7 +34,7 @@ const AppHeader = () => {
                 <div className={headerStyles.item}>
                     <Link className={`${headerStyles.link} p-5`} to='/profile'>
                         <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
-                        <p className={isProfile ? 'ml-2' : 'text_color_inactive ml-2'}>Личный кабинет</p>
+                        <p className={isProfile ? 'ml-2' : 'text_color_inactive ml-2'}>{ user !== null ? user.name : 'Личный кабинет' }</p>
                     </Link>
                 </div>      
             </div>
