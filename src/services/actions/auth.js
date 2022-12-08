@@ -36,6 +36,12 @@ export function setCookie(name, value, props = {}) {
     document.cookie = updatedCookie;
 } 
 
+export function deleteCookie(name) {
+    setCookie(name, "", {
+      'max-age': -1
+    })
+  }
+
 export const registerUser = (email, password, name) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
     const url = `${BASE_URL_AUTH}/register`
@@ -62,7 +68,7 @@ export const registerUser = (email, password, name) => dispatch => {
         .then(data => {
             let accessToken
             accessToken = data.accessToken.split('Bearer ')[1]
-            setCookie('token', accessToken)
+            setCookie('accessToken', accessToken)
             localStorage.setItem('refreshToken', data.refreshToken)
             dispatch({
                 type: REGISTER_USER_SUCCESS,
@@ -99,7 +105,7 @@ export const loginUser = (email, password) => dispatch => {
         .then(data => {
             let accessToken
             accessToken = data.accessToken.split('Bearer ')[1]
-            setCookie('token', accessToken)
+            setCookie('accessToken', accessToken)
             localStorage.setItem('refreshToken', data.refreshToken)
             dispatch({
                 type: LOGIN_USER_SUCCESS,
@@ -124,6 +130,8 @@ export const logoutUser = () => dispatch => {
     fetch(url, requestOptions)
         .then(res => {
             if (res.ok) {
+                deleteCookie('accessToken')
+                localStorage.removeItem('refreshToken')
                 dispatch({ type: LOGOUT_USER })
             }
             return Promise.reject(`Ошибка ${res.status}`)

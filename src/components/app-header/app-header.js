@@ -1,6 +1,6 @@
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import headerStyles from './app-header.module.css'
-import { Link, useRouteMatch, useHistory } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const AppHeader = () => {
