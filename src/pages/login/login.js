@@ -1,7 +1,7 @@
 import loginStyles from './login.module.css'
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
@@ -10,7 +10,6 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const user = useSelector(store => store.auth.user)
     const isLoading = useSelector(store => store.auth.loginUserRequest)
     const history = useHistory()
     const location = useLocation()

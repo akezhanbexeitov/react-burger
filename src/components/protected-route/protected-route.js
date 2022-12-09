@@ -3,17 +3,21 @@ import { useDispatch, useSelector } from "react-redux"
 import { checkUserAuth } from "../../services/actions/auth"
 import { Redirect, useLocation, Route } from 'react-router-dom'
 
-const ProtectedRoute = (props) => {
-    const authChecked = useSelector(store => store.auth.authChecked)
+const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
     const user = useSelector(store => store.auth.user)
     const location = useLocation()
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(checkUserAuth())
-    }, [])
+    }, [dispatch])
 
-    if (!user) {
+    if (onlyUnAuth && user) {
+        const { from } = location.state || { from: { pathname: "/" } };
+        return <Redirect to={from} />;
+    }
+
+    if (!onlyUnAuth && !user) {
         return (
             <Redirect to={{
                 pathname: '/login',
@@ -22,7 +26,7 @@ const ProtectedRoute = (props) => {
         )
     }
     
-    return <Route {...props} />
+    return <Route {...rest} />
 }
 
 export default ProtectedRoute
