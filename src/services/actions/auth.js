@@ -191,6 +191,46 @@ export const updateUserInfo = (name, email) => dispatch => {
         .catch(error => dispatch({ type: UPDATE_USER_FAILED }) && console.log(error))
 }
 
+const checkReponse = (res) => {
+    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  };
+
+export const refreshToken = () => {
+    const url = `${BASE_URL_AUTH}/token`
+    const body = {
+        token: localStorage.getItem("refreshToken")
+    }
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        body: JSON.stringify(body)
+    }
+    return fetch(url, requestOptions).then(checkReponse)
+}
+
+export const fetchWithRefresh = async (url, options) => {
+    try {
+        const res = await fetch(url, options)
+        return await checkReponse(res);
+    } catch (err) {
+        if (err.message === "jwt expired") {
+            const refreshData = await refreshToken()
+            if (!refreshData.success) {
+              Promise.reject(refreshData)
+            }
+            localStorage.setItem("refreshToken", refreshData.refreshToken);
+            setCookie("accessToken", refreshData.accessToken);
+            options.headers.authorization = refreshData.accessToken;
+            const res = await fetch(url, options); 
+            return await checkReponse(res);
+        } else {
+            return Promise.reject(err);
+        }
+    }
+}
+
 export const logoutUser = () => dispatch => {
     const url = `${BASE_URL_AUTH}/logout`
     const body = { token: localStorage.getItem('refreshToken') }
