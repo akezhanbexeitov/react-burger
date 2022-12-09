@@ -1,7 +1,7 @@
 import loginStyles from './login.module.css'
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
@@ -12,6 +12,14 @@ const Login = () => {
     const dispatch = useDispatch()
     const user = useSelector(store => store.auth.user)
     const isLoading = useSelector(store => store.auth.loginUserRequest)
+    const history = useHistory()
+    const location = useLocation()
+
+    const onLogin = () => {
+        dispatch(loginUser(email, password))
+        const { from } = location.state || { from: { pathname: '/' } }
+        history.push(from)
+    }
 
     return (
         <div className={loginStyles.wrapper}>
@@ -37,7 +45,7 @@ const Login = () => {
                             type="primary" 
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={() => dispatch(loginUser(email, password))}
+                            onClick={onLogin}
                         > 
                             Войти
                         </Button>
@@ -52,7 +60,6 @@ const Login = () => {
                     </div>
                 </div>
             }
-            { user ? <Redirect to='/'/> : null }
         </div>
     )
 }

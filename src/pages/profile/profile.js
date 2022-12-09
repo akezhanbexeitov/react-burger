@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserInfo, logoutUser, updateUserInfo } from '../../services/actions/auth'
-import { useHistory } from 'react-router-dom'
+import { logoutUser, updateUserInfo } from '../../services/actions/auth'
 
 const Profile = () => {
     const user = useSelector(store => store.auth.user)
@@ -11,17 +10,6 @@ const Profile = () => {
     const [email, setEmail] = useState(user.email)
     const [password, setPassword] = useState('1234')
     const dispatch = useDispatch()
-    const history = useHistory()
-
-    useEffect(() => {
-        if (user === null) {
-            history.push('/')
-        }
-    }, [user, history])
-
-    useEffect(() => {
-        dispatch(getUserInfo())
-    }, [])
 
     const resetUserInfo = () => {
         setName(user.name)

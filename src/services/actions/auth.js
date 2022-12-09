@@ -16,6 +16,8 @@ export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
 export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
 
+export const AUTH_CHECKED = 'AUTH_CHECKED'
+
 export const LOGOUT_USER = 'LOGOUT_USER'
 
 export function setCookie(name, value, props = {}) {
@@ -55,6 +57,14 @@ export function deleteCookie(name) {
     setCookie(name, "", {
       'max-age': -1
     })
+}
+
+export const checkUserAuth = () => dispatch => {
+    if (getCookie('accessToken')) {
+        dispatch(getUserInfo())
+    } else {
+        dispatch({ type: AUTH_CHECKED })
+    }
 }
 
 export const registerUser = (email, password, name) => dispatch => {
@@ -150,6 +160,9 @@ export const getUserInfo = () => dispatch => {
                     user: data.user
                 }
             })})
+        .finally(() => {
+            dispatch({ type: AUTH_CHECKED })
+        })
         .catch(error => dispatch({ type: GET_USER_FAILED }) && console.log(error))
 }
 

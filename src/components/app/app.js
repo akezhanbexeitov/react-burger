@@ -16,6 +16,7 @@ import ResetPassword from '../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import Feed from '../../pages/feed/feed';
 import NotFound from '../../pages/404-not-found/not-found';
+import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
   const dispatch = useDispatch()
@@ -49,9 +50,9 @@ function App() {
             <Route exact path='/reset-password'>
               <ResetPassword />
             </Route>
-            <Route exact path='/profile'>
+            <ProtectedRoute exact path='/profile'>
               <Profile />
-            </Route>
+            </ProtectedRoute>
             <Route exact path='/feed'>
               <Feed />
             </Route>
