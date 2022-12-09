@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react'
 import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserInfo, logoutUser } from '../../services/actions/auth'
+import { getUserInfo, logoutUser, updateUserInfo } from '../../services/actions/auth'
 import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
-    const [name, setName] = useState('Mark')
-    const [email, setEmail] = useState('mail@stellar.burgers')
-    const [password, setPassword] = useState('mark')
     const user = useSelector(store => store.auth.user)
+    const [name, setName] = useState(user.name)
+    const [email, setEmail] = useState(user.email)
+    const [password, setPassword] = useState('1234')
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -22,6 +22,11 @@ const Profile = () => {
     useEffect(() => {
         dispatch(getUserInfo())
     }, [])
+
+    const resetUserInfo = () => {
+        setName(user.name)
+        setEmail(user.email)
+    }
 
     return (
         <>
@@ -64,7 +69,8 @@ const Profile = () => {
                     <Button 
                         htmlType="button" 
                         type="secondary" 
-                        size="medium" 
+                        size="medium"
+                        onClick={resetUserInfo}
                     >
                         Отмена
                     </Button>
@@ -72,6 +78,7 @@ const Profile = () => {
                         htmlType="button" 
                         type="primary" 
                         size="medium" 
+                        onClick={() => dispatch(updateUserInfo(name, email))}
                     >
                         Сохранить
                     </Button>

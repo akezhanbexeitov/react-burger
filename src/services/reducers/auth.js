@@ -10,12 +10,12 @@ const initialState = {
 
     loginUserRequest: false,
     loginUserFailed: false,
+    
+    getUserRequest: false,
+    getUserFailed: false,
 
     updateUserRequest: false,
-    updateUserFailed: false,
-
-    getUserRequest: false,
-    getUserFailed: false
+    updateUserFailed: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -84,6 +84,28 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 getUserFailed: true,
                 getUserRequest: false
+            }
+        }
+        case auth.UPDATE_USER_REQUEST: {
+            return {
+                ...state,
+                updateUserRequest: true,
+                updateUserFailed: false
+            }
+        }
+        case auth.UPDATE_USER_SUCCESS: {
+            return {
+                ...state,
+                isAuthChecked: true,
+                updateUserRequest: false,
+                user: action.payload.user,
+            }
+        }
+        case auth.UPDATE_USER_FAILED: {
+            return {
+                ...state,
+                updateUserFailed: true,
+                updateUserRequest: false
             }
         }
         case auth.LOGOUT_USER: {

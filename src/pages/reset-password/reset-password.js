@@ -35,7 +35,6 @@ const ResetPassword = () => {
                 setIsLoading(false)
                 return Promise.reject(`Ошибка ${res.status}`)
             })
-            .then(data => console.log(data))
             .catch(error => setIsLoading(false) && console.log(error))
     }
 

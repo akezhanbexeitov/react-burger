@@ -12,6 +12,10 @@ export const GET_USER_REQUEST = 'GET_USER_REQUEST'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
 export const GET_USER_FAILED = 'GET_USER_FAILED'
 
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
+
 export const LOGOUT_USER = 'LOGOUT_USER'
 
 export function setCookie(name, value, props = {}) {
@@ -138,7 +142,6 @@ export const getUserInfo = () => dispatch => {
             'Authorization': 'Bearer ' + getCookie('accessToken')
         },
     }
-    console.log(getCookie('accessToken'))
     fetch(url, requestOptions)
         .then(res => {
             if (res.ok) {
@@ -154,6 +157,38 @@ export const getUserInfo = () => dispatch => {
                 }
             })})
         .catch(error => dispatch({ type: GET_USER_FAILED }) && console.log(error))
+}
+
+export const updateUserInfo = (name, email) => dispatch => {
+    dispatch({ type: UPDATE_USER_REQUEST })
+    const url = `${BASE_URL_AUTH}/user`
+    const body = {
+        name: name,
+        email: email
+    }
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getCookie('accessToken')
+        },
+        body: JSON.stringify(body)
+    }
+    fetch(url, requestOptions)
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка ${res.status}`)
+        })
+        .then(data => {
+            dispatch({
+                type: UPDATE_USER_SUCCESS,
+                payload: {
+                    user: data.user
+                }
+            })})
+        .catch(error => dispatch({ type: UPDATE_USER_FAILED }) && console.log(error))
 }
 
 export const logoutUser = () => dispatch => {
