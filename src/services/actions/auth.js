@@ -142,13 +142,7 @@ export const getUserInfo = () => dispatch => {
             'Authorization': 'Bearer ' + getCookie('accessToken')
         },
     }
-    fetch(url, requestOptions)
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка ${res.status}`)
-        })
+    fetchWithRefresh(url, requestOptions)
         .then(data => {
             dispatch({
                 type: GET_USER_SUCCESS,
@@ -174,13 +168,7 @@ export const updateUserInfo = (name, email) => dispatch => {
         },
         body: JSON.stringify(body)
     }
-    fetch(url, requestOptions)
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            return Promise.reject(`Ошибка ${res.status}`)
-        })
+    fetchWithRefresh(url, requestOptions)
         .then(data => {
             dispatch({
                 type: UPDATE_USER_SUCCESS,
