@@ -8,6 +8,10 @@ export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED'
 
+export const GET_USER_REQUEST = 'GET_USER_REQUEST'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+export const GET_USER_FAILED = 'GET_USER_FAILED'
+
 export const LOGOUT_USER = 'LOGOUT_USER'
 
 export function setCookie(name, value, props = {}) {
@@ -36,11 +40,18 @@ export function setCookie(name, value, props = {}) {
     document.cookie = updatedCookie;
 } 
 
+export function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 export function deleteCookie(name) {
     setCookie(name, "", {
       'max-age': -1
     })
-  }
+}
 
 export const registerUser = (email, password, name) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
@@ -115,6 +126,34 @@ export const loginUser = (email, password) => dispatch => {
             })
         })
         .catch(error => dispatch({ type: LOGIN_USER_FAILED }) && console.log(error))
+}
+
+export const getUserInfo = () => dispatch => {
+    dispatch({ type: GET_USER_REQUEST })
+    const url = `${BASE_URL_AUTH}/user`
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getCookie('accessToken')
+        },
+    }
+    console.log(getCookie('accessToken'))
+    fetch(url, requestOptions)
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            }
+            return Promise.reject(`Ошибка ${res.status}`)
+        })
+        .then(data => {
+            dispatch({
+                type: GET_USER_SUCCESS,
+                payload: {
+                    user: data.user
+                }
+            })})
+        .catch(error => dispatch({ type: GET_USER_FAILED }) && console.log(error))
 }
 
 export const logoutUser = () => dispatch => {

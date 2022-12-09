@@ -64,6 +64,28 @@ const authReducer = (state = initialState, action) => {
                 loginUserRequest: false
             }
         }
+        case auth.GET_USER_REQUEST: {
+            return {
+                ...state,
+                getUserRequest: true,
+                getUserFailed: false
+            }
+        }
+        case auth.GET_USER_SUCCESS: {
+            return {
+                ...state,
+                isAuthChecked: true,
+                getUserRequest: false,
+                user: action.payload.user,
+            }
+        }
+        case auth.GET_USER_FAILED: {
+            return {
+                ...state,
+                getUserFailed: true,
+                getUserRequest: false
+            }
+        }
         case auth.LOGOUT_USER: {
             return {
                 ...state,

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutUser } from '../../services/actions/auth'
+import { getUserInfo, logoutUser } from '../../services/actions/auth'
 import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
@@ -18,6 +18,10 @@ const Profile = () => {
             history.push('/')
         }
     }, [user, history])
+
+    useEffect(() => {
+        dispatch(getUserInfo())
+    }, [])
 
     return (
         <>
