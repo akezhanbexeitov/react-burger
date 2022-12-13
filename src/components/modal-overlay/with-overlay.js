@@ -8,15 +8,12 @@ import { RESET_INGREDIENT_DETAILS } from '../../services/actions/ingredient-deta
 const modalRoot = document.getElementById('react-modals')
 
 const withOverlay = WrappedComponent => props => {
-    const { setIsOpen } = props
+    const { handleModalClose } = props
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (!setIsOpen) return;
-        
+    useEffect(() => {    
         const handleEsc = (e) => {
             if (e.key === 'Escape') {
-                setIsOpen(false)
                 dispatch({ type: RESET_INGREDIENT_DETAILS })
             }
         };
@@ -25,11 +22,11 @@ const withOverlay = WrappedComponent => props => {
         return () => {
         window.removeEventListener('keyup', handleEsc);
         };
-    }, [setIsOpen, dispatch]);
+    }, [dispatch]);
 
     return PortalReactDOM.createPortal(
         <div className={modalOverlayStyles.container} onClick={() => {
-            setIsOpen(false)
+            handleModalClose()
             dispatch({ type: RESET_INGREDIENT_DETAILS })
         }}>
             <WrappedComponent {...props}/>
@@ -41,7 +38,6 @@ const withOverlay = WrappedComponent => props => {
 withOverlay.propTypes = {
     children: propTypes.node.isRequired,
     header: propTypes.string.isRequired,
-    setIsOpen: propTypes.func.isRequired
 }
 
 export default withOverlay;

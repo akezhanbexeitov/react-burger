@@ -55,3 +55,8 @@
     margin: 0;
     text-align: center;
 }
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}

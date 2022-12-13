@@ -17,27 +17,56 @@ import Profile from '../../pages/profile/profile';
 import Feed from '../../pages/feed/feed';
 import NotFound from '../../pages/404-not-found/not-found';
 import ProtectedRoute from '../protected-route/protected-route';
+import { useLocation, useHistory } from 'react-router-dom'
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import withOverlay from '../modal-overlay/with-overlay'
 
 function App() {
   const dispatch = useDispatch()
   const data = useSelector(store => store.ingredientsList.ingredients)
+  const location = useLocation();
+  const history = useHistory();
+  const background = location.state && location.state.background;
+  const WithOverlayModal = withOverlay(Modal)
 
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch])
+
+  const handleModalClose = () => {
+    history.goBack();
+  };
+
+  const modal = (
+    <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
+        <IngredientDetails />
+    </WithOverlayModal>
+  )
 
   return (
     <>
       <AppHeader />
       <main className="text text_type_main-default">
         <div className={appStyles.container}>
-          <Switch>
+          <Switch location={background || location}>
             <Route exact path='/'>
               <DndProvider backend={HTML5Backend}>  
                 {data && <BurgerIngredients />}
                 {data && <BurgerConstructor />}
               </DndProvider>
             </Route>
+            <Route exact path='/ingredients/:ingredientId'>
+              <IngredientDetails />
+            </Route>
+            {background && (
+              <Route
+                path='/ingredients/:ingredientId'
+                children={
+                  modal
+                }
+              />
+            )}
             <ProtectedRoute onlyUnAuth={true} exact path='/login'>
               <Login />
             </ProtectedRoute>
