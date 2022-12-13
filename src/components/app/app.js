@@ -38,12 +38,6 @@ function App() {
     history.goBack();
   };
 
-  const modal = (
-    <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
-        <IngredientDetails />
-    </WithOverlayModal>
-  )
-
   return (
     <>
       <AppHeader />
@@ -59,14 +53,6 @@ function App() {
             <Route exact path='/ingredients/:ingredientId'>
               <IngredientDetails />
             </Route>
-            {background && (
-              <Route
-                path='/ingredients/:ingredientId'
-                children={
-                  modal
-                }
-              />
-            )}
             <ProtectedRoute onlyUnAuth={true} exact path='/login'>
               <Login />
             </ProtectedRoute>
@@ -89,6 +75,13 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
+          {background && (
+              <Route path='/ingredients/:ingredientId'>
+                <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
+                  <IngredientDetails />
+                </WithOverlayModal>
+              </Route>
+            )}
         </div>
       </main>
     </>

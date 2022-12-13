@@ -14,11 +14,12 @@ const IngredientList = forwardRef((props, ref) => {
             <h2 ref={ref} className='mt-10 mb-6'>{title}</h2>
             <ul className={burgerIngredientsStyles.list}>
                 {ingredientType.map(item => {
+                    const ingredientId = item['_id']
                     return (
                         <Link
-                            key={item['_id']}
+                            key={ingredientId}
                             to={{
-                                pathname: `/ingredients/${item['_id']}`,
+                                pathname: `/ingredients/${ingredientId}`,
                                 state: { background: location },
                             }}
                             className={burgerIngredientsStyles.link}

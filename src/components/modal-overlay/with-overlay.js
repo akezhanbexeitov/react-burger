@@ -14,6 +14,7 @@ const withOverlay = WrappedComponent => props => {
     useEffect(() => {    
         const handleEsc = (e) => {
             if (e.key === 'Escape') {
+                handleModalClose()
                 dispatch({ type: RESET_INGREDIENT_DETAILS })
             }
         };
@@ -22,7 +23,7 @@ const withOverlay = WrappedComponent => props => {
         return () => {
         window.removeEventListener('keyup', handleEsc);
         };
-    }, [dispatch]);
+    }, [dispatch, handleModalClose]);
 
     return PortalReactDOM.createPortal(
         <div className={modalOverlayStyles.container} onClick={() => {

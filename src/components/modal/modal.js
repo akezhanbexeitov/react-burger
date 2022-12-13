@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { RESET_INGREDIENT_DETAILS } from '../../services/actions/ingredient-details'
 
 const Modal = (props) => {
-    const { header, setIsOpen, children } = props
+    const { header, handleModalClose, children } = props
     const dispatch = useDispatch()
 
     return (
@@ -13,7 +13,7 @@ const Modal = (props) => {
             <div className={modalStyles.header}>
                 <header className='text text_type_main-large'>{header}</header>
                 <div className={modalStyles.close} onClick={() => {
-                    setIsOpen(false)
+                    handleModalClose()
                     dispatch({ type: RESET_INGREDIENT_DETAILS })
                 }}>
                     <CloseIcon type="primary" />
@@ -27,7 +27,6 @@ const Modal = (props) => {
 Modal.propTypes = {
     children: propTypes.node.isRequired,
     header: propTypes.string,
-    setIsOpen: propTypes.func.isRequired
 }
 
 export default Modal;
