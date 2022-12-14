@@ -16,7 +16,8 @@ const Login = () => {
         password: ''
     });
 
-    const onLogin = () => {
+    const onLogin = e => {
+        e.preventDefault()
         dispatch(loginUser(values.email, values.password))
         const { from } = location.state || { from: { pathname: '/' } }
         history.push(from)
@@ -27,7 +28,7 @@ const Login = () => {
             { isLoading ? <LoadingSpinner /> : 
                 <div className={loginStyles.container}>
                     <h2 className={`${loginStyles.heading} mb-6`}>Вход</h2>
-                    <form className={loginStyles.form} onSubmit={e => e.preventDefault()}>
+                    <form className={loginStyles.form} onSubmit={onLogin}>
                         <EmailInput
                             onChange={handleChange}
                             value={values.email}
@@ -46,7 +47,6 @@ const Login = () => {
                             type="primary" 
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={onLogin}
                         > 
                             Войти
                         </Button>

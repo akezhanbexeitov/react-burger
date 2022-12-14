@@ -13,7 +13,8 @@ const ForgotPassword = () => {
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(false)
 
-    const onClick = (email) => {
+    const onClick = (e, email) => {
+        e.preventDefault()
         setIsLoading(true)
         const url = `${BASE_URL}/password-reset`
         const body = { email: email }
@@ -40,7 +41,7 @@ const ForgotPassword = () => {
             { isLoading ? <LoadingSpinner /> : 
                 <div className={forgotPasswordStyles.container}>
                     <h2 className={`${forgotPasswordStyles.heading} mb-6`}>Восстановление пароля</h2>
-                    <form className={forgotPasswordStyles.form} onSubmit={e => e.preventDefault()}>
+                    <form className={forgotPasswordStyles.form} onSubmit={(e) => onClick(e, values.email)}>
                         <EmailInput
                             onChange={handleChange}
                             value={values.email}
@@ -54,7 +55,6 @@ const ForgotPassword = () => {
                             type="primary" 
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={() => onClick(values.email)}
                         > 
                             Восстановить
                         </Button>

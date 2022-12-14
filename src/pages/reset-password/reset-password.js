@@ -13,7 +13,8 @@ const ResetPassword = () => {
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
 
-    const onClick = (password, token) => {
+    const onClick = (e, password, token) => {
+        e.preventDefault()
         setIsLoading(true)
         const url = `${BASE_URL}/password-reset/reset`
         const body = { 
@@ -43,7 +44,7 @@ const ResetPassword = () => {
             { isLoading ? <LoadingSpinner /> :
                 <div className={resetPasswordStyles.container}>
                     <h2 className={`${resetPasswordStyles.heading} mb-6`}>Восстановление пароля</h2>
-                    <form className={resetPasswordStyles.form} onSubmit={e => e.preventDefault()}>
+                    <form className={resetPasswordStyles.form} onSubmit={e => onClick(e, values.password, token)}>
                         <PasswordInput
                             onChange={handleChange}
                             value={values.password}
@@ -62,7 +63,6 @@ const ResetPassword = () => {
                             type="primary"
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={() => onClick(values.password, token)}
                         > 
                             Сохранить
                         </Button>

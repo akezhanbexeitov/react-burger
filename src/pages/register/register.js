@@ -15,12 +15,17 @@ const Register = () => {
     const isLoading = useSelector(store => store.auth.registerUserRequest)
     const dispatch = useDispatch()
 
+    const onClick = (e) => {
+        e.preventDefault()
+        dispatch(registerUser(values.email, values.password, values.name))
+    }
+
     return (
         <div className={registerStyles.wrapper}>
             { isLoading ? <LoadingSpinner /> :
             <div className={registerStyles.container}>
                 <h2 className={`${registerStyles.heading} mb-6`}>Регистрация</h2>
-                <form className={registerStyles.form} onSubmit={e => e.preventDefault()}>
+                <form className={registerStyles.form} onSubmit={onClick}>
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
@@ -50,7 +55,6 @@ const Register = () => {
                         type="primary" 
                         size="medium" 
                         extraClass='mb-20'
-                        onClick={() => dispatch(registerUser(values.email, values.password, values.name))}
                     > 
                         Зарегистрироваться
                     </Button>
