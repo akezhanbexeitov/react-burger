@@ -21,10 +21,14 @@ import { useLocation, useHistory } from 'react-router-dom'
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import withOverlay from '../modal-overlay/with-overlay'
+import OrderDetails from '../order-details/order-details';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 function App() {
   const dispatch = useDispatch()
   const data = useSelector(store => store.ingredientsList.ingredients)
+  const orderNumber = useSelector(store => store.orderDetails.orderNumber)
+  const isLoading = useSelector(store => store.orderDetails.orderRequest)
   const location = useLocation();
   const history = useHistory();
   const background = location.state && location.state.background;
@@ -76,11 +80,18 @@ function App() {
             </Route>
           </Switch>
           {background && (
-              <Route path='/ingredients/:ingredientId'>
-                <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
-                  <IngredientDetails />
-                </WithOverlayModal>
-              </Route>
+              <>
+                <Route path='/ingredients/:ingredientId'>
+                  <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
+                    <IngredientDetails />
+                  </WithOverlayModal>
+                </Route>
+                <Route path='/order'>
+                  <WithOverlayModal handleModalClose={handleModalClose}>
+                    { isLoading ? <LoadingSpinner /> : <OrderDetails orderNumber={orderNumber}/> }
+                  </WithOverlayModal>
+                </Route>
+              </>
             )}
         </div>
       </main>
