@@ -1,4 +1,5 @@
 import { BASE_URL_AUTH } from "../../constants/constants"
+import { getCookie, setCookie, deleteCookie } from "../../utils/cookies"
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
@@ -19,45 +20,6 @@ export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
 export const AUTH_CHECKED = 'AUTH_CHECKED'
 
 export const LOGOUT_USER = 'LOGOUT_USER'
-
-export function setCookie(name, value, props = {}) {
-    props = {
-        path: '/',
-        ...props
-    };
-    let exp = props.expires;
-    if (typeof exp == 'number' && exp) {
-      const d = new Date();
-      d.setTime(d.getTime() + exp * 1000);
-      exp = props.expires = d;
-    }
-    if (exp && exp.toUTCString) {
-      props.expires = exp.toUTCString();
-    }
-    value = encodeURIComponent(value);
-    let updatedCookie = name + '=' + value;
-    for (const propName in props) {
-      updatedCookie += '; ' + propName;
-      const propValue = props[propName];
-      if (propValue !== true) {
-        updatedCookie += '=' + propValue;
-      }
-    }
-    document.cookie = updatedCookie;
-} 
-
-export function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}
-
-export function deleteCookie(name) {
-    setCookie(name, "", {
-      'max-age': -1
-    })
-}
 
 export const checkUserAuth = () => dispatch => {
     if (getCookie('accessToken')) {
