@@ -58,7 +58,10 @@ export const registerUser = (email, password, name) => dispatch => {
                 }
             })
         })
-        .catch(error => dispatch({ type: REGISTER_USER_FAILED }) && console.log(error))
+        .catch(error => {
+            dispatch({ type: REGISTER_USER_FAILED }) 
+            console.log(error)
+        })
 }
 
 export const loginUser = (email, password) => dispatch => {
@@ -88,7 +91,10 @@ export const loginUser = (email, password) => dispatch => {
                 }
             })
         })
-        .catch(error => dispatch({ type: LOGIN_USER_FAILED }) && console.log(error))
+        .catch(error => {
+            dispatch({ type: LOGIN_USER_FAILED }) 
+            console.log(error)
+        })
 }
 
 export const getUserInfo = () => dispatch => {
@@ -112,7 +118,10 @@ export const getUserInfo = () => dispatch => {
         .finally(() => {
             dispatch({ type: AUTH_CHECKED })
         })
-        .catch(error => dispatch({ type: GET_USER_FAILED }) && console.log(error))
+        .catch(error => {
+            dispatch({ type: GET_USER_FAILED }) 
+            console.log(error)
+        })
 }
 
 export const updateUserInfo = (name, email) => dispatch => {
@@ -138,7 +147,10 @@ export const updateUserInfo = (name, email) => dispatch => {
                     user: data.user
                 }
             })})
-        .catch(error => dispatch({ type: UPDATE_USER_FAILED }) && console.log(error))
+        .catch(error => {
+            dispatch({ type: UPDATE_USER_FAILED }) 
+            console.log(error)
+        })
 }
 
 export const refreshToken = () => {

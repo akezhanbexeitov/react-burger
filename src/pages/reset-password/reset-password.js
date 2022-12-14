@@ -31,7 +31,10 @@ const ResetPassword = () => {
                 setIsLoading(false)
                 history.push('/login')
             })
-            .catch(error => setIsLoading(false) && console.log(error))
+            .catch(error => {
+                setIsLoading(false)
+                console.log(error)
+            })
     }
 
     return (
