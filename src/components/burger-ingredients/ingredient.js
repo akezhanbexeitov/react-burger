@@ -1,7 +1,6 @@
-import { addIngredientDetails } from '../../services/actions/ingredient-details'
 import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import ingredientType from '../../utils/types'
 import { DND_TYPES } from '../../constants/constants'
@@ -9,7 +8,6 @@ import { useMemo } from 'react'
 
 const Ingredient = (props) => {
     const { ingredient } = props
-    const dispatch = useDispatch()
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const [{ isDragging }, dragRef] = useDrag({
@@ -25,9 +23,7 @@ const Ingredient = (props) => {
     }, [ingredients, ingredient.name])
 
     return (
-        <li ref={dragRef} style={{opacity: isDragging ? 0.5 : 1}} className={burgerIngredientsStyles.listItem} onClick={() => {
-            dispatch(addIngredientDetails(ingredient))
-        }}>
+        <li ref={dragRef} style={{opacity: isDragging ? 0.5 : 1}} className={burgerIngredientsStyles.listItem}>
             { ingredient.name === bun.name ? (bun.count > 0 ? <Counter count={bun.count} size="default" /> : null) : (memoizedCountIngredient > 0 ? <Counter count={memoizedCountIngredient} size="default" /> : null)}
             <div className='ml-4 mr-4'>
                 <img src={ingredient.image} alt={ingredient.name}/>
