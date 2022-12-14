@@ -1,4 +1,4 @@
-import { BASE_URL_AUTH } from "../../constants/constants"
+import { BASE_URL } from "../../constants/constants"
 import { getCookie, setCookie, deleteCookie } from "../../utils/cookies"
 import { request, fetchWithRefresh } from "../../utils/server-requests"
 
@@ -32,7 +32,7 @@ export const checkUserAuth = () => dispatch => {
 
 export const registerUser = (email, password, name) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
-    const url = `${BASE_URL_AUTH}/register`
+    const url = `${BASE_URL}/auth/register`
     const body = {
         email: email,
         password: password, 
@@ -66,7 +66,7 @@ export const registerUser = (email, password, name) => dispatch => {
 
 export const loginUser = (email, password) => dispatch => {
     dispatch({ type: LOGIN_USER_REQUEST })
-    const url = `${BASE_URL_AUTH}/login`
+    const url = `${BASE_URL}/auth/login`
     const body = {
         email: email,
         password: password
@@ -99,7 +99,7 @@ export const loginUser = (email, password) => dispatch => {
 
 export const getUserInfo = () => dispatch => {
     dispatch({ type: GET_USER_REQUEST })
-    const url = `${BASE_URL_AUTH}/user`
+    const url = `${BASE_URL}/auth/user`
     const requestOptions = {
         method: 'GET',
         headers: {
@@ -126,7 +126,7 @@ export const getUserInfo = () => dispatch => {
 
 export const updateUserInfo = (name, email) => dispatch => {
     dispatch({ type: UPDATE_USER_REQUEST })
-    const url = `${BASE_URL_AUTH}/user`
+    const url = `${BASE_URL}/auth/user`
     const body = {
         name: name,
         email: email
@@ -154,7 +154,7 @@ export const updateUserInfo = (name, email) => dispatch => {
 }
 
 export const refreshToken = () => {
-    const url = `${BASE_URL_AUTH}/token`
+    const url = `${BASE_URL}/auth/token`
     const body = {
         token: localStorage.getItem("refreshToken")
     }
@@ -169,7 +169,7 @@ export const refreshToken = () => {
 }
 
 export const logoutUser = () => dispatch => {
-    const url = `${BASE_URL_AUTH}/logout`
+    const url = `${BASE_URL}/auth/logout`
     const body = { token: localStorage.getItem('refreshToken') }
     const requestOptions = {
         method: 'POST',
