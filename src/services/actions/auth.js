@@ -1,5 +1,6 @@
 import { BASE_URL_AUTH } from "../../constants/constants"
 import { getCookie, setCookie, deleteCookie } from "../../utils/cookies"
+import { request, fetchWithRefresh } from "../../utils/server-requests"
 
 export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
@@ -44,14 +45,7 @@ export const registerUser = (email, password, name) => dispatch => {
         },
         body: JSON.stringify(body)
     }
-    fetch(url, requestOptions)
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            dispatch({ type: REGISTER_USER_FAILED })
-            return Promise.reject(`Ошибка ${res.status}`)
-        })
+    request(url, requestOptions)
         .then(data => {
             let accessToken
             accessToken = data.accessToken.split('Bearer ')[1]
@@ -81,14 +75,7 @@ export const loginUser = (email, password) => dispatch => {
         },
         body: JSON.stringify(body)
     }
-    fetch(url, requestOptions)
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            dispatch({ type: LOGIN_USER_FAILED })
-            return Promise.reject(`Ошибка ${res.status}`)
-        })
+    request(url, requestOptions)
         .then(data => {
             let accessToken
             accessToken = data.accessToken.split('Bearer ')[1]
@@ -154,10 +141,6 @@ export const updateUserInfo = (name, email) => dispatch => {
         .catch(error => dispatch({ type: UPDATE_USER_FAILED }) && console.log(error))
 }
 
-const checkReponse = (res) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-  };
-
 export const refreshToken = () => {
     const url = `${BASE_URL_AUTH}/token`
     const body = {
@@ -170,28 +153,7 @@ export const refreshToken = () => {
         },
         body: JSON.stringify(body)
     }
-    return fetch(url, requestOptions).then(checkReponse)
-}
-
-export const fetchWithRefresh = async (url, options) => {
-    try {
-        const res = await fetch(url, options)
-        return await checkReponse(res);
-    } catch (err) {
-        if (err.message === "jwt expired") {
-            const refreshData = await refreshToken()
-            if (!refreshData.success) {
-              Promise.reject(refreshData)
-            }
-            localStorage.setItem("refreshToken", refreshData.refreshToken);
-            setCookie("accessToken", refreshData.accessToken);
-            options.headers.authorization = refreshData.accessToken;
-            const res = await fetch(url, options); 
-            return await checkReponse(res);
-        } else {
-            return Promise.reject(err);
-        }
-    }
+    return request(url, requestOptions)
 }
 
 export const logoutUser = () => dispatch => {
@@ -204,14 +166,11 @@ export const logoutUser = () => dispatch => {
         },
         body: JSON.stringify(body)
     }
-    fetch(url, requestOptions)
-        .then(res => {
-            if (res.ok) {
-                deleteCookie('accessToken')
-                localStorage.removeItem('refreshToken')
-                dispatch({ type: LOGOUT_USER })
-            }
-            return Promise.reject(`Ошибка ${res.status}`)
+    request(url, requestOptions)
+        .then(() => {
+            deleteCookie('accessToken')
+            localStorage.removeItem('refreshToken')
+            dispatch({ type: LOGOUT_USER })
         })
         .catch(error => console.log(error))
 }

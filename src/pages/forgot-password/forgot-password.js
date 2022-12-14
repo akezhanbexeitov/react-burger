@@ -5,6 +5,7 @@ import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-comp
 import { BASE_URL } from "../../constants/constants"
 import { useHistory } from 'react-router-dom'
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner"
+import { request } from "../../utils/server-requests"
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('')
@@ -22,15 +23,10 @@ const ForgotPassword = () => {
             },
             body: JSON.stringify(body)
         }
-        fetch(url, requestOptions)
-            .then(res => {
-                if (res.ok) {
-                    setIsLoading(false)
-                    history.push('/reset-password')
-                    return res.json()
-                }
+        request(url, requestOptions)
+            .then(() => {
                 setIsLoading(false)
-                return Promise.reject(`Ошибка ${res.status}`)
+                history.push('/reset-password')
             })
             .catch(error => setIsLoading(false) && console.log(error))
     }

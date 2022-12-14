@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { useState } from 'react'
 import { BASE_URL } from "../../constants/constants"
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
+import { request } from '../../utils/server-requests'
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('')
@@ -25,15 +26,10 @@ const ResetPassword = () => {
             },
             body: JSON.stringify(body)
         }
-        fetch(url, requestOptions)
-            .then(res => {
-                if (res.ok) {
-                    setIsLoading(false)
-                    history.push('/login')
-                    return res.json()
-                }
+        request(url, requestOptions)
+            .then(() => {
                 setIsLoading(false)
-                return Promise.reject(`Ошибка ${res.status}`)
+                history.push('/login')
             })
             .catch(error => setIsLoading(false) && console.log(error))
     }
