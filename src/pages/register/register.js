@@ -1,25 +1,19 @@
 import registerStyles from './register.module.css'
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
+import { useForm } from '../../hooks/useForm'
 
 const Register = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const {values, handleChange} = useForm({
+        name: '',
+        email: '',
+        password: ''
+    })
     const isLoading = useSelector(store => store.auth.registerUserRequest)
-    const isAuthChecked = useSelector(store => store.auth.isAuthChecked)
     const dispatch = useDispatch()
-    const history = useHistory()
-
-    useEffect(() => {
-        if (isAuthChecked) {
-            history.push('/')
-        }
-    }, [isAuthChecked, history]) 
 
     return (
         <div className={registerStyles.wrapper}>
@@ -30,8 +24,8 @@ const Register = () => {
                     <Input
                         type={'text'}
                         placeholder={'Имя'}
-                        onChange={e => setName(e.target.value)}
-                        value={name}
+                        onChange={handleChange}
+                        value={values.name}
                         name={'name'}
                         error={false}
                         errorText={'Ошибка'}
@@ -39,15 +33,15 @@ const Register = () => {
                         extraClass="mb-6"
                     />
                     <EmailInput
-                        onChange={e => setEmail(e.target.value)}
-                        value={email}
+                        onChange={handleChange}
+                        value={values.email}
                         name={'email'}
                         isIcon={false}
                         extraClass='mb-6'
                     />
                     <PasswordInput
-                        onChange={e => setPassword(e.target.value)}
-                        value={password}
+                        onChange={handleChange}
+                        value={values.password}
                         name={'password'}
                         extraClass="mb-6"
                     />
@@ -56,7 +50,7 @@ const Register = () => {
                         type="primary" 
                         size="medium" 
                         extraClass='mb-20'
-                        onClick={() => dispatch(registerUser(email, password, name))}
+                        onClick={() => dispatch(registerUser(values.email, values.password, values.name))}
                     > 
                         Зарегистрироваться
                     </Button>

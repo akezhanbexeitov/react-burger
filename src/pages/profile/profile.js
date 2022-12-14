@@ -1,20 +1,23 @@
-import { useState } from 'react'
 import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, updateUserInfo } from '../../services/actions/auth'
+import { useForm } from '../../hooks/useForm'
 
 const Profile = () => {
     const user = useSelector(store => store.auth.user)
-    const [name, setName] = useState(user.name)
-    const [email, setEmail] = useState(user.email)
-    const [password, setPassword] = useState('1234')
     const dispatch = useDispatch()
+    const {values, handleChange, setValues} = useForm({
+        name: user.name,
+        email: user.email,
+        password: '1234'
+    })
 
-    const resetUserInfo = () => {
-        setName(user.name)
-        setEmail(user.email)
-    }
+    const resetUserInfo = () => setValues({
+        ...values, 
+        name: user.name,
+        email: user.email
+    })
 
     return (
         <>
@@ -31,23 +34,23 @@ const Profile = () => {
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
-                    onChange={e => setName(e.target.value)}
+                    onChange={handleChange}
                     icon='EditIcon'
-                    value={name}
+                    value={values.name}
                     name={'name'}
                     extraClass="mb-6"
                 /> {/* TODO: Fix this input */}
                 <EmailInput
-                    onChange={e => setEmail(e.target.value)}
-                    value={email}
+                    onChange={handleChange}
+                    value={values.email}
                     name={'email'}
                     placeholder="Логин"
                     isIcon={true}
                     extraClass="mb-6"
                 />
                 <PasswordInput
-                    onChange={e => setPassword(e.target.value)}
-                    value={password}
+                    onChange={handleChange}
+                    value={values.password}
                     name={'password'}
                     icon="EditIcon"
                     placeholder='Пароль'
@@ -66,7 +69,7 @@ const Profile = () => {
                         htmlType="button" 
                         type="primary" 
                         size="medium" 
-                        onClick={() => dispatch(updateUserInfo(name, email))}
+                        onClick={() => dispatch(updateUserInfo(values.name, values.email))}
                     >
                         Сохранить
                     </Button>

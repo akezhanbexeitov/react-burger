@@ -5,9 +5,10 @@ import { useState } from 'react'
 import { BASE_URL } from "../../constants/constants"
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { request } from '../../utils/server-requests'
+import { useForm } from '../../hooks/useForm'
 
 const ResetPassword = () => {
-    const [password, setPassword] = useState('')
+    const {values, handleChange} = useForm({ password: '' })
     const [token, setToken] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
@@ -44,8 +45,8 @@ const ResetPassword = () => {
                     <h2 className={`${resetPasswordStyles.heading} mb-6`}>Восстановление пароля</h2>
                     <form className={resetPasswordStyles.form} onSubmit={e => e.preventDefault()}>
                         <PasswordInput
-                            onChange={e => setPassword(e.target.value)}
-                            value={password}
+                            onChange={handleChange}
+                            value={values.password}
                             name={'password'}
                             extraClass="mb-6"
                         />
@@ -61,7 +62,7 @@ const ResetPassword = () => {
                             type="primary"
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={() => onClick(password, token)}
+                            onClick={() => onClick(values.password, token)}
                         > 
                             Сохранить
                         </Button>

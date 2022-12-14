@@ -6,9 +6,10 @@ import { BASE_URL } from "../../constants/constants"
 import { useHistory } from 'react-router-dom'
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner"
 import { request } from "../../utils/server-requests"
+import { useForm } from "../../hooks/useForm"
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState('')
+    const {values, handleChange} = useForm({ email: '' })
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(false)
 
@@ -41,8 +42,8 @@ const ForgotPassword = () => {
                     <h2 className={`${forgotPasswordStyles.heading} mb-6`}>Восстановление пароля</h2>
                     <form className={forgotPasswordStyles.form} onSubmit={e => e.preventDefault()}>
                         <EmailInput
-                            onChange={e => setEmail(e.target.value)}
-                            value={email}
+                            onChange={handleChange}
+                            value={values.email}
                             name={'email'}
                             isIcon={false}
                             extraClass='mb-6'
@@ -53,7 +54,7 @@ const ForgotPassword = () => {
                             type="primary" 
                             size="medium" 
                             extraClass='mb-20'
-                            onClick={() => onClick(email)}
+                            onClick={() => onClick(values.email)}
                         > 
                             Восстановить
                         </Button>
