@@ -3,16 +3,14 @@ import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import { postOrder } from '../../services/actions/order-details'
-import { useHistory, Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const BurgerConstructor = () => {
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
     const user = useSelector(store => store.auth.user)
-    const history = useHistory()
     const location = useLocation()
 
     const calculateTotalPrice = (bunPrice = 0, ingredients) => {
@@ -24,7 +22,6 @@ const BurgerConstructor = () => {
     const clickHandler = () => {
         if (user) {
             dispatch(postOrder(bun, ingredients))
-            dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
         }
     }
 
