@@ -4,7 +4,6 @@ import IngredientList from './ingredient-list'
 import { useSelector } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 
-
 const BurgerIngredients = () => {
     const data = useSelector(store => store.ingredientsList.ingredients)
     const [current, setCurrent] = useState('buns')
