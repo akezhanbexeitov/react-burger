@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { checkUserAuth } from "../../services/actions/auth"
 import { Redirect, useLocation, Route } from 'react-router-dom'
+import propTypes from 'prop-types'
 
 const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
     const user = useSelector(store => store.auth.user)
@@ -27,6 +28,12 @@ const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
     }
     
     return <Route {...rest} />
+}
+
+ProtectedRoute.propTypes = {
+    onlyUnAuth: propTypes.bool,
+    exact: propTypes.bool,
+    path: propTypes.string.isRequired
 }
 
 export default ProtectedRoute

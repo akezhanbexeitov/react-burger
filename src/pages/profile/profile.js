@@ -10,7 +10,7 @@ const Profile = () => {
     const {values, handleChange, setValues} = useForm({
         name: user.name,
         email: user.email,
-        password: '1234'
+        password: '123456'
     })
 
     const resetUserInfo = () => setValues({

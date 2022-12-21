@@ -33,9 +33,6 @@ const withOverlay = WrappedComponent => props => {
     )
 }
 
-withOverlay.propTypes = {
-    children: propTypes.node.isRequired,
-    header: propTypes.string.isRequired,
-}
+withOverlay.propTypes = { handleModalClose: propTypes.func.isRequired }
 
 export default withOverlay;

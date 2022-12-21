@@ -23,6 +23,7 @@ const Modal = (props) => {
 Modal.propTypes = {
     children: propTypes.node.isRequired,
     header: propTypes.string,
+    handleModalClose: propTypes.func.isRequired
 }
 
 export default Modal;
