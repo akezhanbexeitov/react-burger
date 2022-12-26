@@ -43,8 +43,8 @@ const IngredientConstructor = () => {
     dispatch({
       type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
       payload: {
-        fromIndex: atIndex,
-        toIndex: index
+        fromIndex: index,
+        toIndex: atIndex
       }
     })
   }, [findIngredient, dispatch])

@@ -16,13 +16,13 @@ const ConstructorItem = (props) => {
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-        end: (item, monitor) => {
-            const { id: droppedId, originalIndex } = item 
-            const didDrop = monitor.didDrop()
-            if (!didDrop) {
-                moveIngredient(droppedId, originalIndex)
-            }
-        },
+        // end: (item, monitor) => {
+        //     const { id: droppedId, originalIndex } = item 
+        //     const didDrop = monitor.didDrop()
+        //     if (!didDrop) {
+        //         moveIngredient(droppedId, originalIndex)
+        //     }
+        // },
     }))
 
     const [, drop] = useDrop(() => ({
@@ -32,7 +32,7 @@ const ConstructorItem = (props) => {
                 const { index: overIndex } = findIngredient(id)
                 moveIngredient(draggedId, overIndex)
             }
-            },
+        },
     }))
 
     const opacity = isDragging ? 0 : 1
