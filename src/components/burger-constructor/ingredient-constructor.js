@@ -31,23 +31,15 @@ const IngredientConstructor = () => {
     backgroundColor = '#4c4cff'
   }
 
-  const findIngredient = useCallback(key => {
-    const ingredient = ingredients.filter(item => item.key === key)[0]
-    return { 
-      index: ingredients.indexOf(ingredient)
-    }
-  }, [ingredients])
-
-  const moveIngredient = useCallback((key, atIndex) => {
-    const { index } = findIngredient(key)
+  const moveIngredient = useCallback((dragIndex, hoverIndex) => {
     dispatch({
       type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
       payload: {
-        fromIndex: index,
-        toIndex: atIndex
+        fromIndex: dragIndex,
+        toIndex: hoverIndex
       }
     })
-  }, [findIngredient, dispatch])
+  }, [dispatch])
 
   return (
     <ul ref={dropRef} className={burgerConstructorStyles.list}>
@@ -67,14 +59,14 @@ const IngredientConstructor = () => {
       }
       <div className={burgerConstructorStyles.ingredients}>
         {ingredients.length > 0
-          ? ingredients.map(item => {
+          ? ingredients.map((item, index) => {
               return (
                 <ConstructorItem 
+                  index={index}
                   ingredient={item} 
                   key={item.key} 
-                  id={item.key} 
                   moveIngredient={moveIngredient} 
-                  findIngredient={findIngredient}/>
+                />
               )})
           : <li className={burgerConstructorStyles.empty} style={{ backgroundColor }}>
               <p>Выберите начинку</p>
