@@ -1,30 +1,17 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useMemo, useState } from 'react'
-import Modal from '../modal/modal'
-import OrderDetails from '../order-details/order-details'
-import withOverlay from '../modal-overlay/with-overlay'
-import LoadingSpinner from '../loading-spinner/loading-spinner'
+import { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import { postOrder } from '../../services/actions/order-details'
-
-const WithOverlayModal = withOverlay(Modal)
+import { Link, useLocation } from 'react-router-dom'
 
 const BurgerConstructor = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const isLoading = useSelector(store => store.orderDetails.orderRequest)
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
-    const orderNumber = useSelector(store => store.orderDetails.orderNumber)
-
-    const modal = (
-        <WithOverlayModal setIsOpen={setIsOpen}>
-            {isLoading ? <LoadingSpinner /> : <OrderDetails orderNumber={orderNumber}/>}
-        </WithOverlayModal>
-    )
+    const user = useSelector(store => store.auth.user)
+    const location = useLocation()
 
     const calculateTotalPrice = (bunPrice = 0, ingredients) => {
         let total = bunPrice * 2
@@ -33,9 +20,9 @@ const BurgerConstructor = () => {
     }
 
     const clickHandler = () => {
-        setIsOpen(true)
-        dispatch(postOrder(bun, ingredients))
-        dispatch({ type: RESET_INGREDIENTS_FROM_CONSTRUCTOR })
+        if (user) {
+            dispatch(postOrder(bun, ingredients))
+        }
     }
 
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
@@ -54,18 +41,24 @@ const BurgerConstructor = () => {
                     }
                 </p>
                 <CurrencyIcon type="primary" />
-                <Button 
-                    className='button button_type_primary button_size_medium ml-10' 
-                    type="primary" 
-                    size="medium" 
-                    htmlType='submit' 
-                    onClick={clickHandler} 
-                    disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
+                <Link
+                    to={{
+                        pathname: user ? `/order` : '/login',
+                        state: user ? { background: location } : null,
+                    }}
                 >
-                    Оформить заказ
-                </Button>
+                    <Button 
+                        className='button button_type_primary button_size_medium ml-10' 
+                        type="primary" 
+                        size="medium" 
+                        htmlType='button' 
+                        onClick={clickHandler} 
+                        disabled={!(Object.keys(bun).length > 0 && ingredients.length > 0)}
+                    >
+                        Оформить заказ
+                    </Button>   
+                </Link>
             </div>
-            {isOpen && modal}
         </section>
     )
 }

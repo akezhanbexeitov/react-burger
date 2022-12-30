@@ -3,21 +3,17 @@ import PortalReactDOM from 'react-dom'
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { RESET_INGREDIENT_DETAILS } from '../../services/actions/ingredient-details'
 
 const modalRoot = document.getElementById('react-modals')
 
 const withOverlay = WrappedComponent => props => {
-    const { setIsOpen } = props
+    const { handleModalClose } = props
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (!setIsOpen) return;
-        
+    useEffect(() => {    
         const handleEsc = (e) => {
             if (e.key === 'Escape') {
-                setIsOpen(false)
-                dispatch({ type: RESET_INGREDIENT_DETAILS })
+                handleModalClose()
             }
         };
         window.addEventListener('keyup', handleEsc);
@@ -25,12 +21,11 @@ const withOverlay = WrappedComponent => props => {
         return () => {
         window.removeEventListener('keyup', handleEsc);
         };
-    }, [setIsOpen, dispatch]);
+    }, [dispatch, handleModalClose]);
 
     return PortalReactDOM.createPortal(
         <div className={modalOverlayStyles.container} onClick={() => {
-            setIsOpen(false)
-            dispatch({ type: RESET_INGREDIENT_DETAILS })
+            handleModalClose()
         }}>
             <WrappedComponent {...props}/>
         </div>,
@@ -38,10 +33,6 @@ const withOverlay = WrappedComponent => props => {
     )
 }
 
-withOverlay.propTypes = {
-    children: propTypes.node.isRequired,
-    header: propTypes.string.isRequired,
-    setIsOpen: propTypes.func.isRequired
-}
+withOverlay.propTypes = { handleModalClose: propTypes.func.isRequired }
 
 export default withOverlay;

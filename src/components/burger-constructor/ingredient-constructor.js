@@ -12,30 +12,34 @@ const IngredientConstructor = () => {
   const bun = useSelector(store => store.ingredientsConstructor.bun)
   const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
   const dispatch = useDispatch()
-  const [, dropRef] = useDrop({
+  const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,
-    drop(ingredient) {
+    drop: ingredient => {
       dispatch(addIngredientToConstructor(ingredient))
-    }
+    },
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop()
+    })
   })
 
-  const findIngredient = useCallback(key => {
-    const ingredient = ingredients.filter(item => item.key === key)[0]
-    return { 
-      index: ingredients.indexOf(ingredient)
-    }
-  }, [ingredients])
+  let backgroundColor = ''
+  const isActive = canDrop && isOver
+  if (isActive) {
+    backgroundColor = 'darkgreen'
+  } else if (canDrop) {
+    backgroundColor = '#4c4cff'
+  }
 
-  const moveIngredient = useCallback((key, atIndex) => {
-    const { index } = findIngredient(key)
+  const moveIngredient = useCallback((dragIndex, hoverIndex) => {
     dispatch({
       type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
       payload: {
-        fromIndex: atIndex,
-        toIndex: index
+        fromIndex: dragIndex,
+        toIndex: hoverIndex
       }
     })
-  }, [findIngredient, dispatch])
+  }, [dispatch])
 
   return (
     <ul ref={dropRef} className={burgerConstructorStyles.list}>
@@ -49,22 +53,22 @@ const IngredientConstructor = () => {
               thumbnail={bun.image}
             />
           </li>
-        : <li className={burgerConstructorStyles.emptyTop}>
+        : <li className={burgerConstructorStyles.emptyTop} style={{ backgroundColor }}>
             <p>Выберите булку</p>
           </li>
       }
       <div className={burgerConstructorStyles.ingredients}>
         {ingredients.length > 0
-          ? ingredients.map(item => {
+          ? ingredients.map((item, index) => {
               return (
                 <ConstructorItem 
+                  index={index}
                   ingredient={item} 
                   key={item.key} 
-                  id={item.key} 
                   moveIngredient={moveIngredient} 
-                  findIngredient={findIngredient}/>
+                />
               )})
-          : <li className={burgerConstructorStyles.empty}>
+          : <li className={burgerConstructorStyles.empty} style={{ backgroundColor }}>
               <p>Выберите начинку</p>
             </li>
         }
@@ -79,7 +83,7 @@ const IngredientConstructor = () => {
               thumbnail={bun.image}
             />
           </li>
-        : <li className={burgerConstructorStyles.emptyBottom}>
+        : <li className={burgerConstructorStyles.emptyBottom} style={{ backgroundColor }}>
             <p>Выберите булку</p>
           </li>
       }

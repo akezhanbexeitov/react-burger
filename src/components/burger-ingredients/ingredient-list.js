@@ -1,35 +1,34 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import ingredientType from '../../utils/types'
 import propTypes from 'prop-types'
-import Modal from '../modal/modal'
-import { forwardRef, useState } from 'react'
-import IngredientDetails from '../ingredient-details/ingredient-details'
-import withOverlay from '../modal-overlay/with-overlay'
+import { forwardRef } from 'react'
 import Ingredient from './ingredient'
-
-const WithOverlayModal = withOverlay(Modal)
+import { useLocation, Link } from 'react-router-dom'
 
 const IngredientList = forwardRef((props, ref) => {
     const { ingredientType, title } = props
-    const [isOpen, setIsOpen] = useState(false)
-
-    const modal = (
-        <WithOverlayModal header="Детали ингредиента" setIsOpen={setIsOpen}>
-            <IngredientDetails />
-        </WithOverlayModal>
-    )
+    const location = useLocation();
     
     return (
         <>
             <h2 ref={ref} className='mt-10 mb-6'>{title}</h2>
             <ul className={burgerIngredientsStyles.list}>
                 {ingredientType.map(item => {
+                    const ingredientId = item['_id']
                     return (
-                        <Ingredient setIsOpen={setIsOpen} ingredient={item} key={item['_id']}/>
+                        <Link
+                            key={ingredientId}
+                            to={{
+                                pathname: `/ingredients/${ingredientId}`,
+                                state: { background: location },
+                            }}
+                            className={burgerIngredientsStyles.link}
+                        >
+                            <Ingredient ingredient={item} key={item['_id']}/>
+                        </Link>
                     )
                 })}
             </ul>
-            {isOpen && modal}
         </>
     )
 })
