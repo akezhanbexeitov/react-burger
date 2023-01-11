@@ -1,5 +1,5 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import ingredientType from '../../utils/types'
+import { ingredientType } from '../../utils/types'
 import propTypes from 'prop-types'
 import { forwardRef } from 'react'
 import Ingredient from './ingredient'

@@ -2,7 +2,7 @@ import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import ingredientType from '../../utils/types'
+import { ingredientType } from '../../utils/types'
 import { DND_TYPES } from '../../constants/constants'
 import { useMemo } from 'react'
 

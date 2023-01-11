@@ -1,27 +1,12 @@
 import ingredientDetailsStyles from './ingredient-details.module.css'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-
-type TIngredient = {
-    _id: string
-    name: string
-    type: string
-    proteins: number
-    fat: number
-    carbohydrates: number
-    calories: number
-    price: number
-    image: string
-    image_mobile: string
-    image_large: string
-    __v: number
-}
+import { TIngredient, TIngredientList } from '../../utils/types'
 
 type TParams = { ingredientId: string } 
 
 const IngredientDetails = () => {
-    // @ts-ignore (remove it later)
-    const ingredients = useSelector(store => store.ingredientsList.ingredients) 
+    const ingredients: TIngredient[] = useSelector((store: TIngredientList) => store.ingredientsList.ingredients) 
     const params = useParams<TParams>()
     const ingredient = ingredients.find((item: TIngredient) => item._id === params.ingredientId)
 
