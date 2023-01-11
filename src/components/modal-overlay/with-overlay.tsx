@@ -3,15 +3,22 @@ import PortalReactDOM from 'react-dom'
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { FC, ReactNode } from 'react'
 
 const modalRoot = document.getElementById('react-modals')
 
-const withOverlay = WrappedComponent => props => {
+type TWithOverlayProps = {
+    header?: string
+    handleModalClose(): void
+    children: ReactNode
+}
+
+const withOverlay = (WrappedComponent: FC<any>) => (props: TWithOverlayProps) => {
     const { handleModalClose } = props
     const dispatch = useDispatch()
 
     useEffect(() => {    
-        const handleEsc = (e) => {
+        const handleEsc = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 handleModalClose()
             }
@@ -29,7 +36,7 @@ const withOverlay = WrappedComponent => props => {
         }}>
             <WrappedComponent {...props}/>
         </div>,
-        modalRoot
+        modalRoot!
     )
 }
 
