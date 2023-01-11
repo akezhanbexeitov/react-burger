@@ -7,10 +7,11 @@ import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../.
 import ConstructorItem from './constructor-item'
 import { useCallback } from 'react'
 import { DND_TYPES } from '../../constants/constants'
+import { TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 
 const IngredientConstructor = () => {
-  const bun = useSelector(store => store.ingredientsConstructor.bun)
-  const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+  const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
+  const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
   const dispatch = useDispatch()
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,
@@ -31,7 +32,7 @@ const IngredientConstructor = () => {
     backgroundColor = '#4c4cff'
   }
 
-  const moveIngredient = useCallback((dragIndex, hoverIndex) => {
+  const moveIngredient = useCallback((dragIndex: number, hoverIndex: number) => {
     dispatch({
       type: MOVE_INGREDIENT_IN_CONSTRUCTOR,
       payload: {
@@ -63,7 +64,9 @@ const IngredientConstructor = () => {
               return (
                 <ConstructorItem 
                   index={index}
+                  // @ts-ignore
                   ingredient={item} 
+                  // @ts-ignore
                   key={item.key} 
                   moveIngredient={moveIngredient} 
                 />
