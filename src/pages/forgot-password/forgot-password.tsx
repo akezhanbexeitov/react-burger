@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, FormEvent } from "react"
 import { Link } from 'react-router-dom'
 import forgotPasswordStyles from './forgot-password.module.css'
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(false)
 
-    const onClick = (e, email) => {
+    const onClick = (e: FormEvent<HTMLFormElement>, email: string) => {
         e.preventDefault()
         setIsLoading(true)
         const url = `${BASE_URL}/password-reset`
