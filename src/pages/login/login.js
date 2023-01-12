@@ -4,7 +4,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/use-form'
 
 const Login = () => {
     const dispatch = useDispatch()

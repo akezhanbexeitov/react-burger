@@ -2,7 +2,7 @@ import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, updateUserInfo } from '../../services/actions/auth'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/use-form'
 
 const Profile = () => {
     const user = useSelector(store => store.auth.user)

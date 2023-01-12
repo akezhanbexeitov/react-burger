@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { BASE_URL } from "../../constants/constants"
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { request } from '../../utils/server-requests'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/use-form'
 
 const ResetPassword = () => {
     const {values, handleChange} = useForm({ password: '' })
