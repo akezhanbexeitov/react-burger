@@ -1,6 +1,5 @@
 import modalOverlayStyles from './modal-overlay.module.css'
 import PortalReactDOM from 'react-dom'
-import propTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { FC, ReactNode } from 'react'
@@ -39,7 +38,5 @@ const withOverlay = (WrappedComponent: FC<any>) => (props: TWithOverlayProps) =>
         modalRoot!
     )
 }
-
-withOverlay.propTypes = { handleModalClose: propTypes.func.isRequired }
 
 export default withOverlay;

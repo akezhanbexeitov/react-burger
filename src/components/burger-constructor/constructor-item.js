@@ -3,9 +3,16 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import { DELETE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
-import propTypes from 'prop-types'
 import { DND_TYPES } from '../../constants/constants'
-import { useRef } from 'react'
+import { useRef, FC } from 'react'
+import { TIngredient } from '../../utils/types'
+
+// type ConstructorItemProps = {
+//     id: number
+//     ingredient: TIngredient
+//     moveIngredient(): void
+//     index: number
+// }
 
 const ConstructorItem = (props) => {
     const { id, ingredient, moveIngredient, index } = props
@@ -83,20 +90,6 @@ const ConstructorItem = (props) => {
             />
         </li>
     )
-}
-
-const ingredientType = propTypes.shape({
-    id: propTypes.string.isRequired,
-    image: propTypes.string.isRequired,
-    key: propTypes.string.isRequired,
-    name: propTypes.string.isRequired,
-    price: propTypes.number.isRequired
-})
-
-ConstructorItem.propTypes = {
-    index: propTypes.number.isRequired,
-    ingredient: ingredientType.isRequired,
-    moveIngredient: propTypes.func.isRequired,
 }
 
 export default ConstructorItem

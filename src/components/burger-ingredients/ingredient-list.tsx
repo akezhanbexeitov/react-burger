@@ -1,6 +1,5 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import { ingredientType, TIngredient } from '../../utils/types'
-import propTypes from 'prop-types'
+import { TIngredient } from '../../utils/types'
 import { forwardRef } from 'react'
 import Ingredient from './ingredient'
 import { useLocation, Link } from 'react-router-dom'
@@ -37,11 +36,5 @@ const IngredientList = forwardRef<HTMLHeadingElement, TIngredientListProps>((pro
         </>
     )
 })
-
-IngredientList.propTypes = {
-    // @ts-ignore
-    ingredientType: propTypes.arrayOf(ingredientType).isRequired,
-    title: propTypes.string.isRequired
-}
 
 export default IngredientList;

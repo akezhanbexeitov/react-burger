@@ -2,7 +2,7 @@ import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import { ingredientType, TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
+import { TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 import { DND_TYPES } from '../../constants/constants'
 import { useMemo, FC } from 'react'
 
@@ -38,11 +38,6 @@ const Ingredient: FC<TIngredientProps> = ({ ingredient }) => {
             <p className={burgerIngredientsStyles.description}>{ingredient.name}</p>
         </li>
     )
-}
-
-Ingredient.propTypes = {
-    // @ts-ignore
-    ingredient: ingredientType,
 }
 
 export default Ingredient
