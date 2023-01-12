@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
+import { FormEvent } from "react"
+
+type TAuthRegisterUserRequest = {
+    auth: { registerUserRequest: boolean }
+}
 
 const Register = () => {
     const {values, handleChange} = useForm({
@@ -12,11 +17,12 @@ const Register = () => {
         email: '',
         password: ''
     })
-    const isLoading = useSelector(store => store.auth.registerUserRequest)
+    const isLoading = useSelector((store: TAuthRegisterUserRequest) => store.auth.registerUserRequest)
     const dispatch = useDispatch()
 
-    const onClick = (e) => {
+    const onClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        // @ts-ignore
         dispatch(registerUser(values.email, values.password, values.name))
     }
 
