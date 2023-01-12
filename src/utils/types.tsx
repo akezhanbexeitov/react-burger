@@ -13,6 +13,11 @@ export type TIngredient = {
     __v: number
 }
 
+export type TUser = {
+    email: string
+    name: string
+}
+
 export type TIngredientWithKey = TIngredient & { key: string }
 
 export type TIngredientList = {
@@ -33,4 +38,8 @@ export type TIngredientsConstructorBun = {
 
 export type TIngredientsConstructorIngredients = {
     ingredientsConstructor: { ingredients: TIngredient[] }
+}
+
+export type TAuthUser = {
+    auth: { user: TUser }
 }
