@@ -1,7 +1,7 @@
 import resetPasswordStyles from './reset-password.module.css'
 import { PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useHistory } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import { BASE_URL } from "../../constants/constants"
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { request } from '../../utils/server-requests'
@@ -13,7 +13,7 @@ const ResetPassword = () => {
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
 
-    const onClick = (e, password, token) => {
+    const onClick = (e: FormEvent<HTMLFormElement>, password: string, token: string) => {
         e.preventDefault()
         setIsLoading(true)
         const url = `${BASE_URL}/password-reset/reset`
