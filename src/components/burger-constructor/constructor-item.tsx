@@ -5,31 +5,31 @@ import { useDrag, useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import { DND_TYPES } from '../../constants/constants'
 import { useRef, FC } from 'react'
-import { TIngredient } from '../../utils/types'
+import { TIngredientWithKey } from '../../utils/types'
 
-// type ConstructorItemProps = {
-//     id: number
-//     ingredient: TIngredient
-//     moveIngredient(): void
-//     index: number
-// }
+type ConstructorItemProps = {
+    ingredient: TIngredientWithKey
+    moveIngredient: (dragIndex: number, hoverIndex: number) => void
+    index: number
+}
 
-const ConstructorItem = (props) => {
-    const { id, ingredient, moveIngredient, index } = props
+const ConstructorItem: FC<ConstructorItemProps> = (props) => {
+    const { ingredient, moveIngredient, index } = props
     const dispatch = useDispatch()
-    const ref = useRef()
+    const ref = useRef<HTMLLIElement>(null)
 
     const [{ isDragging }, drag] = useDrag({
         type: DND_TYPES.burgerConstructor,
         item: () => {
-            return { id, index }
+            return { index }
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         })
     })
 
-    const [{ handlerId }, drop] = useDrop({
+    // @ts-ignore
+    const [{ handlerId }, drop] = useDrop<{id: number, index: number}>({
         accept: DND_TYPES.burgerConstructor,
         collect(monitor) {
             return {
@@ -50,8 +50,8 @@ const ConstructorItem = (props) => {
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             // Get vertical middle
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            // Determine mouse position
-            const clientOffset = monitor.getClientOffset()
+            // Determine mouse positions
+            const clientOffset = monitor.getClientOffset()!
             // Get pixels to the top
             const hoverClientY = clientOffset.y - hoverBoundingRect.top
             // Only perform the move when the mouse has crossed half of the items height
