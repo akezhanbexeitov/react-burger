@@ -2,14 +2,17 @@ import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import ingredientType from '../../utils/types'
+import { TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 import { DND_TYPES } from '../../constants/constants'
-import { useMemo } from 'react'
+import { useMemo, FC } from 'react'
 
-const Ingredient = (props) => {
-    const { ingredient } = props
-    const bun = useSelector(store => store.ingredientsConstructor.bun)
-    const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+type TIngredientProps = {
+    ingredient: TIngredient
+}
+
+const Ingredient: FC<TIngredientProps> = ({ ingredient }) => {
+    const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
+    const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
     const [{ isDragging }, dragRef] = useDrag({
         type: DND_TYPES.ingredient,
         item: ingredient,
@@ -35,10 +38,6 @@ const Ingredient = (props) => {
             <p className={burgerIngredientsStyles.description}>{ingredient.name}</p>
         </li>
     )
-}
-
-Ingredient.propTypes = {
-    ingredient: ingredientType,
 }
 
 export default Ingredient

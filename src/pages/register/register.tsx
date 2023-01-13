@@ -4,19 +4,25 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../hooks/use-form'
+import { FormEvent, FC } from "react"
 
-const Register = () => {
+type TAuthRegisterUserRequest = {
+    auth: { registerUserRequest: boolean }
+}
+
+const Register: FC = () => {
     const {values, handleChange} = useForm({
         name: '',
         email: '',
         password: ''
     })
-    const isLoading = useSelector(store => store.auth.registerUserRequest)
+    const isLoading = useSelector((store: TAuthRegisterUserRequest) => store.auth.registerUserRequest)
     const dispatch = useDispatch()
 
-    const onClick = (e) => {
+    const onClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        // @ts-ignore
         dispatch(registerUser(values.email, values.password, values.name))
     }
 
