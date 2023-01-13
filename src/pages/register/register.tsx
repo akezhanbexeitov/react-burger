@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
-import { FormEvent } from "react"
+import { FormEvent, FC } from "react"
 
 type TAuthRegisterUserRequest = {
     auth: { registerUserRequest: boolean }
 }
 
-const Register = () => {
+const Register: FC = () => {
     const {values, handleChange} = useForm({
         name: '',
         email: '',

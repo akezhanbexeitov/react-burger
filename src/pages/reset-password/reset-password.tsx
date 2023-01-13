@@ -1,13 +1,13 @@
 import resetPasswordStyles from './reset-password.module.css'
 import { PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useHistory } from 'react-router-dom'
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, FC } from 'react'
 import { BASE_URL } from "../../constants/constants"
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { request } from '../../utils/server-requests'
 import { useForm } from '../../hooks/use-form'
 
-const ResetPassword = () => {
+const ResetPassword: FC = () => {
     const {values, handleChange} = useForm({ password: '' })
     const [token, setToken] = useState('')
     const [isLoading, setIsLoading] = useState(false)

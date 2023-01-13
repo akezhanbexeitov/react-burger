@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react"
+import { useState, FormEvent, FC } from "react"
 import { Link } from 'react-router-dom'
 import forgotPasswordStyles from './forgot-password.module.css'
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -8,7 +8,7 @@ import LoadingSpinner from "../../components/loading-spinner/loading-spinner"
 import { request } from "../../utils/server-requests"
 import { useForm } from "../../hooks/use-form"
 
-const ForgotPassword = () => {
+const ForgotPassword: FC = () => {
     const {values, handleChange} = useForm({ email: '' })
     const history = useHistory()
     const [isLoading, setIsLoading] = useState(false)

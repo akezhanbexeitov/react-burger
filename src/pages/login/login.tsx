@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
-import { FormEvent } from 'react'
+import { FormEvent, FC } from 'react'
 
 type TAuthLoginUserRequest = {
     auth: { loginUserRequest: boolean }
 }
 
-const Login = () => {
+const Login: FC = () => {
     const dispatch = useDispatch()
     const isLoading = useSelector((store: TAuthLoginUserRequest) => store.auth.loginUserRequest)
     const history = useHistory()

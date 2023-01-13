@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, updateUserInfo } from '../../services/actions/auth'
 import { useForm } from '../../hooks/use-form'
 import { TAuthUser } from '../../utils/types'
+import { FC } from 'react'
 
-const Profile = () => {
+const Profile: FC = () => {
     const user = useSelector((store: TAuthUser) => store.auth.user)
     const dispatch = useDispatch()
     const {values, handleChange, setValues} = useForm({

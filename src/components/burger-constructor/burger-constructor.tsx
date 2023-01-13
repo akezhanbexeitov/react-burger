@@ -1,13 +1,13 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useMemo } from 'react'
+import { useMemo, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postOrder } from '../../services/actions/order-details'
 import { Link, useLocation } from 'react-router-dom'
 import { TAuthUser, TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
     const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
     const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()

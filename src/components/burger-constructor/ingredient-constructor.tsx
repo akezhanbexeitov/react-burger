@@ -5,11 +5,11 @@ import { useDrop } from 'react-dnd'
 import { useDispatch } from 'react-redux'
 import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import ConstructorItem from './constructor-item'
-import { useCallback } from 'react'
+import { useCallback, FC } from 'react'
 import { DND_TYPES } from '../../constants/constants'
 import { TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 
-const IngredientConstructor = () => {
+const IngredientConstructor: FC = () => {
   const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
   const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
   const dispatch = useDispatch()
