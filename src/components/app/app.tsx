@@ -24,6 +24,7 @@ import withOverlay from '../modal-overlay/with-overlay'
 import OrderDetails from '../order-details/order-details';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { TIngredientList } from '../../utils/types';
+import { Location } from 'history'
 
 type TOrderDetailsOrderRequest = {
   orderDetails: { orderRequest: boolean}
@@ -33,14 +34,17 @@ type TOrderDetailsOrderNumber = {
   orderDetails: { orderNumber: number }
 }
 
+type TLocation = {
+  background: Location
+}
+
 const App: FC = () => {
   const dispatch = useDispatch()
   const data = useSelector((store: TIngredientList) => store.ingredientsList.ingredients)
   const orderNumber = useSelector((store: TOrderDetailsOrderNumber) => store.orderDetails.orderNumber)
   const isLoading = useSelector((store: TOrderDetailsOrderRequest) => store.orderDetails.orderRequest)
-  const location = useLocation()
+  const location = useLocation<TLocation>()
   const history = useHistory()
-  // @ts-ignore
   const background = location.state && location.state.background
   const WithOverlayModal = withOverlay(Modal)
 
