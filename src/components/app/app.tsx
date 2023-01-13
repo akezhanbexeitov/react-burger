@@ -2,7 +2,7 @@ import appStyles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import 'normalize.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients } from '../../services/actions/ingredients-list';
@@ -23,18 +23,29 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import withOverlay from '../modal-overlay/with-overlay'
 import OrderDetails from '../order-details/order-details';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import { TIngredientList } from '../../utils/types';
 
-function App() {
+type TOrderDetailsOrderRequest = {
+  orderDetails: { orderRequest: boolean}
+}
+
+type TOrderDetailsOrderNumber = {
+  orderDetails: { orderNumber: number }
+}
+
+const App: FC = () => {
   const dispatch = useDispatch()
-  const data = useSelector(store => store.ingredientsList.ingredients)
-  const orderNumber = useSelector(store => store.orderDetails.orderNumber)
-  const isLoading = useSelector(store => store.orderDetails.orderRequest)
-  const location = useLocation();
-  const history = useHistory();
-  const background = location.state && location.state.background;
+  const data = useSelector((store: TIngredientList) => store.ingredientsList.ingredients)
+  const orderNumber = useSelector((store: TOrderDetailsOrderNumber) => store.orderDetails.orderNumber)
+  const isLoading = useSelector((store: TOrderDetailsOrderRequest) => store.orderDetails.orderRequest)
+  const location = useLocation()
+  const history = useHistory()
+  // @ts-ignore
+  const background = location.state && location.state.background
   const WithOverlayModal = withOverlay(Modal)
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(getIngredients())
   }, [dispatch])
 
