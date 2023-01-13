@@ -1,8 +1,12 @@
 import orderAcceptedImage from '../../images/graphics.svg'
 import orderDetailsStyles from './order-details.module.css'
-import propTypes from 'prop-types'
+import { FC } from 'react'
 
-const OrderDetails = ({ orderNumber }) => {
+type TOrderDetailsProps = {
+    orderNumber?: number
+}
+
+const OrderDetails: FC<TOrderDetailsProps> = ({ orderNumber }) => {
     return (
         <div className={orderDetailsStyles.main}>
             <h2 className="text text_type_digits-large mb-8">{orderNumber}</h2>
@@ -12,10 +16,6 @@ const OrderDetails = ({ orderNumber }) => {
             <p className="text text_type_main-default text_color_inactive mt-2 mb-15">Дождитесь готовности на орбитальной станции</p>
         </div>
     )
-}
-
-OrderDetails.propTypes = {
-    orderNumber: propTypes.number
 }
 
 export default OrderDetails;

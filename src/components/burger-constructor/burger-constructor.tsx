@@ -1,19 +1,20 @@
 import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useMemo } from 'react'
+import { useMemo, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postOrder } from '../../services/actions/order-details'
 import { Link, useLocation } from 'react-router-dom'
+import { TAuthUser, TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
 
-const BurgerConstructor = () => {
-    const bun = useSelector(store => store.ingredientsConstructor.bun)
-    const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+const BurgerConstructor: FC = () => {
+    const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
+    const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
-    const user = useSelector(store => store.auth.user)
+    const user = useSelector((store: TAuthUser) => store.auth.user)
     const location = useLocation()
 
-    const calculateTotalPrice = (bunPrice = 0, ingredients) => {
+    const calculateTotalPrice = (bunPrice: number = 0, ingredients: TIngredient[]) => {
         let total = bunPrice * 2
         ingredients.map(item => total += item.price)
         return total
@@ -21,6 +22,7 @@ const BurgerConstructor = () => {
 
     const clickHandler = () => {
         if (user) {
+            // @ts-ignore
             dispatch(postOrder(bun, ingredients))
         }
     }

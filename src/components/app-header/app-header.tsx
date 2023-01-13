@@ -1,8 +1,9 @@
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import headerStyles from './app-header.module.css'
 import { Link, useRouteMatch } from 'react-router-dom'
+import { FC } from 'react'
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
     const isConstructor = !!useRouteMatch({ path: '/', exact: true});
     const isProfile = !!useRouteMatch('/profile');
     const isFeed = !!useRouteMatch('/feed');
