@@ -1,4 +1,4 @@
-export type TIngredient = {
+export type TIngredientLong = {
     _id: string
     name: string
     type: string
@@ -11,6 +11,14 @@ export type TIngredient = {
     image_mobile: string
     image_large: string
     __v: number
+}
+
+export type TIngredientShort = {
+    name: string
+    image: string
+    price: number
+    id: string
+    key: string
 }
 
 export type TBun = {
@@ -27,10 +35,10 @@ export type TUser = {
     name: string
 }
 
-export type TIngredientWithKey = TIngredient & { key: string }
+export type TIngredientWithKey = TIngredientLong & { key: string }
 
 export type TIngredientList = {
-    ingredientsList: { ingredients: TIngredient[] }
+    ingredientsList: { ingredients: Array<TIngredientLong> }
 }
 
 export type TIngredientsConstructorBun = {
@@ -46,7 +54,7 @@ export type TIngredientsConstructorBun = {
 }
 
 export type TIngredientsConstructorIngredients = {
-    ingredientsConstructor: { ingredients: TIngredient[] }
+    ingredientsConstructor: { ingredients: Array<TIngredientLong> }
 }
 
 export type TAuthUser = {

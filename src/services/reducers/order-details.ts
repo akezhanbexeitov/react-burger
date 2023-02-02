@@ -1,12 +1,19 @@
+import { TOrderDetailsActions } from './../actions/order-details';
 import * as order from "../actions/order-details"
 
-const initialState = {
+type TOrderDetailsState = {
+    orderNumber: number
+    orderRequest: boolean
+    orderFailed: boolean
+}
+
+const initialState: TOrderDetailsState = {
     orderNumber: 0,
     orderRequest: false,
     orderFailed: false
 }
 
-const orderDetailsReducer = (state = initialState, action) => {
+const orderDetailsReducer = (state = initialState, action: TOrderDetailsActions) => {
     switch (action.type) {
         case order.POST_ORDER_REQUEST: {
             return {

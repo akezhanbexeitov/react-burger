@@ -1,4 +1,4 @@
-import { TIngredient, TBun } from './../../utils/types';
+import { TIngredientLong, TBun } from './../../utils/types';
 import { v4 as uuidv4 } from 'uuid';
 
 export const ADD_INGREDIENT_TO_CONSTRUCTOR: 'ADD_INGREDIENT_TO_CONSTRUCTOR' = 'ADD_INGREDIENT_TO_CONSTRUCTOR'
@@ -43,7 +43,7 @@ export type TBurgerConstructorActions =
     | IMoveIngredientInConstructorAction
     | IAddIngredientToConstructor
 
-export const addIngredientToConstructor = (ingredient: TIngredient): IAddIngredientToConstructor => {
+export const addIngredientToConstructor = (ingredient: TIngredientLong): IAddIngredientToConstructor => {
     return {
         type: ADD_INGREDIENT_TO_CONSTRUCTOR,
         payload: {
