@@ -1,4 +1,4 @@
-import { TBun, TIngredientShort } from './../../utils/types';
+import { TBun } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants"
 import { request } from "../../utils/server-requests"
 import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from "./burger-constructor"
@@ -31,7 +31,15 @@ type TPostOrderBody = {
     ingredients: Array<string>
 }
 
-//   @ts-ignore
+type TIngredientShort = {
+    name: string
+    image: string
+    key: string
+    id: string
+    price: number
+}
+
+// @ts-ignore thunk
 export const postOrder = (bun: TBun, ingredients: Array<TIngredientShort>) => dispatch => {
     dispatch({ type: POST_ORDER_REQUEST })
     const url = `${BASE_URL}/orders`
@@ -49,7 +57,6 @@ export const postOrder = (bun: TBun, ingredients: Array<TIngredientShort>) => di
     request(url, requestOptions)
         .then(actualData => {
             dispatch({
-                //   @ts-ignore
                 type: POST_ORDER_SUCCESS,
                 payload: {
                     orderNumber: actualData.order.number

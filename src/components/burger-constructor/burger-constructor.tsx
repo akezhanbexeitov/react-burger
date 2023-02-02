@@ -4,16 +4,26 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import { useMemo, FC } from 'react'
 import { postOrder } from '../../services/actions/order-details'
 import { Link, useLocation } from 'react-router-dom'
-import { TIngredientLong, useDispatch, useSelector } from '../../utils/types'
+import { useDispatch, useSelector } from '../../utils/types'
+
+type TIngredientShort = {
+    name: string
+    image: string
+    key: string
+    id: string
+    price: number
+    type?: string
+}
 
 const BurgerConstructor: FC = () => {
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
+    console.log(ingredients)
     const dispatch = useDispatch()
     const user = useSelector(store => store.auth.user)
     const location = useLocation()
 
-    const calculateTotalPrice = (bunPrice: number = 0, ingredients: TIngredientLong[]) => {
+    const calculateTotalPrice = (bunPrice: number = 0, ingredients: Array<TIngredientShort>) => {
         let total = bunPrice * 2
         ingredients.map(item => total += item.price)
         return total
@@ -21,12 +31,11 @@ const BurgerConstructor: FC = () => {
 
     const clickHandler = () => {
         if (user) {
-            // @ts-ignore
+            // @ts-ignore thunk
             dispatch(postOrder(bun, ingredients))
         }
     }
 
-    // @ts-ignore
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
 
     return (

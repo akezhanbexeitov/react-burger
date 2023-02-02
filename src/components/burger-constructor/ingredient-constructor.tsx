@@ -14,7 +14,7 @@ const IngredientConstructor: FC = () => {
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,
     drop: ingredient => {
-      // @ts-ignore
+      // @ts-ignore thunk
       dispatch(addIngredientToConstructor(ingredient))
     },
     collect: monitor => ({
@@ -63,9 +63,7 @@ const IngredientConstructor: FC = () => {
               return (
                 <ConstructorItem 
                   index={index}
-                  // @ts-ignore
                   ingredient={item} 
-                  // @ts-ignore
                   key={item.key} 
                   moveIngredient={moveIngredient} 
                 />

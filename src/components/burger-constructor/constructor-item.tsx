@@ -4,10 +4,19 @@ import { DELETE_INGREDIENT_FROM_CONSTRUCTOR } from '../../services/actions/burge
 import { useDrag, useDrop } from 'react-dnd'
 import { DND_TYPES } from '../../constants/constants'
 import { useRef, FC } from 'react'
-import { TIngredientWithKey, useDispatch } from '../../utils/types'
+import { useDispatch } from '../../utils/types'
+
+type TIngredientShort = {
+    name: string
+    image: string
+    key: string
+    id: string
+    price: number
+    type?: string
+}
 
 type ConstructorItemProps = {
-    ingredient: TIngredientWithKey
+    ingredient: TIngredientShort
     moveIngredient: (dragIndex: number, hoverIndex: number) => void
     index: number
 }
@@ -27,7 +36,7 @@ const ConstructorItem: FC<ConstructorItemProps> = (props) => {
         })
     })
 
-    // @ts-ignore
+    // @ts-ignore handlerId
     const [{ handlerId }, drop] = useDrop<{id: number, index: number}>({
         accept: DND_TYPES.burgerConstructor,
         collect(monitor) {

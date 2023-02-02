@@ -1,15 +1,14 @@
 import ingredientDetailsStyles from './ingredient-details.module.css'
 import { useParams } from 'react-router-dom'
-import { TIngredientLong, useSelector } from '../../utils/types'
+import { TIngredient, useSelector } from '../../utils/types'
 import { FC } from 'react'
 
 type TParams = { ingredientId: string } 
 
 const IngredientDetails: FC = () => {
-    // @ts-ignore
-    const ingredients: TIngredientLong[] = useSelector(store => store.ingredientsList.ingredients) 
+    const ingredients: Array<TIngredient> = useSelector(store => store.ingredientsList.ingredients) 
     const params = useParams<TParams>()
-    const ingredient = ingredients.find((item: TIngredientLong) => item._id === params.ingredientId)
+    const ingredient = ingredients.find((item: TIngredient) => item._id === params.ingredientId)
 
     return (
         <div className={ingredientDetailsStyles.container}>

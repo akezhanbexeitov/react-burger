@@ -22,7 +22,7 @@ const Register: FC = () => {
 
     const onClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // @ts-ignore
+        // @ts-ignore thunk
         dispatch(registerUser(values.email, values.password, values.name))
     }
 

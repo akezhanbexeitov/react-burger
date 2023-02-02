@@ -23,7 +23,7 @@ const Login: FC = () => {
 
     const onLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // @ts-ignore
+        // @ts-ignore thunk
         dispatch(loginUser(values.email, values.password))
         const { from } = { from: { pathname: '/' } } || location.state
         history.push(from)

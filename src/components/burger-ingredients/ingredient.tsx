@@ -1,12 +1,12 @@
 import { useDrag } from 'react-dnd'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import { TIngredientLong, useSelector } from '../../utils/types'
+import { TIngredient, useSelector } from '../../utils/types'
 import { DND_TYPES } from '../../constants/constants'
 import { useMemo, FC } from 'react'
 
 type TIngredientProps = {
-    ingredient: TIngredientLong
+    ingredient: TIngredient
 }
 
 const Ingredient: FC<TIngredientProps> = ({ ingredient }) => {

@@ -11,11 +11,8 @@ const BurgerIngredients: FC = () => {
     const bunsRef = useRef<HTMLHeadingElement>(null)
     const saucesRef = useRef<HTMLHeadingElement>(null)
     const mainsRef = useRef<HTMLHeadingElement>(null)
-    // @ts-ignore
     const buns = useMemo(() => data.filter(item => item.type === 'bun' ? item : null), [data])
-    // @ts-ignore
     const sauces = useMemo(() => data.filter(item => item.type === 'sauce' ? item : null), [data])
-    // @ts-ignore
     const mains = useMemo(() => data.filter(item => item.type === 'main' ? item : null), [data])
 
     const scrollView = (ingredientTypeRef: HTMLElement) => {
@@ -62,11 +59,8 @@ const BurgerIngredients: FC = () => {
                     </Tab>
                 </div>
                 <div onScroll={handleScrollGroups} className={burgerIngredientsStyles.ingredients}>
-                     {/* @ts-ignore */}
                     <IngredientList ref={bunsRef} ingredientType={buns} title='Булки'/>
-                    {/* @ts-ignore */}
                     <IngredientList ref={saucesRef} ingredientType={sauces} title='Соусы'/>
-                    {/* @ts-ignore */}
                     <IngredientList ref={mainsRef} ingredientType={mains} title='Начинки'/>
                 </div>
             </div>

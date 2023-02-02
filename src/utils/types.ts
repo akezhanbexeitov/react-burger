@@ -2,7 +2,7 @@ import { store } from ".."
 import { TypedUseSelectorHook, useDispatch as dispatchHook, useSelector as selectorHook } from "react-redux"
 import rootReducer from "../services/reducers"
 
-export type TIngredientLong = {
+export type TIngredient = {
     _id: string
     name: string
     type: string
@@ -15,14 +15,6 @@ export type TIngredientLong = {
     image_mobile: string
     image_large: string
     __v: number
-}
-
-export type TIngredientShort = {
-    name: string
-    image: string
-    price: number
-    id: string
-    key: string
 }
 
 export type TBun = {
@@ -39,7 +31,7 @@ export type TUser = {
     name: string
 }
 
-export type TIngredientWithKey = TIngredientLong & { key: string }
+export type TIngredientWithKey = TIngredient & { key: string }
 
 // Typescript for store
 export type RootState = ReturnType<typeof rootReducer>

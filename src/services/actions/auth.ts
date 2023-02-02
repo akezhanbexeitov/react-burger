@@ -118,7 +118,7 @@ export type TAuthActions =
     | IAuthCheckedAction
     | ILogoutUserAction
 
-// @ts-ignore
+// @ts-ignore thunk
 export const checkUserAuth = () => dispatch => {
     if (getCookie('accessToken')) {
         dispatch(getUserInfo())
@@ -127,7 +127,7 @@ export const checkUserAuth = () => dispatch => {
     }
 }
 
-// @ts-ignore
+// @ts-ignore thunk
 export const registerUser = (email: string, password: string, name: string) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
     const url = `${BASE_URL}/auth/register`
@@ -162,7 +162,7 @@ export const registerUser = (email: string, password: string, name: string) => d
         })
 }
 
-// @ts-ignore
+// @ts-ignore thunk
 export const loginUser = (email: string, password: string) => dispatch => {
     dispatch({ type: LOGIN_USER_REQUEST })
     const url = `${BASE_URL}/auth/login`
@@ -196,7 +196,7 @@ export const loginUser = (email: string, password: string) => dispatch => {
         })
 }
 
-// @ts-ignore
+// @ts-ignore thunk
 export const getUserInfo = () => dispatch => {
     dispatch({ type: GET_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
@@ -224,7 +224,7 @@ export const getUserInfo = () => dispatch => {
         })
 }
 
-// @ts-ignore
+// @ts-ignore thunk
 export const updateUserInfo = (name: string, email: string) => dispatch => {
     dispatch({ type: UPDATE_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
@@ -269,7 +269,7 @@ export const refreshToken = () => {
     return request(url, requestOptions)
 }
 
-// @ts-ignore
+// @ts-ignore thunk
 export const logoutUser = () => dispatch => {
     const url = `${BASE_URL}/auth/logout`
     const body = { token: localStorage.getItem('refreshToken') }

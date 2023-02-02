@@ -1,6 +1,6 @@
-import { TIngredientShort } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants";
 import { request } from "../../utils/server-requests";
+import { TIngredient } from "../../utils/types";
 
 export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = 'GET_INGREDIENTS_REQUEST';
 export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = 'GET_INGREDIENTS_SUCCESS';
@@ -13,7 +13,7 @@ export interface IGetIngredientsRequestAction {
 export interface IGetIngredientsSuccessAction {
     readonly type: typeof GET_INGREDIENTS_SUCCESS
     payload: {
-        ingredients: Array<TIngredientShort>
+        ingredients: Array<TIngredient>
     }
 }
 
@@ -26,11 +26,11 @@ export type TIngredientsListActions =
     | IGetIngredientsSuccessAction
     | IGetIngredientsFailedAction
 
-// @ts-ignore
+// @ts-ignore thunk
 export const getIngredients = () => dispatch => {
     dispatch({ type: GET_INGREDIENTS_REQUEST })
     const url = `${BASE_URL}/ingredients`
-    // @ts-ignore
+    // @ts-ignorerequest options not provided
     request(url)
         .then(actualData => {
             dispatch({

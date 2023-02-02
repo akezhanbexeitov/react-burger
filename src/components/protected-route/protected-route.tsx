@@ -9,7 +9,7 @@ const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // @ts-ignore
+        // @ts-ignore thunk
         dispatch(checkUserAuth())
     }, [dispatch])
 

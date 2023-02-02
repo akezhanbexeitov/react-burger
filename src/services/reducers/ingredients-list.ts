@@ -1,9 +1,9 @@
 import { TIngredientsListActions } from './../actions/ingredients-list';
-import { TIngredientShort } from './../../utils/types';
 import * as ingredients from '../actions/ingredients-list'
+import { TIngredient } from '../../utils/types';
 
 type TIngredientsListState = {
-    ingredients: Array<TIngredientShort>
+    ingredients: Array<TIngredient>
     ingredientsRequest: boolean
     ingredientsFailed: boolean
 }
