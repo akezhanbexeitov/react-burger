@@ -13,6 +13,15 @@ export type TIngredient = {
     __v: number
 }
 
+export type TBun = {
+    image: string
+    name: string
+    price: number
+    type: string
+    id: string
+    key: string
+}
+
 export type TUser = {
     email: string
     name: string
