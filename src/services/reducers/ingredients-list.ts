@@ -1,9 +1,9 @@
 import { TIngredientsListActions } from './../actions/ingredients-list';
-import { TIngredientLong } from './../../utils/types';
+import { TIngredientShort } from './../../utils/types';
 import * as ingredients from '../actions/ingredients-list'
 
 type TIngredientsListState = {
-    ingredients: Array<TIngredientLong>
+    ingredients: Array<TIngredientShort>
     ingredientsRequest: boolean
     ingredientsFailed: boolean
 }
@@ -14,7 +14,7 @@ const initialState: TIngredientsListState = {
     ingredientsFailed: false
 }
 
-const ingredientsReducer = (state = initialState, action: TIngredientsListActions) => {
+const ingredientsReducer = (state = initialState, action: TIngredientsListActions): TIngredientsListState => {
     switch (action.type) {
         case ingredients.GET_INGREDIENTS_REQUEST: {
             return {

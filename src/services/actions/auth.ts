@@ -2,26 +2,123 @@ import { BASE_URL } from "../../constants/constants"
 import { getCookie, setCookie, deleteCookie } from "../../utils/cookies"
 import { request, fetchWithRefresh } from "../../utils/server-requests"
 
-export const REGISTER_USER_REQUEST = 'REGISTER_USER_REQUEST'
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS'
-export const REGISTER_USER_FAILED = 'REGISTER_USER_FAILED'
+export const REGISTER_USER_REQUEST: 'REGISTER_USER_REQUEST' = 'REGISTER_USER_REQUEST'
+export const REGISTER_USER_SUCCESS: 'REGISTER_USER_SUCCESS' = 'REGISTER_USER_SUCCESS'
+export const REGISTER_USER_FAILED: 'REGISTER_USER_FAILED' = 'REGISTER_USER_FAILED'
 
-export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
-export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
-export const LOGIN_USER_FAILED = 'LOGIN_USER_FAILED'
+export const LOGIN_USER_REQUEST: 'LOGIN_USER_REQUEST' = 'LOGIN_USER_REQUEST'
+export const LOGIN_USER_SUCCESS: 'LOGIN_USER_SUCCESS' = 'LOGIN_USER_SUCCESS'
+export const LOGIN_USER_FAILED: 'LOGIN_USER_FAILED' = 'LOGIN_USER_FAILED'
 
-export const GET_USER_REQUEST = 'GET_USER_REQUEST'
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
-export const GET_USER_FAILED = 'GET_USER_FAILED'
+export const GET_USER_REQUEST: 'GET_USER_REQUEST' = 'GET_USER_REQUEST'
+export const GET_USER_SUCCESS: 'GET_USER_SUCCESS' = 'GET_USER_SUCCESS'
+export const GET_USER_FAILED: 'GET_USER_FAILED' = 'GET_USER_FAILED'
 
-export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
-export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
-export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
+export const UPDATE_USER_REQUEST: 'UPDATE_USER_REQUEST' = 'UPDATE_USER_REQUEST'
+export const UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS' = 'UPDATE_USER_SUCCESS'
+export const UPDATE_USER_FAILED: 'UPDATE_USER_FAILED' = 'UPDATE_USER_FAILED'
 
-export const AUTH_CHECKED = 'AUTH_CHECKED'
+export const AUTH_CHECKED: 'AUTH_CHECKED' = 'AUTH_CHECKED'
 
-export const LOGOUT_USER = 'LOGOUT_USER'
+export const LOGOUT_USER: 'LOGOUT_USER' = 'LOGOUT_USER'
 
+export interface IRegisterUserRequestAction {
+    readonly type: typeof REGISTER_USER_REQUEST
+}
+
+export interface IRegisterUserSuccessAction {
+    readonly type: typeof REGISTER_USER_SUCCESS
+    payload: {
+        user: {
+            name: string
+            email: string
+        }
+    }
+}
+
+export interface IRegisterUserFailedAction {
+    readonly type: typeof REGISTER_USER_FAILED
+}
+
+export interface ILoginUserRequestAction {
+    readonly type: typeof LOGIN_USER_REQUEST
+}
+
+export interface ILoginUserSuccessAction {
+    readonly type: typeof LOGIN_USER_SUCCESS
+    payload: {
+        user: {
+            name: string
+            email: string
+        }
+    }
+}
+
+export interface ILoginUserFailedAction {
+    readonly type: typeof LOGIN_USER_FAILED
+}
+
+export interface IGetUserRequestAction {
+    readonly type: typeof GET_USER_REQUEST
+}
+
+export interface IGetUserSuccessAction {
+    readonly type: typeof GET_USER_SUCCESS
+    payload: {
+        user: {
+            name: string
+            email: string
+        }
+    }
+}
+
+export interface IGetUserFailedAction {
+    readonly type: typeof GET_USER_FAILED
+}
+
+export interface IUpdateUserRequestAction {
+    readonly type: typeof UPDATE_USER_REQUEST
+}
+
+export interface IUpdateUserSuccessAction {
+    readonly type: typeof UPDATE_USER_SUCCESS
+    payload: {
+        user: {
+            name: string
+            email: string
+        }
+    }
+}
+
+export interface IUpdateUserFailedAction {
+    readonly type: typeof UPDATE_USER_FAILED
+}
+
+export interface IAuthCheckedAction {
+    readonly type: typeof AUTH_CHECKED
+}
+
+export interface ILogoutUserAction {
+    readonly type: typeof LOGOUT_USER
+}
+
+export type TAuthActions = 
+    | IRegisterUserRequestAction
+    | IRegisterUserSuccessAction
+    | IRegisterUserFailedAction
+    | ILoginUserRequestAction
+    | ILoginUserSuccessAction
+    | ILoginUserFailedAction
+    | IGetUserRequestAction
+    | IGetUserSuccessAction
+    | IGetUserFailedAction
+    | IUpdateUserRequestAction
+    | IUpdateUserSuccessAction
+    | IUpdateUserFailedAction
+    | IAuthCheckedAction
+    | ILogoutUserAction
+
+// @ts-ignore
 export const checkUserAuth = () => dispatch => {
     if (getCookie('accessToken')) {
         dispatch(getUserInfo())
@@ -30,7 +127,8 @@ export const checkUserAuth = () => dispatch => {
     }
 }
 
-export const registerUser = (email, password, name) => dispatch => {
+// @ts-ignore
+export const registerUser = (email: string, password: string, name: string) => dispatch => {
     dispatch({ type: REGISTER_USER_REQUEST })
     const url = `${BASE_URL}/auth/register`
     const body = {
@@ -64,7 +162,8 @@ export const registerUser = (email, password, name) => dispatch => {
         })
 }
 
-export const loginUser = (email, password) => dispatch => {
+// @ts-ignore
+export const loginUser = (email: string, password: string) => dispatch => {
     dispatch({ type: LOGIN_USER_REQUEST })
     const url = `${BASE_URL}/auth/login`
     const body = {
@@ -97,6 +196,7 @@ export const loginUser = (email, password) => dispatch => {
         })
 }
 
+// @ts-ignore
 export const getUserInfo = () => dispatch => {
     dispatch({ type: GET_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
@@ -124,7 +224,8 @@ export const getUserInfo = () => dispatch => {
         })
 }
 
-export const updateUserInfo = (name, email) => dispatch => {
+// @ts-ignore
+export const updateUserInfo = (name: string, email: string) => dispatch => {
     dispatch({ type: UPDATE_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
     const body = {
@@ -168,6 +269,7 @@ export const refreshToken = () => {
     return request(url, requestOptions)
 }
 
+// @ts-ignore
 export const logoutUser = () => dispatch => {
     const url = `${BASE_URL}/auth/logout`
     const body = { token: localStorage.getItem('refreshToken') }

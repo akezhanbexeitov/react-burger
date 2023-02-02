@@ -1,4 +1,4 @@
-import { TIngredientLong } from './../../utils/types';
+import { TIngredientShort } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants";
 import { request } from "../../utils/server-requests";
 
@@ -13,7 +13,7 @@ export interface IGetIngredientsRequestAction {
 export interface IGetIngredientsSuccessAction {
     readonly type: typeof GET_INGREDIENTS_SUCCESS
     payload: {
-        ingredients: Array<TIngredientLong>
+        ingredients: Array<TIngredientShort>
     }
 }
 
