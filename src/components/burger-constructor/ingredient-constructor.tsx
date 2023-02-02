@@ -7,14 +7,22 @@ import { useCallback, FC } from 'react'
 import { DND_TYPES } from '../../constants/constants'
 import { useDispatch, useSelector } from '../../utils/types'
 
+type TIngredientShort = {
+  name: string
+  image: string
+  price: number
+  _id: string
+  key: string
+  type: string
+}
+
 const IngredientConstructor: FC = () => {
   const bun = useSelector(store => store.ingredientsConstructor.bun)
   const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
   const dispatch = useDispatch()
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,
-    drop: ingredient => {
-      // @ts-ignore thunk
+    drop: (ingredient: TIngredientShort) => {
       dispatch(addIngredientToConstructor(ingredient))
     },
     collect: monitor => ({

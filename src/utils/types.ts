@@ -1,6 +1,10 @@
-import { store } from ".."
+import { TOrderDetailsActions } from './../services/actions/order-details';
+import { TIngredientsListActions } from './../services/actions/ingredients-list';
+import { TBurgerConstructorActions } from './../services/actions/burger-constructor';
+import { TAuthActions } from './../services/actions/auth';
 import { TypedUseSelectorHook, useDispatch as dispatchHook, useSelector as selectorHook } from "react-redux"
 import rootReducer from "../services/reducers"
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 export type TIngredient = {
     _id: string
@@ -31,14 +35,22 @@ export type TUser = {
     name: string
 }
 
-export type TIngredientWithKey = TIngredient & { key: string }
+// Application actions
+type TAppActions = 
+    | TAuthActions
+    | TBurgerConstructorActions
+    | TIngredientsListActions
+    | TOrderDetailsActions
 
 // Typescript for store
 export type RootState = ReturnType<typeof rootReducer>
 
 // Typescript for useDispatch()
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>
 export const useDispatch = () => dispatchHook<AppDispatch>()
 
 // Typescript for useSelector()
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+
+// Typescript for Redux Thunk
+export type AppThunk<TReturn = void> = ThunkAction<TReturn, RootState, never, TAppActions>

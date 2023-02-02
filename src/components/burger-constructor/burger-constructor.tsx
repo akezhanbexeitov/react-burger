@@ -18,7 +18,6 @@ type TIngredientShort = {
 const BurgerConstructor: FC = () => {
     const bun = useSelector(store => store.ingredientsConstructor.bun)
     const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
-    console.log(ingredients)
     const dispatch = useDispatch()
     const user = useSelector(store => store.auth.user)
     const location = useLocation()
@@ -31,7 +30,7 @@ const BurgerConstructor: FC = () => {
 
     const clickHandler = () => {
         if (user) {
-            // @ts-ignore thunk
+            // @ts-ignore
             dispatch(postOrder(bun, ingredients))
         }
     }

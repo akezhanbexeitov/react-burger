@@ -30,7 +30,7 @@ export type TIngredientsListActions =
 export const getIngredients = () => dispatch => {
     dispatch({ type: GET_INGREDIENTS_REQUEST })
     const url = `${BASE_URL}/ingredients`
-    // @ts-ignorerequest options not provided
+    // @ts-ignore request options not provided
     request(url)
         .then(actualData => {
             dispatch({

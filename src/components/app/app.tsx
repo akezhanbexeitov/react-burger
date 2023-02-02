@@ -40,7 +40,6 @@ const App: FC = () => {
   const WithOverlayModal = withOverlay(Modal)
 
   useEffect(() => {
-    // @ts-ignore thunk
     dispatch(getIngredients())
   }, [dispatch])
 
