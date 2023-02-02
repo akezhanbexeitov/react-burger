@@ -41,30 +41,6 @@ export type TUser = {
 
 export type TIngredientWithKey = TIngredientLong & { key: string }
 
-export type TIngredientList = {
-    ingredientsList: { ingredients: Array<TIngredientLong> }
-}
-
-export type TIngredientsConstructorBun = {
-    ingredientsConstructor: {
-        bun: {
-            name: string
-            image: string
-            price: number
-            id: string
-            count: number
-        }
-    }
-}
-
-export type TIngredientsConstructorIngredients = {
-    ingredientsConstructor: { ingredients: Array<TIngredientLong> }
-}
-
-export type TAuthUser = {
-    auth: { user: TUser }
-}
-
 // Typescript for store
 export type RootState = ReturnType<typeof rootReducer>
 

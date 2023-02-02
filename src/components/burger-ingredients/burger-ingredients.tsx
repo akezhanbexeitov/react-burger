@@ -1,19 +1,21 @@
 import { useMemo, memo, useRef, useState, FC } from 'react'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientList from './ingredient-list'
-import { useSelector } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { TIngredientList } from '../../utils/types'
+import { useSelector } from '../../utils/types'
 
 const BurgerIngredients: FC = () => {
-    const data = useSelector((store: TIngredientList) => store.ingredientsList.ingredients)
+    const data = useSelector(store => store.ingredientsList.ingredients)
     const [current, setCurrent] = useState('buns')
     const tabsRef = useRef<HTMLDivElement>(null)
     const bunsRef = useRef<HTMLHeadingElement>(null)
     const saucesRef = useRef<HTMLHeadingElement>(null)
     const mainsRef = useRef<HTMLHeadingElement>(null)
+    // @ts-ignore
     const buns = useMemo(() => data.filter(item => item.type === 'bun' ? item : null), [data])
+    // @ts-ignore
     const sauces = useMemo(() => data.filter(item => item.type === 'sauce' ? item : null), [data])
+    // @ts-ignore
     const mains = useMemo(() => data.filter(item => item.type === 'main' ? item : null), [data])
 
     const scrollView = (ingredientTypeRef: HTMLElement) => {
@@ -60,8 +62,11 @@ const BurgerIngredients: FC = () => {
                     </Tab>
                 </div>
                 <div onScroll={handleScrollGroups} className={burgerIngredientsStyles.ingredients}>
+                     {/* @ts-ignore */}
                     <IngredientList ref={bunsRef} ingredientType={buns} title='Булки'/>
+                    {/* @ts-ignore */}
                     <IngredientList ref={saucesRef} ingredientType={sauces} title='Соусы'/>
+                    {/* @ts-ignore */}
                     <IngredientList ref={mainsRef} ingredientType={mains} title='Начинки'/>
                 </div>
             </div>

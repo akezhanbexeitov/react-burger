@@ -1,8 +1,8 @@
 import modalOverlayStyles from './modal-overlay.module.css'
 import PortalReactDOM from 'react-dom'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { FC, ReactNode } from 'react'
+import { useDispatch } from '../../utils/types'
 
 const modalRoot = document.getElementById('react-modals')
 

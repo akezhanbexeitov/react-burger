@@ -1,11 +1,10 @@
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { checkUserAuth } from "../../services/actions/auth"
 import { Redirect, useLocation, Route } from 'react-router-dom'
-import { TAuthUser } from "../../utils/types"
+import { useDispatch, useSelector } from "../../utils/types"
 
 const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
-    const user = useSelector((store: TAuthUser) => store.auth.user)
+    const user = useSelector(store => store.auth.user)
     const location = useLocation()
     const dispatch = useDispatch()
 

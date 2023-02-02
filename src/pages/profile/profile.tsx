@@ -1,13 +1,12 @@
 import profileStyles from './profile.module.css'
 import { EmailInput, PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser, updateUserInfo } from '../../services/actions/auth'
 import { useForm } from '../../hooks/use-form'
-import { TAuthUser } from '../../utils/types'
 import { FC } from 'react'
+import { useDispatch, useSelector } from '../../utils/types'
 
 const Profile: FC = () => {
-    const user = useSelector((store: TAuthUser) => store.auth.user)
+    const user = useSelector(store => store.auth.user)
     const dispatch = useDispatch()
     const {values, handleChange, setValues} = useForm({
         name: user.name,

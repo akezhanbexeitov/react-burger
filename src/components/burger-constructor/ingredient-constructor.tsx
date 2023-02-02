@@ -1,17 +1,15 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import burgerConstructorStyles from './burger-constructor.module.css'
-import { useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
-import { useDispatch } from 'react-redux'
 import { addIngredientToConstructor, MOVE_INGREDIENT_IN_CONSTRUCTOR } from '../../services/actions/burger-constructor'
 import ConstructorItem from './constructor-item'
 import { useCallback, FC } from 'react'
 import { DND_TYPES } from '../../constants/constants'
-import { TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
+import { useDispatch, useSelector } from '../../utils/types'
 
 const IngredientConstructor: FC = () => {
-  const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
-  const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
+  const bun = useSelector(store => store.ingredientsConstructor.bun)
+  const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
   const dispatch = useDispatch()
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,

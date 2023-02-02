@@ -4,7 +4,6 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import { useEffect, FC } from 'react';
 import 'normalize.css'
-import { useDispatch, useSelector } from 'react-redux'
 import { getIngredients } from '../../services/actions/ingredients-list';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -23,16 +22,8 @@ import IngredientDetails from '../ingredient-details/ingredient-details';
 import withOverlay from '../modal-overlay/with-overlay'
 import OrderDetails from '../order-details/order-details';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
-import { TIngredientList } from '../../utils/types';
 import { Location } from 'history'
-
-type TOrderDetailsOrderRequest = {
-  orderDetails: { orderRequest: boolean}
-}
-
-type TOrderDetailsOrderNumber = {
-  orderDetails: { orderNumber: number }
-}
+import { useDispatch, useSelector } from '../../utils/types';
 
 type TLocation = {
   background: Location
@@ -40,9 +31,9 @@ type TLocation = {
 
 const App: FC = () => {
   const dispatch = useDispatch()
-  const data = useSelector((store: TIngredientList) => store.ingredientsList.ingredients)
-  const orderNumber = useSelector((store: TOrderDetailsOrderNumber) => store.orderDetails.orderNumber)
-  const isLoading = useSelector((store: TOrderDetailsOrderRequest) => store.orderDetails.orderRequest)
+  const data = useSelector(store => store.ingredientsList.ingredients)
+  const orderNumber = useSelector(store => store.orderDetails.orderNumber)
+  const isLoading = useSelector(store => store.orderDetails.orderRequest)
   const location = useLocation<TLocation>()
   const history = useHistory()
   const background = location.state && location.state.background
