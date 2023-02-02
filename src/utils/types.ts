@@ -1,3 +1,7 @@
+import { store } from ".."
+import { TypedUseSelectorHook, useDispatch as dispatchHook, useSelector as selectorHook } from "react-redux"
+import rootReducer from "../services/reducers"
+
 export type TIngredientLong = {
     _id: string
     name: string
@@ -60,3 +64,13 @@ export type TIngredientsConstructorIngredients = {
 export type TAuthUser = {
     auth: { user: TUser }
 }
+
+// Typescript for store
+export type RootState = ReturnType<typeof rootReducer>
+
+// Typescript for useDispatch()
+export type AppDispatch = typeof store.dispatch
+export const useDispatch = () => dispatchHook<AppDispatch>()
+
+// Typescript for useSelector()
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook

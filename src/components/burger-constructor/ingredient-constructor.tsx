@@ -16,6 +16,7 @@ const IngredientConstructor: FC = () => {
   const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: DND_TYPES.ingredient,
     drop: ingredient => {
+      // @ts-ignore
       dispatch(addIngredientToConstructor(ingredient))
     },
     collect: monitor => ({
