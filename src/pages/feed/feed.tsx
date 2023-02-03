@@ -181,8 +181,35 @@ const Feed: FC = () => {
                     </div>
                 </div>
             </section>
-            <section className={feedStyles.container_right}>
-                Hello
+            <section className={`${feedStyles.container_right} mt-25`}>
+                <div className={`${feedStyles.orders} mb-15`}>
+                    <div className={`${feedStyles.completed} mr-9`}>
+                        <h3 className={`${feedStyles.orders_heading} mb-6`}>Готовы:</h3>
+                        <div>
+                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034533</p>
+                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034532</p>
+                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034530</p>
+                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034527</p>
+                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034525</p>
+                        </div>
+                    </div>
+                    <div className={feedStyles.in_progress}>
+                        <h3 className={`${feedStyles.orders_heading} mb-6`}>В работе:</h3>
+                        <div>
+                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034538</p>
+                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034541</p>
+                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034542</p>
+                        </div>
+                    </div>
+                </div>
+                <div className={`${feedStyles.all_time_completed} mb-15`}>
+                    <p className='text text_type_main-medium'>Выполнено за все время:</p>
+                    <p className={`${feedStyles.number} text text_type_digits-large`}>28 752</p>
+                </div>
+                <div className={feedStyles.today_completed}>
+                <p className='text text_type_main-medium'>Выполнено за сегодня:</p>
+                    <p className={`${feedStyles.number} text text_type_digits-large`}>138</p>
+                </div>
             </section>
         </div>
     )

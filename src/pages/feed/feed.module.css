@@ -1,12 +1,10 @@
 .wrapper {
     width: 100%;
     display: flex;
-    border: 1px solid white;
 }
 
 .container_left {
     width: 600px;
-    border: 1px solid white
 }
 
 .feed {
@@ -29,7 +27,6 @@
 
 .container_right {
     width: 580px;
-    border: 1px solid white
 }
 
 .box {
@@ -60,7 +57,7 @@
     height: 64px;
     border-radius: 50%;
     margin-right: -15px;
-    background-image: linear-gradient(rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+    background-image: linear-gradient(var(--purple-color), var(--blue-color));
 }
 
 .ingredient_image_inner {
@@ -82,4 +79,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.orders {
+    display: flex;
+}
+
+.completed {
+    flex: 1;
+}
+
+.completed_item {
+    margin-top: 0;
+    color: var(--emerald-color);
+}
+
+.in_progress {
+    flex: 1;
+}
+
+.in_progress_item,
+.orders_heading {
+    margin-top: 0;
+}
+
+.number {
+    text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25), 0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
 }
