@@ -121,7 +121,6 @@ export type TAuthActions =
 
 export const checkUserAuth: AppThunk = () => (dispatch: AppDispatch) => {
     if (getCookie('accessToken')) {
-        // @ts-ignore dispatch in thunk
         dispatch(getUserInfo())
     } else {
         dispatch({ type: AUTH_CHECKED })
@@ -195,7 +194,7 @@ export const loginUser: AppThunk = (email, password) => (dispatch: AppDispatch) 
         })
 }
 
-export const getUserInfo: AppThunk = () => (dispatch: AppDispatch) => {
+export const getUserInfo = (): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: GET_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
     const requestOptions = {
