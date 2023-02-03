@@ -24,6 +24,7 @@ import OrderDetails from '../order-details/order-details';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { Location } from 'history'
 import { useDispatch, useSelector } from '../../utils/types';
+import FeedDetails from '../../pages/feed-details/feed-details';
 
 type TLocation = {
   background: Location
@@ -77,8 +78,11 @@ const App: FC = () => {
             <ProtectedRoute exact path='/profile'>
               <Profile />
             </ProtectedRoute>
-            <Route exact path='/feed'>
+            <ProtectedRoute exact path='/feed'>
               <Feed />
+            </ProtectedRoute>
+            <Route exact path='/feed/:id'>
+              <FeedDetails />
             </Route>
             <Route>
               <NotFound />
