@@ -2,8 +2,8 @@ import { setCookie } from "./cookies";
 import { refreshToken } from "../services/actions/auth";
 
 interface IRequestOptions extends RequestInit {
-    headers?: Record<string, string>
-  }
+  headers?: Record<string, string>
+}
 
 export const checkResponse = (res: Response) => {
     if (res.ok) {

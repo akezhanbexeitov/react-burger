@@ -30,7 +30,6 @@ const BurgerConstructor: FC = () => {
 
     const clickHandler = () => {
         if (user) {
-            // @ts-ignore
             dispatch(postOrder(bun, ingredients))
         }
     }

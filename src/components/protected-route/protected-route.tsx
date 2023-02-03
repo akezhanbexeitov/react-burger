@@ -9,16 +9,15 @@ const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // @ts-ignore thunk
         dispatch(checkUserAuth())
     }, [dispatch])
 
-    if (onlyUnAuth && user) {
+    if (onlyUnAuth && Object.keys(user).length !== 0) {
         const { from } = { from: { pathname: "/" } } || location.state
         return <Redirect to={from} />;
     }
 
-    if (!onlyUnAuth && !user) {
+    if (!onlyUnAuth && Object.keys(user).length === 0) {
         return (
             <Redirect to={{
                 pathname: '/login',

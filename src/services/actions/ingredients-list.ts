@@ -1,3 +1,4 @@
+import { AppThunk, AppDispatch } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants";
 import { request } from "../../utils/server-requests";
 import { TIngredient } from "../../utils/types";
@@ -26,12 +27,16 @@ export type TIngredientsListActions =
     | IGetIngredientsSuccessAction
     | IGetIngredientsFailedAction
 
-// @ts-ignore thunk
-export const getIngredients = () => dispatch => {
+export const getIngredients = (): AppThunk => (dispatch: AppDispatch)=> {
     dispatch({ type: GET_INGREDIENTS_REQUEST })
     const url = `${BASE_URL}/ingredients`
-    // @ts-ignore request options not provided
-    request(url)
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    request(url, requestOptions)
         .then(actualData => {
             dispatch({
                 type: GET_INGREDIENTS_SUCCESS,

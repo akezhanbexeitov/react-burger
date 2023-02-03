@@ -1,15 +1,11 @@
 import registerStyles from './register.module.css'
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { registerUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
 import { FormEvent, FC } from "react"
-
-type TAuthRegisterUserRequest = {
-    auth: { registerUserRequest: boolean }
-}
+import { useDispatch, useSelector } from '../../utils/types'
 
 const Register: FC = () => {
     const {values, handleChange} = useForm({
@@ -17,12 +13,11 @@ const Register: FC = () => {
         email: '',
         password: ''
     })
-    const isLoading = useSelector((store: TAuthRegisterUserRequest) => store.auth.registerUserRequest)
+    const isLoading = useSelector(store => store.auth.registerUserRequest)
     const dispatch = useDispatch()
 
     const onClick = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // @ts-ignore thunk
         dispatch(registerUser(values.email, values.password, values.name))
     }
 

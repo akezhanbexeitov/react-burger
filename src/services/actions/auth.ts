@@ -119,7 +119,7 @@ export type TAuthActions =
     | IAuthCheckedAction
     | ILogoutUserAction
 
-export const checkUserAuth: AppThunk = () => (dispatch: AppDispatch) => {
+export const checkUserAuth = (): AppThunk => (dispatch: AppDispatch) => {
     if (getCookie('accessToken')) {
         dispatch(getUserInfo())
     } else {
@@ -127,7 +127,7 @@ export const checkUserAuth: AppThunk = () => (dispatch: AppDispatch) => {
     }
 }
 
-export const registerUser: AppThunk = (email, password, name) => (dispatch: AppDispatch)  => {
+export const registerUser = (email: string, password: string, name: string): AppThunk => (dispatch: AppDispatch)  => {
     dispatch({ type: REGISTER_USER_REQUEST })
     const url = `${BASE_URL}/auth/register`
     const body = {
@@ -161,7 +161,7 @@ export const registerUser: AppThunk = (email, password, name) => (dispatch: AppD
         })
 }
 
-export const loginUser: AppThunk = (email, password) => (dispatch: AppDispatch) => {
+export const loginUser = (email: string, password: string): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: LOGIN_USER_REQUEST })
     const url = `${BASE_URL}/auth/login`
     const body = {
@@ -221,7 +221,7 @@ export const getUserInfo = (): AppThunk => (dispatch: AppDispatch) => {
         })
 }
 
-export const updateUserInfo: AppThunk = (name, email) => (dispatch: AppDispatch) => {
+export const updateUserInfo = (name: string, email: string): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: UPDATE_USER_REQUEST })
     const url = `${BASE_URL}/auth/user`
     const body = {
@@ -265,7 +265,7 @@ export const refreshToken = () => {
     return request(url, requestOptions)
 }
 
-export const logoutUser: AppThunk = () => (dispatch: AppDispatch) => {
+export const logoutUser = (): AppThunk => (dispatch: AppDispatch) => {
     const url = `${BASE_URL}/auth/logout`
     const body = { token: localStorage.getItem('refreshToken') }
     const requestOptions = {

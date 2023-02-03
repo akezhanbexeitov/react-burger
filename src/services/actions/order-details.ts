@@ -1,4 +1,4 @@
-import { TBun } from './../../utils/types';
+import { AppThunk, AppDispatch } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants"
 import { request } from "../../utils/server-requests"
 import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from "./burger-constructor"
@@ -39,8 +39,14 @@ type TIngredientShort = {
     price: number
 }
 
-// @ts-ignore thunk
-export const postOrder = (bun: TBun, ingredients: Array<TIngredientShort>) => dispatch => {
+export type TBun = {
+    image: string
+    name: string
+    price: number
+    id: string
+}
+
+export const postOrder = (bun: TBun, ingredients: Array<TIngredientShort>): AppThunk => (dispatch: AppDispatch) => {
     dispatch({ type: POST_ORDER_REQUEST })
     const url = `${BASE_URL}/orders`
     const body: TPostOrderBody = { ingredients: [] }

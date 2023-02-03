@@ -26,7 +26,6 @@ const Profile: FC = () => {
                 {/* TODO: change h2 tags to Links */}
                 <h2>Профиль</h2>
                 <h2 className='text_color_inactive'>История заказов</h2>
-                {/* @ts-ignore thunk */}
                 <h2 className={`${profileStyles.logout} text_color_inactive mb-20`} onClick={() => dispatch(logoutUser())}>Выход</h2>
                 <p className="text text_type_main-default text_color_inactive">
                     В этом разделе вы можете изменить свои персональные данные
@@ -71,7 +70,6 @@ const Profile: FC = () => {
                         htmlType="button" 
                         type="primary" 
                         size="medium" 
-                        // @ts-ignore thunk
                         onClick={() => dispatch(updateUserInfo(values.name, values.email))}
                     >
                         Сохранить
