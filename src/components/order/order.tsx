@@ -1,6 +1,6 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from '../../utils/types'
 import orderStyles from './order.module.css'
 
@@ -14,6 +14,7 @@ type TOrderProps = {
 }
 
 const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsIds, status }) => {
+    const location = useLocation()
     let zIndex = 99
     let totalPrice = 0
 
@@ -30,7 +31,10 @@ const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsI
     return (
         <Link
             key={orderId}
-            to={{ pathname: `/feed/${orderNumber}` }}
+            to={{ 
+                pathname: `/feed/${orderNumber}`,
+                state: { background: location }
+             }}
             className={orderStyles.link}
         >
             <div className={`${orderStyles.box} p-6 mb-5`}>

@@ -90,6 +90,11 @@ const App: FC = () => {
           </Switch>
           {background && (
               <>
+                <Route path='/feed/:id'>
+                  <WithOverlayModal handleModalClose={handleModalClose}>
+                    <FeedDetails />
+                  </WithOverlayModal>
+                </Route>
                 <Route path='/ingredients/:ingredientId'>
                   <WithOverlayModal header="Детали ингредиента" handleModalClose={handleModalClose}>
                     <IngredientDetails />
