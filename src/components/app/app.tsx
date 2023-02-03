@@ -75,12 +75,12 @@ const App: FC = () => {
             <ProtectedRoute onlyUnAuth={true} exact path='/reset-password'>
               <ResetPassword />
             </ProtectedRoute>
-            <ProtectedRoute exact path='/profile'>
+            <ProtectedRoute path='/profile'>
               <Profile />
             </ProtectedRoute>
-            <ProtectedRoute exact path='/feed'>
+            <Route exact path='/feed'>
               <Feed />
-            </ProtectedRoute>
+            </Route>
             <Route exact path='/feed/:id'>
               <FeedDetails />
             </Route>
