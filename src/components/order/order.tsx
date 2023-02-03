@@ -16,8 +16,16 @@ type TOrderProps = {
 const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsIds, status }) => {
     let zIndex = 99
     let totalPrice = 0
+
+    let orderStatus
+    if (status === 'created') {
+        orderStatus = 'Создан'
+    } else if (status === 'pending') {
+        orderStatus = 'Готовится'
+    } else if (status === 'done') {
+        orderStatus = 'Выполнен'
+    }
     const ingredients = useSelector(store => store.ingredientsList.ingredients)
-    console.log(ingredients)
 
     return (
         <Link
@@ -33,7 +41,7 @@ const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsI
 
                 <h3 className='text text_type_main-medium'>{name}</h3>
 
-                {status ? <p className='mt-2'>Создан</p> : null}
+                {status ? <p className='mt-2'>{orderStatus}</p> : null}
 
                 <div className={`${orderStyles.box_bottom} mt-6`}>
                     <div className={orderStyles.images}>

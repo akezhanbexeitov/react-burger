@@ -29,62 +29,6 @@
     width: 580px;
 }
 
-.link {
-    color: inherit;
-    text-decoration: none;
-}
-
-.box {
-    background-color: #1C1C21;
-    border-radius: 40px;
-}
-
-.box_top {
-    display: flex;
-    justify-content: space-between;
-}
-
-.box_bottom {
-    display: flex;
-    justify-content: space-between;
-}
-
-.images {
-    display: flex;
-}
-
-.ingredient_image_outer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    margin-right: -15px;
-    background-image: linear-gradient(var(--purple-color), var(--blue-color));
-}
-
-.ingredient_image_inner {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ingredient_image_inner img {
-    width: 112px;
-    height: 56px;
-}
-
-.price {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .orders {
     display: flex;
 }

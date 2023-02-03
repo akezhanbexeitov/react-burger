@@ -4,6 +4,7 @@ import { FC } from 'react'
 import { Link, Route, Switch, useLocation } from 'react-router-dom'
 import PersonalDetails from './personal-details'
 import { useDispatch } from '../../utils/types'
+import Orders from './orders'
 
 const Profile: FC = () => {
     const location = useLocation()
@@ -36,7 +37,7 @@ const Profile: FC = () => {
                         <PersonalDetails />
                     </Route>
                     <Route exact path='/profile/orders'>
-                        Orders will be here
+                        <Orders />
                     </Route>
                 </Switch>
             </section>
