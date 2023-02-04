@@ -13,18 +13,18 @@ const Feed: FC = () => {
     useEffect(() => {
         dispatch({ type: 'WS_CONNECTION_START' })
 
-        // return () => {
-        //     dispatch({ type: 'WS_CONNECTION_CLOSE' })
-        // }
+        return () => {
+            dispatch({ type: 'WS_CONNECTION_CLOSE' })
+        }
     }, [dispatch])
     return (
         <div className={feedStyles.wrapper}>
             <section className={`${feedStyles.container_left} mr-15`}>
                 <h2 className="text text_type_main-large mb-5 mt-10">Лента заказов</h2>
                 <div className={`${feedStyles.feed} pr-2`}>
-                    {message.orders ? message.orders.map((order: TOrder) => {
+                    {message.orders ? message.orders.map((order: TOrder, index: number) => {
                         return (
-                            <Order orderId={order.number} orderNumber={order.number} time={order.createdAt} name={order.name} ingredientsIds={order.ingredients}/>
+                            <Order key={index} orderId={order.number} orderNumber={order.number} time={order.createdAt} name={order.name} ingredientsIds={order.ingredients}/>
                         )
                     }) : <LoadingSpinner />}
                 </div>

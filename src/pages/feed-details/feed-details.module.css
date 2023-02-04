@@ -7,10 +7,6 @@
     text-align: center;
 }
 
-.status {
-    color: var(--emerald-color)
-}
-
 .ingredients {
     max-height: 312px;
     overflow: scroll;

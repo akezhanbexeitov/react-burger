@@ -17,14 +17,18 @@ const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsI
     const location = useLocation()
     let zIndex = 99
     let totalPrice = 0
+    let statusColor = '#AAA'
 
     let orderStatus
     if (status === 'created') {
         orderStatus = 'Создан'
+        statusColor = '#AAA'
     } else if (status === 'pending') {
         orderStatus = 'Готовится'
+        statusColor = '#FFCC66'
     } else if (status === 'done') {
         orderStatus = 'Выполнен'
+        statusColor = '#00CCCC'
     }
     const ingredients = useSelector(store => store.ingredientsList.ingredients)
 
@@ -45,7 +49,7 @@ const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsI
 
                 <h3 className='text text_type_main-medium'>{name}</h3>
 
-                {status ? <p className='mt-2'>{orderStatus}</p> : null}
+                {status ? <p className='mt-2' style={{ color: statusColor }}>{orderStatus}</p> : null}
 
                 <div className={`${orderStyles.box_bottom} mt-6`}>
                     <div className={orderStyles.images}>
