@@ -1,3 +1,4 @@
+import { TWSActions } from './../services/actions/web-socket';
 import { TOrderDetailsActions } from './../services/actions/order-details';
 import { TIngredientsListActions } from './../services/actions/ingredients-list';
 import { TBurgerConstructorActions } from './../services/actions/burger-constructor';
@@ -36,21 +37,22 @@ export type TUser = {
 }
 
 // Application actions
-type TAppActions = 
+export type AppActions = 
     | TAuthActions
     | TBurgerConstructorActions
     | TIngredientsListActions
     | TOrderDetailsActions
+    | TWSActions
 
 // Typescript for store
 export type RootState = ReturnType<typeof rootReducer>
 
 // Typescript for useDispatch()
-export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>
+export type AppDispatch = ThunkDispatch<RootState, never, AppActions>
 export const useDispatch = () => dispatchHook<AppDispatch>()
 
 // Typescript for useSelector()
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
 
 // Typescript for Redux Thunk
-export type AppThunk<TReturn = void> = ThunkAction<TReturn, RootState, never, TAppActions>
+export type AppThunk<TReturn = void> = ThunkAction<TReturn, RootState, never, AppActions>
