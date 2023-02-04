@@ -33,10 +33,10 @@ const Orders: FC = () => {
 
     return (
         <section className={`${profileStyles.orders} mt-20`}>
-            <Order orderId={1} orderNumber='034535' time='Сегодня, 16:20 i-GMT+3' name='Death Star Starship Main бургер' ingredientsIds={ingredientsIds1} status='created'/>
-            <Order orderId={2} orderNumber='034534' time='Сегодня, 13:20 i-GMT+3' name='Interstellar бургер' ingredientsIds={ingredientsIds2} status='pending'/>
-            <Order orderId={3} orderNumber='034533' time='Вчера, 13:50 i-GMT+3' name='Black Hole Singularity острый бургер' ingredientsIds={ingredientsIds3} status='done'/>
-            <Order orderId={4} orderNumber='034532' time='2 дня назад, 21:53 i-GMT+3' name='Supernova Infinity бургер' ingredientsIds={ingredientsIds4} status='done'/>
+            <Order orderId={1} orderNumber={34535} time='Сегодня, 16:20 i-GMT+3' name='Death Star Starship Main бургер' ingredientsIds={ingredientsIds1} status='created'/>
+            <Order orderId={2} orderNumber={34534} time='Сегодня, 13:20 i-GMT+3' name='Interstellar бургер' ingredientsIds={ingredientsIds2} status='pending'/>
+            <Order orderId={3} orderNumber={34533} time='Вчера, 13:50 i-GMT+3' name='Black Hole Singularity острый бургер' ingredientsIds={ingredientsIds3} status='done'/>
+            <Order orderId={4} orderNumber={34532} time='2 дня назад, 21:53 i-GMT+3' name='Supernova Infinity бургер' ingredientsIds={ingredientsIds4} status='done'/>
         </section>
     )
 }

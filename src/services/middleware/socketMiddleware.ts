@@ -25,7 +25,8 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
         socket.onmessage = event => {
           const { data } = event;
-          dispatch({ type: 'WS_GET_MESSAGE', payload: data });
+
+          dispatch({ type: 'WS_GET_MESSAGE', payload: JSON.parse(data) });
         };
 
         socket.onclose = event => {
@@ -35,6 +36,10 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
         if (type === 'WS_SEND_MESSAGE') {
           const message = payload;
           socket.send(JSON.stringify(message));
+        }
+
+        if (type === 'WS_CONNECTION_CLOSE') {
+          socket.close()
         }
       }
 

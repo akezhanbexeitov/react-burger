@@ -6,7 +6,7 @@ import orderStyles from './order.module.css'
 
 type TOrderProps = {
     orderId: number
-    orderNumber: string
+    orderNumber: number
     time: string
     name: string
     ingredientsIds: string[]

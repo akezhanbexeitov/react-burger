@@ -4,6 +4,7 @@ export const WS_CONNECTION_FAILED: 'WS_CONNECTION_FAILED' = 'WS_CONNECTION_FAILE
 export const WS_GET_MESSAGE: 'WS_GET_MESSAGE' = 'WS_GET_MESSAGE'
 export const WS_CONNECTION_CLOSED: 'WS_CONNECTION_CLOSED' = 'WS_CONNECTION_CLOSED'
 export const WS_SEND_MESSAGE: 'WS_SEND_MESSAGE' = 'WS_SEND_MESSAGE'
+export const WS_CONNECTION_CLOSE: 'WS_CONNECTION_CLOSE' = 'WS_CONNECTION_CLOSE'
 
 export interface IWSConnectionStartAction {
     readonly type: typeof WS_CONNECTION_START
@@ -32,6 +33,10 @@ export interface IWSSendMessageAction {
     payload: any //  TODO Change this any to other types when you see the message from the server
 }
 
+export interface IWSConnectionCloseAction {
+    readonly type: typeof WS_CONNECTION_CLOSE
+}
+
 export type TWSActions = 
     | IWSConnectionStartAction
     | IWSConnectionSuccessAction
@@ -39,3 +44,4 @@ export type TWSActions =
     | IWSGetMessageAction
     | IWSConnectionClosedAction
     | IWSSendMessageAction
+    | IWSConnectionCloseAction

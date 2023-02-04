@@ -1,15 +1,30 @@
 import { TWSActions } from "../actions/web-socket"
 import * as ws from '../actions/web-socket'
 
+export type TOrder = {
+    _id: string
+    ingredients: Array<string>
+    status: string
+    name: string
+    createdAt: string
+    updatedAt: string
+    number: number
+}
+
+type TMessage = {
+    success: boolean
+    orders: Array<TOrder>
+}
+
 type TWSState = {
     wsConnected: boolean
-    messages: []
+    message: TMessage
     error?: Event
 }
 
 const initialState: TWSState = {
     wsConnected: false,
-    messages: []
+    message: {} as TMessage
 }
 
 export const wsReducer = (state = initialState, action: TWSActions) => {
@@ -36,7 +51,7 @@ export const wsReducer = (state = initialState, action: TWSActions) => {
             return {
                 ...state,
                 error: undefined,
-                messages: [...state.messages, action.payload]
+                message: action.payload
             }
         default:
             return state;
