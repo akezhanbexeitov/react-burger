@@ -8,7 +8,6 @@ import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 const Feed: FC = () => {
     const dispatch = useDispatch()
     const message = useSelector(store => store.feed.message)
-    console.log(message)
 
     useEffect(() => {
         dispatch({ 

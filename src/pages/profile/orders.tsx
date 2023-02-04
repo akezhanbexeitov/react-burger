@@ -27,11 +27,11 @@ const Orders: FC = () => {
     return (
         <section className={`${profileStyles.orders} mt-20`}>
             {message.orders 
-                ? message.orders.map((order: TOrder, index: number) => {
+                ? message.orders.slice().reverse().map((order: TOrder, index: number) => {
                     return (
                         <Order key={index} orderId={order.number} orderNumber={order.number} time={order.createdAt} name={order.name} ingredientsIds={order.ingredients} status={order.status}/>
                     )
-                }) 
+                })
                 : <LoadingSpinner />
             }
         </section>
