@@ -11,7 +11,7 @@ const FeedDetails: FC = () => {
     const params = useParams<TParams>()
     const orders = useSelector(store => store.feed.message.orders)
     const ingredients = useSelector(store => store.ingredientsList.ingredients)
-    const order = orders.find((item: TOrder) => item.number === +params.id)
+    const order = orders && orders.find((item: TOrder) => item.number === +params.id)
     let price = 0
 
     let orderStatus

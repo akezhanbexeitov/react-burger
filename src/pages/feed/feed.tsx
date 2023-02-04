@@ -33,20 +33,40 @@ const Feed: FC = () => {
                 <div className={`${feedStyles.orders} mb-15`}>
                     <div className={`${feedStyles.completed} mr-9`}>
                         <h3 className={`${feedStyles.orders_heading} mb-6`}>Готовы:</h3>
-                        <div>
-                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034533</p>
-                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034532</p>
-                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034530</p>
-                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034527</p>
-                            <p className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>034525</p>
+                        <div className={feedStyles.done_numbers}>
+                            {message.orders && message.orders.map((order, index) => {
+                                if (order.status === 'done') {
+                                    if (index <= 9) {
+                                        return (
+                                            <p key={order.number} className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>{order.number}</p>
+                                        )
+                                    } else {
+                                        return null
+                                    }
+                                } else {
+                                    index -= 1
+                                    return null
+                                }
+                            })}
                         </div>
                     </div>
                     <div className={feedStyles.in_progress}>
                         <h3 className={`${feedStyles.orders_heading} mb-6`}>В работе:</h3>
-                        <div>
-                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034538</p>
-                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034541</p>
-                            <p className={`${feedStyles.in_progress_item} text text_type_digits-default mb-2`}>034542</p>
+                        <div className={feedStyles.pending_numbers}>
+                            {message.orders && message.orders.map((order, index) => {
+                                    if (order.status === 'pending') {
+                                        if (index <= 9) {
+                                            return (
+                                                <p key={order.number} className={`${feedStyles.completed_item} text text_type_digits-default mb-2`}>{order.number}</p>
+                                            )
+                                        } else {
+                                            return null
+                                        }
+                                    } else {
+                                        index -= 1
+                                        return null
+                                    }
+                                })}
                         </div>
                     </div>
                 </div>
