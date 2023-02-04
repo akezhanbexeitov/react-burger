@@ -1,4 +1,4 @@
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from '../../utils/types'
@@ -44,7 +44,7 @@ const Order: FC<TOrderProps> = ({ orderId, orderNumber, time, name, ingredientsI
             <div className={`${orderStyles.box} p-6 mb-5`}>
                 <span className={`${orderStyles.box_top} mb-6`}>
                     <p className='text text_type_digits-default'>#{orderNumber}</p>
-                    <p className='text text_type_main-default text_color_inactive'>{time}</p>
+                    <p className='text text_type_main-default text_color_inactive'><FormattedDate date={new Date(time)}/></p>
                 </span>
 
                 <h3 className='text text_type_main-medium'>{name}</h3>
