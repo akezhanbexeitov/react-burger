@@ -11,7 +11,12 @@ const Feed: FC = () => {
     console.log(message)
 
     useEffect(() => {
-        dispatch({ type: 'WS_CONNECTION_START' })
+        dispatch({ 
+            type: 'WS_CONNECTION_START',
+            payload: {
+                url: 'wss://norma.nomoreparties.space/orders/all'
+            }
+        })
 
         return () => {
             dispatch({ type: 'WS_CONNECTION_CLOSE' })

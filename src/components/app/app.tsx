@@ -100,11 +100,11 @@ const App: FC = () => {
                     <IngredientDetails />
                   </WithOverlayModal>
                 </Route>
-                <Route path='/order'>
+                <ProtectedRoute path='/order'>
                   <WithOverlayModal handleModalClose={handleModalClose}>
                     { isLoading ? <LoadingSpinner /> : <OrderDetails orderNumber={orderNumber}/> }
                   </WithOverlayModal>
-                </Route>
+                </ProtectedRoute>
               </>
             )}
         </div>

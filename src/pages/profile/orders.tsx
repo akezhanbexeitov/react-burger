@@ -2,20 +2,27 @@ import { FC, useEffect } from 'react'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import Order from '../../components/order/order'
 import { TOrder } from '../../services/reducers/web-socket'
+import { getCookie } from '../../utils/cookies'
 import { useDispatch, useSelector } from '../../utils/types'
 import profileStyles from './profile.module.css'
 
 const Orders: FC = () => {
     const message = useSelector(store => store.feed.message)
     const dispatch = useDispatch()
+    const accessToken = getCookie('accessToken')
 
     useEffect(() => {
-        dispatch({ type: 'WS_CONNECTION_START' })
+        dispatch({ 
+            type: 'WS_CONNECTION_START',
+            payload: {
+                url: `wss://norma.nomoreparties.space/orders?token=${accessToken}`
+            }
+        })
 
         return () => {
             dispatch({ type: 'WS_CONNECTION_CLOSE' })
         }
-    }, [dispatch])
+    }, [dispatch, accessToken])
 
     return (
         <section className={`${profileStyles.orders} mt-20`}>

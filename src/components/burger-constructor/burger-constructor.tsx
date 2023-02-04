@@ -29,7 +29,7 @@ const BurgerConstructor: FC = () => {
     }
 
     const clickHandler = () => {
-        if (user) {
+        if (Object.keys(user).length !== 0) {
             dispatch(postOrder(bun, ingredients))
         }
     }

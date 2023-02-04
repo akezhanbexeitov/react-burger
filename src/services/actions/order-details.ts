@@ -2,6 +2,7 @@ import { AppThunk, AppDispatch } from './../../utils/types';
 import { BASE_URL } from "../../constants/constants"
 import { request } from "../../utils/server-requests"
 import { RESET_INGREDIENTS_FROM_CONSTRUCTOR } from "./burger-constructor"
+import { getCookie } from '../../utils/cookies';
 
 export const POST_ORDER_REQUEST: 'POST_ORDER_REQUEST' = 'POST_ORDER_REQUEST'
 export const POST_ORDER_SUCCESS: 'POST_ORDER_SUCCESS' = 'POST_ORDER_SUCCESS'
@@ -56,7 +57,8 @@ export const postOrder = (bun: TBun, ingredients: Array<TIngredientShort>): AppT
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + getCookie('accessToken')
         },
         body: JSON.stringify(body)
     }

@@ -21,16 +21,24 @@ export type TMessage = {
 type TWSState = {
     wsConnected: boolean
     message: TMessage
+    url: string
     error?: Event
 }
 
 const initialState: TWSState = {
     wsConnected: false,
-    message: {} as TMessage
+    message: {} as TMessage,
+    url: ''
 }
 
 export const wsReducer = (state = initialState, action: TWSActions) => {
     switch(action.type) {
+        case ws.WS_CONNECTION_START: 
+            return {
+                ...state,
+                error: undefined,
+                url: action.payload.url
+            }
         case ws.WS_CONNECTION_SUCCESS:
             return {
                 ...state,
@@ -47,7 +55,8 @@ export const wsReducer = (state = initialState, action: TWSActions) => {
             return {
                 ...state,
                 error: undefined,
-                wsConnected: false
+                wsConnected: false,
+                message: {} as TMessage
             }
         case ws.WS_GET_MESSAGE:
             return {

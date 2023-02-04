@@ -9,6 +9,9 @@ export const WS_CONNECTION_CLOSE: 'WS_CONNECTION_CLOSE' = 'WS_CONNECTION_CLOSE'
 
 export interface IWSConnectionStartAction {
     readonly type: typeof WS_CONNECTION_START
+    payload: {
+        url: string
+    }
 }
 
 export interface IWSConnectionSuccessAction {
