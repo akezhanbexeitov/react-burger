@@ -1,7 +1,7 @@
 import feedDetailsStyles from './feed-details.module.css'
 import { FC } from 'react'
 import { useSelector } from '../../utils/types'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useParams } from 'react-router-dom'
 import { TOrder } from '../../services/reducers/web-socket'
 
@@ -58,7 +58,7 @@ const FeedDetails: FC = () => {
                 })}
             </div>
             <div className={feedDetailsStyles.total}>
-                <p className="text text_type_main-default text_color_inactive">{order!.createdAt}</p>
+                <p className="text text_type_main-default text_color_inactive"><FormattedDate date={new Date(order!.createdAt)}/></p>
                 <div className={feedDetailsStyles.total_price}>
                     <p className='text text_type_digits-default mr-2'>{price}</p>
                     <CurrencyIcon type="primary" />
