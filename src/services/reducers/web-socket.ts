@@ -11,9 +11,11 @@ export type TOrder = {
     number: number
 }
 
-type TMessage = {
+export type TMessage = {
     success: boolean
     orders: Array<TOrder>
+    total: number
+    totalToday: number
 }
 
 type TWSState = {

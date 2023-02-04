@@ -1,3 +1,4 @@
+import { TMessage } from './../reducers/web-socket';
 export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START'
 export const WS_CONNECTION_SUCCESS: 'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS'
 export const WS_CONNECTION_FAILED: 'WS_CONNECTION_FAILED' = 'WS_CONNECTION_FAILED'
@@ -21,7 +22,7 @@ export interface IWSConnectionFailedAction {
 
 export interface IWSGetMessageAction {
     readonly type: typeof WS_GET_MESSAGE
-    payload: any // TODO Change this any to other types when you see the message from the server
+    payload: TMessage
 }
 
 export interface IWSConnectionClosedAction {
@@ -30,7 +31,6 @@ export interface IWSConnectionClosedAction {
 
 export interface IWSSendMessageAction {
     readonly type: typeof WS_SEND_MESSAGE
-    payload: any //  TODO Change this any to other types when you see the message from the server
 }
 
 export interface IWSConnectionCloseAction {
