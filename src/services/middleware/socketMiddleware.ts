@@ -8,14 +8,11 @@ export const socketMiddleware = (): Middleware => {
 
   return next => (action: ws.TWSActions) => {
     const { dispatch } = store;    
-    const wsUrl = store.getState().feed.url  
     // @ts-ignore  
     const { type, payload } = action;
 
     if (type === ws.WS_CONNECTION_START) {
-      if (wsUrl !== '') {
-        socket = new WebSocket(wsUrl);
-      }
+      socket = new WebSocket(payload.url);
     }
     if (socket) {
       socket.onopen = event => {

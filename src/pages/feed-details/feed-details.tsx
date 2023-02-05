@@ -76,6 +76,7 @@ const FeedDetails: FC = () => {
                             )
                         })
                     }
+                    {/* Keeping this code here if the above code is not correct */}
                     {/* {order && order.ingredients.map((ingredient: string, index: number) => {
                         const currentIngredient = ingredients.find(item => item._id === ingredient)
                         price += currentIngredient!.price
