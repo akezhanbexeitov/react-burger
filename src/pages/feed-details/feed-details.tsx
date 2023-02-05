@@ -28,16 +28,20 @@ const FeedDetails: FC = () => {
         statusColor = '#00CCCC'
     }
 
-    function countIdOccurrences(array: Array<string>) {
-        let count = array.reduce((accumulator: any, curr: any) => {
-            console.log(accumulator)
-            accumulator[curr] = (accumulator[curr] || 0) + 1;
-          return accumulator;
-        }, {});
-        return count;
+    type TAccumulator = {
+        [key: string]: number
     }
 
-    // console.log(countIdOccurrences(order!.ingredients))
+    const countIdOccurrences = (array: Array<string>) => {
+        let count = array.reduce((accumulator: TAccumulator, current: string) => {
+            accumulator[current] = (accumulator[current] || 0) + 1;
+            return accumulator;
+        }, {});
+        return Object.keys(count).map(id => ({ id, count: count[id] }));
+    }
+
+    const orderIngredients = order && countIdOccurrences(order.ingredients)
+    console.log(orderIngredients)
 
     return (
         <main className={feedDetailsStyles.wrapper}>
@@ -48,8 +52,31 @@ const FeedDetails: FC = () => {
                 <p className='text text_type_main-default mb-15' style={{ color: statusColor }}>{orderStatus}</p>
                 <p className='text text_type_main-medium mb-6'>Состав:</p>
                 <div className={`${feedDetailsStyles.ingredients} pr-6 mb-10`}>
-                    {order && order.ingredients.map((ingredient: string, index: number) => {
-
+                    {order &&
+                        orderIngredients!.map((ingredient, index) => {
+                            const currentIngredient = ingredients.find(item => item._id === ingredient.id)
+                            price += currentIngredient!.price * ingredient.count
+                            return (
+                                <div key={index} className={`${feedDetailsStyles.ingredient} mb-4`}>
+                                    <div className={feedDetailsStyles.ingredient_left}>
+                                        <div className={`${feedDetailsStyles.image_outer} mr-4`}>
+                                            <div className={feedDetailsStyles.image_inner}>
+                                                <img src={currentIngredient!.image} alt={currentIngredient!.name}/>
+                                            </div>
+                                        </div>
+                                        <p className={`${feedDetailsStyles.name} mr-4`}>{currentIngredient!.name}</p>
+                                    </div>
+                                    <div className={feedDetailsStyles.ingredient_right}>
+                                        <div className={feedDetailsStyles.price}>
+                                            <p className='text text_type_digits-default mr-2'>{ingredient.count === 1 ? currentIngredient!.price : `${ingredient.count} x ${currentIngredient!.price}`}</p>
+                                            <CurrencyIcon type="primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    {/* {order && order.ingredients.map((ingredient: string, index: number) => {
                         const currentIngredient = ingredients.find(item => item._id === ingredient)
                         price += currentIngredient!.price
                         return (
@@ -70,7 +97,7 @@ const FeedDetails: FC = () => {
                                 </div>
                             </div>
                         )
-                    })}
+                    })} */}
                 </div>
                 <div className={feedDetailsStyles.total}>
                     <p className="text text_type_main-default text_color_inactive">{order && <FormattedDate date={new Date(order.createdAt)}/>}</p>
