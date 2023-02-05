@@ -1,4 +1,4 @@
-import { TWSActions } from './../actions/web-socket';
+import { TWSActions, WS_CONNECTION_CLOSE, WS_CONNECTION_START, WS_SEND_MESSAGE } from './../actions/web-socket';
 import { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../../utils/types";
 
@@ -13,7 +13,7 @@ export const socketMiddleware = (): Middleware => {
     // @ts-ignore  
     const { type, payload } = action;
 
-    if (type === 'WS_CONNECTION_START') {
+    if (type === WS_CONNECTION_START) {
       if (wsUrl !== '') {
         socket = new WebSocket(wsUrl);
       }
@@ -37,12 +37,12 @@ export const socketMiddleware = (): Middleware => {
         dispatch({ type: 'WS_CONNECTION_CLOSED', payload: event });
       };
 
-      if (type === 'WS_SEND_MESSAGE') {
+      if (type === WS_SEND_MESSAGE) {
         const message = payload;
         socket.send(JSON.stringify(message));
       }
 
-      if (type === 'WS_CONNECTION_CLOSE') {
+      if (type === WS_CONNECTION_CLOSE) {
         socket.close()
       }
     }
