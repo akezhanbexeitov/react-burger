@@ -3,7 +3,6 @@ import { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../../utils/types";
 
 export const socketMiddleware = (): Middleware => {
-    
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
