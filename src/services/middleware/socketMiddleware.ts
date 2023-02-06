@@ -1,44 +1,55 @@
-import * as ws from './../actions/web-socket';
 import { Middleware, MiddlewareAPI } from "redux";
 import { AppDispatch, RootState } from "../../utils/types";
+import { TWSActions, WS_CONNECTION_CLOSE, WS_CONNECTION_CLOSED, WS_CONNECTION_FAILED, WS_CONNECTION_START, WS_CONNECTION_SUCCESS, WS_GET_MESSAGE, WS_SEND_MESSAGE } from "../actions/web-socket";
 
-export const socketMiddleware = (): Middleware => {
+type TWSActionTypes = {
+  wsInit: typeof WS_CONNECTION_START
+  wsSendMessage: typeof WS_SEND_MESSAGE
+  onOpen: typeof WS_CONNECTION_SUCCESS
+  onClose: typeof WS_CONNECTION_CLOSED
+  onError: typeof WS_CONNECTION_FAILED
+  onMessage: typeof WS_GET_MESSAGE
+  wsClose: typeof WS_CONNECTION_CLOSE
+}
+
+export const socketMiddleware = (wsActions: TWSActionTypes): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
 
-  return next => (action: ws.TWSActions) => {
+  return next => (action: TWSActions) => {
     const { dispatch } = store;    
     // @ts-ignore  
     const { type, payload } = action;
+    const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage, wsClose } = wsActions;
 
-    if (type === ws.WS_CONNECTION_START) {
+    if (type === wsInit) {
       socket = new WebSocket(payload.url);
     }
     if (socket) {
       socket.onopen = event => {
-        dispatch({ type: ws.WS_CONNECTION_SUCCESS, payload: event });
+        dispatch({ type: onOpen, payload: event });
       };
 
       socket.onerror = event => {
-        dispatch({ type: ws.WS_CONNECTION_FAILED, payload: event });
+        dispatch({ type: onError, payload: event });
       };
 
       socket.onmessage = event => {
         const { data } = event;
 
-        dispatch({ type: ws.WS_GET_MESSAGE, payload: JSON.parse(data) });
+        dispatch({ type: onMessage, payload: JSON.parse(data) });
       };
 
       socket.onclose = event => {
-        dispatch({ type: ws.WS_CONNECTION_CLOSED, payload: event });
+        dispatch({ type: onClose, payload: event });
       };
 
-      if (type === ws.WS_SEND_MESSAGE) {
+      if (type === wsSendMessage) {
         const message = payload;
         socket.send(JSON.stringify(message));
       }
 
-      if (type === ws.WS_CONNECTION_CLOSE) {
+      if (type === wsClose) {
         socket.close()
       }
     }
