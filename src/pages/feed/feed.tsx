@@ -2,7 +2,6 @@ import feedStyles from './feed.module.css'
 import { FC, useEffect } from 'react'
 import Order from '../../components/order/order'
 import { useDispatch, useSelector } from '../../utils/types'
-import { TOrder } from '../../services/reducers/web-socket'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from '../../services/actions/web-socket'
 import { WS_BASE_URL } from '../../constants/constants'
@@ -28,7 +27,7 @@ const Feed: FC = () => {
             <section className={`${feedStyles.container_left} mr-15`}>
                 <h2 className="text text_type_main-large mb-5 mt-10">Лента заказов</h2>
                 <div className={`${feedStyles.feed} pr-2`}>
-                    {message.orders ? message.orders.map((order: TOrder, index: number) => {
+                    {message.orders ? message.orders.map((order, index) => {
                         return (
                             <Order key={index} orderId={order.number} orderNumber={order.number} time={order.createdAt} name={order.name} ingredientsIds={order.ingredients}/>
                         )
