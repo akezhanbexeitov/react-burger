@@ -31,7 +31,7 @@ const BurgerConstructor: FC = () => {
     const clickHandler = () => {
         if (Object.keys(user).length !== 0) {
             dispatch(postOrder(bun, ingredients))
-        }
+        } 
     }
 
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
@@ -52,8 +52,8 @@ const BurgerConstructor: FC = () => {
                 <CurrencyIcon type="primary" />
                 <Link
                     to={{
-                        pathname: user ? `/order` : '/login',
-                        state: user ? { background: location } : null,
+                        pathname: Object.keys(user).length !== 0 ? `/order` : '/login',
+                        state: Object.keys(user).length !== 0 ? { background: location } : null,
                     }}
                 >
                     <Button 
