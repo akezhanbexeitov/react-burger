@@ -68,11 +68,11 @@ const FeedDetails: FC = () => {
                 <p className='text text_type_main-medium mb-6'>Состав:</p>
                 <div className={`${feedDetailsStyles.ingredients} pr-6 mb-10`}>
                     {order &&
-                        orderIngredients!.map((ingredient, index) => {
+                        orderIngredients!.map(ingredient => {
                             const currentIngredient = ingredients.find(item => item._id === ingredient.id)
                             price += currentIngredient!.price * ingredient.count
                             return (
-                                <div key={index} className={`${feedDetailsStyles.ingredient} mb-4`}>
+                                <div key={ingredient.id} className={`${feedDetailsStyles.ingredient} mb-4`}>
                                     <div className={feedDetailsStyles.ingredient_left}>
                                         <div className={`${feedDetailsStyles.image_outer} mr-4`}>
                                             <div className={feedDetailsStyles.image_inner}>
