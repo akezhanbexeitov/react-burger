@@ -91,29 +91,6 @@ const FeedDetails: FC = () => {
                             )
                         })
                     }
-                    {/* Keeping this code here if the above code is not correct */}
-                    {/* {order && order.ingredients.map((ingredient: string, index: number) => {
-                        const currentIngredient = ingredients.find(item => item._id === ingredient)
-                        price += currentIngredient!.price
-                        return (
-                            <div key={index} className={`${feedDetailsStyles.ingredient} mb-4`}>
-                                <div className={feedDetailsStyles.ingredient_left}>
-                                    <div className={`${feedDetailsStyles.image_outer} mr-4`}>
-                                        <div className={feedDetailsStyles.image_inner}>
-                                            <img src={currentIngredient!.image} alt={currentIngredient!.name}/>
-                                        </div>
-                                    </div>
-                                    <p className={`${feedDetailsStyles.name} mr-4`}>{currentIngredient!.name}</p>
-                                </div>
-                                <div className={feedDetailsStyles.ingredient_right}>
-                                    <div className={feedDetailsStyles.price}>
-                                        <p className='text text_type_digits-default mr-2'>{currentIngredient!.price}</p>
-                                        <CurrencyIcon type="primary" />
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })} */}
                 </div>
                 <div className={feedDetailsStyles.total}>
                     <p className="text text_type_main-default text_color_inactive">{order && <FormattedDate date={new Date(order.createdAt)}/>}</p>
