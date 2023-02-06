@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import Order from '../../components/order/order'
+import { WS_BASE_URL } from '../../constants/constants'
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from '../../services/actions/web-socket'
 import { TOrder } from '../../services/reducers/web-socket'
 import { getCookie } from '../../utils/cookies'
@@ -16,7 +17,7 @@ const Orders: FC = () => {
         dispatch({ 
             type: WS_CONNECTION_START,
             payload: {
-                url: `wss://norma.nomoreparties.space/orders?token=${accessToken}`
+                url: `${WS_BASE_URL}?token=${accessToken}`
             }
         })
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from '../../utils/types'
 import { TOrder } from '../../services/reducers/web-socket'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { WS_CONNECTION_CLOSE, WS_CONNECTION_START } from '../../services/actions/web-socket'
+import { WS_BASE_URL } from '../../constants/constants'
 
 const Feed: FC = () => {
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const Feed: FC = () => {
         dispatch({ 
             type: WS_CONNECTION_START,
             payload: {
-                url: 'wss://norma.nomoreparties.space/orders/all'
+                url: `${WS_BASE_URL}/all`
             }
         })
 
