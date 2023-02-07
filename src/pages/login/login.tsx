@@ -6,12 +6,17 @@ import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
 import { FormEvent, FC } from 'react'
 import { useDispatch, useSelector } from '../../utils/types'
+import { Location } from 'history'
+
+type TLocation = {
+    from: Location
+}
 
 const Login: FC = () => {
     const dispatch = useDispatch()
     const isLoading = useSelector(store => store.auth.loginUserRequest)
     const history = useHistory()
-    const location = useLocation()
+    const location = useLocation<TLocation>()
     const {values, handleChange} = useForm({
         email: '',
         password: ''
@@ -20,7 +25,7 @@ const Login: FC = () => {
     const onLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(loginUser(values.email, values.password))
-        const { from } = { from: { pathname: '/' } } || location.state
+        const { from } = location.state || { from: { pathname: "/" }}
         history.push(from)
     }
 
