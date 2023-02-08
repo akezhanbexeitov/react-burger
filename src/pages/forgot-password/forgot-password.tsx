@@ -7,10 +7,13 @@ import { useHistory } from 'react-router-dom'
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner"
 import { request } from "../../utils/server-requests"
 import { useForm } from "../../hooks/use-form"
+import { useDispatch } from "../../utils/types"
+import { FORGOT_PASSWORD_REQUEST } from "../../services/actions/auth"
 
 const ForgotPassword: FC = () => {
     const {values, handleChange} = useForm({ email: '' })
     const history = useHistory()
+    const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(false)
 
     const onClick = (e: FormEvent<HTMLFormElement>, email: string) => {
@@ -27,6 +30,7 @@ const ForgotPassword: FC = () => {
         }
         request(url, requestOptions)
             .then(() => {
+                dispatch({ type: FORGOT_PASSWORD_REQUEST })
                 setIsLoading(false)
                 history.push('/reset-password')
             })

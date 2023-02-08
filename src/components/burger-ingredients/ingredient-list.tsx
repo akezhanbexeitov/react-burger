@@ -1,11 +1,11 @@
 import burgerIngredientsStyles from './burger-ingredients.module.css'
-import { TIngredient } from '../../utils/types'
 import { forwardRef } from 'react'
 import Ingredient from './ingredient'
 import { useLocation, Link } from 'react-router-dom'
+import { TIngredient } from '../../utils/types'
 
 type TIngredientListProps = {
-    ingredientType: TIngredient[]
+    ingredientType: Array<TIngredient>
     title: string
 }
 

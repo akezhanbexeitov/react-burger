@@ -20,4 +20,7 @@ code {
   --constructor-background-color: #2f2f37;
   --link-color: #4C4CFF;
   --header-background-color: #1C1C21;
+  --purple-color: rgba(128, 26, 178, 1);
+  --blue-color: rgba(76, 76, 255, 1);
+  --emerald-color: rgba(0, 204, 204, 1);
 }

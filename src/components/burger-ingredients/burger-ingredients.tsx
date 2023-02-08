@@ -1,12 +1,11 @@
 import { useMemo, memo, useRef, useState, FC } from 'react'
 import burgerIngredientsStyles from './burger-ingredients.module.css'
 import IngredientList from './ingredient-list'
-import { useSelector } from 'react-redux'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { TIngredientList } from '../../utils/types'
+import { useSelector } from '../../utils/types'
 
 const BurgerIngredients: FC = () => {
-    const data = useSelector((store: TIngredientList) => store.ingredientsList.ingredients)
+    const data = useSelector(store => store.ingredientsList.ingredients)
     const [current, setCurrent] = useState('buns')
     const tabsRef = useRef<HTMLDivElement>(null)
     const bunsRef = useRef<HTMLHeadingElement>(null)

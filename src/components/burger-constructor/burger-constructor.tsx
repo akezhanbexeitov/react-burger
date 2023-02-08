@@ -2,29 +2,36 @@ import burgerConstructorStyles from './burger-constructor.module.css'
 import IngredientConstructor from './ingredient-constructor'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useMemo, FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { postOrder } from '../../services/actions/order-details'
 import { Link, useLocation } from 'react-router-dom'
-import { TAuthUser, TIngredient, TIngredientsConstructorBun, TIngredientsConstructorIngredients } from '../../utils/types'
+import { useDispatch, useSelector } from '../../utils/types'
+
+type TIngredientShort = {
+    name: string
+    image: string
+    key: string
+    id: string
+    price: number
+    type?: string
+}
 
 const BurgerConstructor: FC = () => {
-    const bun = useSelector((store: TIngredientsConstructorBun) => store.ingredientsConstructor.bun)
-    const ingredients = useSelector((store: TIngredientsConstructorIngredients) => store.ingredientsConstructor.ingredients)
+    const bun = useSelector(store => store.ingredientsConstructor.bun)
+    const ingredients = useSelector(store => store.ingredientsConstructor.ingredients)
     const dispatch = useDispatch()
-    const user = useSelector((store: TAuthUser) => store.auth.user)
+    const user = useSelector(store => store.auth.user)
     const location = useLocation()
 
-    const calculateTotalPrice = (bunPrice: number = 0, ingredients: TIngredient[]) => {
+    const calculateTotalPrice = (bunPrice: number = 0, ingredients: Array<TIngredientShort>) => {
         let total = bunPrice * 2
         ingredients.map(item => total += item.price)
         return total
     }
 
     const clickHandler = () => {
-        if (user) {
-            // @ts-ignore
+        if (Object.keys(user).length !== 0) {
             dispatch(postOrder(bun, ingredients))
-        }
+        } 
     }
 
     const memoizedTotalPrice = useMemo(() => calculateTotalPrice(bun.price, ingredients), [bun.price, ingredients])
@@ -45,8 +52,8 @@ const BurgerConstructor: FC = () => {
                 <CurrencyIcon type="primary" />
                 <Link
                     to={{
-                        pathname: user ? `/order` : '/login',
-                        state: user ? { background: location } : null,
+                        pathname: Object.keys(user).length !== 0 ? `/order` : '/login',
+                        state: Object.keys(user).length !== 0 ? { background: location } : null,
                     }}
                 >
                     <Button 

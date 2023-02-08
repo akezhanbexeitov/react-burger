@@ -1,9 +1,29 @@
+import { TAuthActions } from './../actions/auth';
 import * as auth from '../actions/auth'
 
-const initialState = {
+type TUser = {
+    email: string
+    name: string
+}
+
+type TAuthState = {
+    isAuthChecked: boolean
+    user: TUser
+    registerUserRequest: boolean
+    registerUserFailed: boolean
+    loginUserRequest: boolean
+    loginUserFailed: boolean
+    getUserRequest: boolean
+    getUserFailed: boolean
+    updateUserRequest: boolean
+    updateUserFailed: boolean
+    forgotPasswordRequest: boolean
+}
+
+const initialState: TAuthState = {
     isAuthChecked: false,
 
-    user: null,
+    user: {} as TUser,
 
     registerUserRequest: false,
     registerUserFailed: false,
@@ -15,10 +35,12 @@ const initialState = {
     getUserFailed: false,
 
     updateUserRequest: false,
-    updateUserFailed: false
+    updateUserFailed: false,
+
+    forgotPasswordRequest: false
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
     switch (action.type) {
         case auth.REGISTER_USER_REQUEST: {
             return {
@@ -108,6 +130,12 @@ const authReducer = (state = initialState, action) => {
                 updateUserRequest: false
             }
         }
+        case auth.FORGOT_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                forgotPasswordRequest: true
+            }
+        }
         case auth.AUTH_CHECKED: {
             return {
                 ...state,
@@ -117,7 +145,7 @@ const authReducer = (state = initialState, action) => {
         case auth.LOGOUT_USER: {
             return {
                 ...state,
-                user: null,
+                user: {} as TUser,
                 isAuthChecked: false
             }
         }

@@ -1,25 +1,28 @@
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { checkUserAuth } from "../../services/actions/auth"
 import { Redirect, useLocation, Route } from 'react-router-dom'
-import { TAuthUser } from "../../utils/types"
+import { useDispatch, useSelector } from "../../utils/types"
+import { Location } from 'history'
+
+type TLocation = {
+    from: Location
+}
 
 const ProtectedRoute = ({ onlyUnAuth = false, ...rest }) => {
-    const user = useSelector((store: TAuthUser) => store.auth.user)
-    const location = useLocation()
+    const user = useSelector(store => store.auth.user)
+    const location = useLocation<TLocation>()
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // @ts-ignore
         dispatch(checkUserAuth())
     }, [dispatch])
 
-    if (onlyUnAuth && user) {
-        const { from } = { from: { pathname: "/" } } || location.state
+    if (onlyUnAuth && Object.keys(user).length !== 0) {
+        const { from } = location.state || { from: { pathname: "/" } }
         return <Redirect to={from} />;
     }
 
-    if (!onlyUnAuth && !user) {
+    if (!onlyUnAuth && Object.keys(user).length === 0) {
         return (
             <Redirect to={{
                 pathname: '/login',

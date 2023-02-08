@@ -1,21 +1,22 @@
 import loginStyles from './login.module.css'
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../services/actions/auth'
 import LoadingSpinner from '../../components/loading-spinner/loading-spinner'
 import { useForm } from '../../hooks/use-form'
 import { FormEvent, FC } from 'react'
+import { useDispatch, useSelector } from '../../utils/types'
+import { Location } from 'history'
 
-type TAuthLoginUserRequest = {
-    auth: { loginUserRequest: boolean }
+type TLocation = {
+    from: Location
 }
 
 const Login: FC = () => {
     const dispatch = useDispatch()
-    const isLoading = useSelector((store: TAuthLoginUserRequest) => store.auth.loginUserRequest)
+    const isLoading = useSelector(store => store.auth.loginUserRequest)
     const history = useHistory()
-    const location = useLocation()
+    const location = useLocation<TLocation>()
     const {values, handleChange} = useForm({
         email: '',
         password: ''
@@ -23,9 +24,8 @@ const Login: FC = () => {
 
     const onLogin = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // @ts-ignore
         dispatch(loginUser(values.email, values.password))
-        const { from } = { from: { pathname: '/' } } || location.state
+        const { from } = location.state || { from: { pathname: "/" }}
         history.push(from)
     }
 

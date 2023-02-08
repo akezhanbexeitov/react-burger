@@ -1,12 +1,20 @@
+import { TIngredientsListActions } from './../actions/ingredients-list';
 import * as ingredients from '../actions/ingredients-list'
+import { TIngredient } from '../../utils/types';
 
-const initialState = {
+type TIngredientsListState = {
+    ingredients: Array<TIngredient>
+    ingredientsRequest: boolean
+    ingredientsFailed: boolean
+}
+
+const initialState: TIngredientsListState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false
 }
 
-const ingredientsReducer = (state = initialState, action) => {
+const ingredientsReducer = (state = initialState, action: TIngredientsListActions): TIngredientsListState => {
     switch (action.type) {
         case ingredients.GET_INGREDIENTS_REQUEST: {
             return {

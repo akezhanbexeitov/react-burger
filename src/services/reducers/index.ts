@@ -1,3 +1,4 @@
+import { wsReducer } from './web-socket';
 import { combineReducers } from 'redux'
 import ingredientsReducer from './ingredients-list';
 import burgerConstructorReducer from './burger-constructor';
@@ -8,7 +9,8 @@ const rootReducer = combineReducers({
   ingredientsList: ingredientsReducer,
   ingredientsConstructor: burgerConstructorReducer,
   orderDetails: orderDetailsReducer,
-  auth: authReducer
+  auth: authReducer,
+  feed: wsReducer
 })
 
 export default rootReducer
