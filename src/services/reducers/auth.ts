@@ -17,6 +17,7 @@ type TAuthState = {
     getUserFailed: boolean
     updateUserRequest: boolean
     updateUserFailed: boolean
+    forgotPasswordRequest: boolean
 }
 
 const initialState: TAuthState = {
@@ -34,7 +35,9 @@ const initialState: TAuthState = {
     getUserFailed: false,
 
     updateUserRequest: false,
-    updateUserFailed: false
+    updateUserFailed: false,
+
+    forgotPasswordRequest: false
 }
 
 const authReducer = (state = initialState, action: TAuthActions): TAuthState => {
@@ -125,6 +128,12 @@ const authReducer = (state = initialState, action: TAuthActions): TAuthState => 
                 ...state,
                 updateUserFailed: true,
                 updateUserRequest: false
+            }
+        }
+        case auth.FORGOT_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                forgotPasswordRequest: true
             }
         }
         case auth.AUTH_CHECKED: {

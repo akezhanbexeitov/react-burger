@@ -19,6 +19,8 @@ export const UPDATE_USER_REQUEST: 'UPDATE_USER_REQUEST' = 'UPDATE_USER_REQUEST'
 export const UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS' = 'UPDATE_USER_SUCCESS'
 export const UPDATE_USER_FAILED: 'UPDATE_USER_FAILED' = 'UPDATE_USER_FAILED'
 
+export const FORGOT_PASSWORD_REQUEST: 'FORGOT_PASSWORD_REQUEST' = 'FORGOT_PASSWORD_REQUEST'
+
 export const AUTH_CHECKED: 'AUTH_CHECKED' = 'AUTH_CHECKED'
 
 export const LOGOUT_USER: 'LOGOUT_USER' = 'LOGOUT_USER'
@@ -91,6 +93,10 @@ export interface IUpdateUserSuccessAction {
     }
 }
 
+export interface IForgotPasswordRequestSentAction {
+    readonly type: typeof FORGOT_PASSWORD_REQUEST
+}
+
 export interface IUpdateUserFailedAction {
     readonly type: typeof UPDATE_USER_FAILED
 }
@@ -116,6 +122,7 @@ export type TAuthActions =
     | IUpdateUserRequestAction
     | IUpdateUserSuccessAction
     | IUpdateUserFailedAction
+    | IForgotPasswordRequestSentAction
     | IAuthCheckedAction
     | ILogoutUserAction
 
