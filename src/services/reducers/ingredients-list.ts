@@ -34,7 +34,6 @@ const ingredientsReducer = (state = initialState, action: TIngredientsListAction
                 ...state,
                 ingredientsFailed: true,
                 ingredientsRequest: false
-
             }
         }
         default: {
