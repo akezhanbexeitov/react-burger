@@ -28,6 +28,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/uuid": "9.0.0",
     "cypress": "12.5.1",
+    "eslint-plugin-cypress": "^2.12.1",
     "fetch-mock": "9.11.0",
     "react-scripts": "5.0.1",
     "react-test-renderer": "18.2.0",
