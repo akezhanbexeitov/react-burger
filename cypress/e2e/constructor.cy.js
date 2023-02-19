@@ -1,5 +1,10 @@
 import { testUrl } from '../../src/constants/constants'
 
+const bunClass = '[class^=burger-ingredients_listItem__]'
+const topBunClass = '[class^=burger-constructor_list__]'
+const inputClass = '[class^=input__container]'
+const modalClass = '[class^=modal_modal__]'
+
 describe('Constructor page', () => {
   beforeEach(() => {
     cy.visit(testUrl)
@@ -7,7 +12,7 @@ describe('Constructor page', () => {
   })
 
   it('should load ingredients', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .first()
       .as('bun')
 
@@ -22,16 +27,16 @@ describe('Constructor page', () => {
   })
 
   it('should handle DND for buns to the constructor', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .first()
       .as('bun')
 
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .first()
       .as('topBun')
 
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .last()
       .as('bottomBun')
@@ -47,11 +52,11 @@ describe('Constructor page', () => {
   })
 
   it('should handle DND for sauces to the constructor', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .eq('2')
       .as('sauce')
 
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .eq('1')
       .as('ingredients')
@@ -64,15 +69,15 @@ describe('Constructor page', () => {
   })
 
   it('should handle DND for mains to the constructor', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .eq('7')
       .as('main1')
 
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .eq('10')
       .as('main2')
 
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .eq('1')
       .as('ingredients')
@@ -89,20 +94,20 @@ describe('Constructor page', () => {
   })
 
   it('should go to login page after clicking make order button and go back to the constructor page. User should be able to make order after logging in', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .first()
       .as('bun')
 
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .eq('2')
       .as('sauce')
 
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .eq('1')
       .as('ingredients')
   
-    cy.get('[class^=burger-constructor_list__]')
+    cy.get(topBunClass)
       .children()
       .first()
       .as('topBun')
@@ -120,31 +125,31 @@ describe('Constructor page', () => {
 
     const email = 'akidulatini@mail.ru'
     const password = 123456789
-    cy.get('[class^=input__container]')
+    cy.get(inputClass)
       .children()
       .first()
       .type(email)
 
-    cy.get('[class^=input__container]')
+    cy.get(inputClass)
       .children()
       .last()
       .type(`${password}{enter}`)
 
     cy.get('[class^=burger-ingredients_container__]').should('exist')
     cy.get('[class^=burger-constructor_container__]').should('exist')
-    cy.get('[class^=burger-constructor_list__]').should('exist')
+    cy.get(topBunClass).should('exist')
 
     cy.get('@orderButton').click()
     cy.get('#react-modals').should('exist')
   })
   
   it('should open modal when clicking on ingredient and exit when clicking on X', () => {
-    cy.get('[class^=burger-ingredients_listItem__]')
+    cy.get(bunClass)
       .first()
       .click()
-    cy.get('[class^=modal_modal__]').should('exist')
+    cy.get(modalClass).should('exist')
 
     cy.get('[class^=modal_close__]').click()
-    cy.get('[class^=modal_modal__]').should('not.exist')
+    cy.get(modalClass).should('not.exist')
   })
 })
