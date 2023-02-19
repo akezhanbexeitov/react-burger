@@ -1,19 +1,6 @@
 import * as auth from "../actions/auth"
 import authReducer from "./auth"
-
-const initialState = {
-    isAuthChecked: false,
-    user: {},
-    registerUserRequest: false,
-    registerUserFailed: false,
-    loginUserRequest: false,
-    loginUserFailed: false,
-    getUserRequest: false,
-    getUserFailed: false,
-    updateUserRequest: false,
-    updateUserFailed: false,
-    forgotPasswordRequest: false
-}
+import { initialState } from "./auth"
 
 const testUser = {
     email: 'something@something.ru',

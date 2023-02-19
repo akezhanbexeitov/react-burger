@@ -1,10 +1,6 @@
 import * as ws from "../actions/web-socket"
 import { wsReducer } from "./web-socket"
-
-const initialState = {
-    wsConnected: false,
-    message: {} 
-}
+import { initialState } from "./web-socket"
 
 const testErrorMessage = 'Test error message'
 

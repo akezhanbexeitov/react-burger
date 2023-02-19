@@ -1,10 +1,6 @@
 import * as ingredientsConstructor from "../actions/burger-constructor";
 import burgerConstructorReducer from "./burger-constructor"
-
-const initialState = {
-    bun: {},
-    ingredients: []
-};
+import { initialState } from "./burger-constructor";
 
 const testIngredient1 = {
     name: 'Bun test name',

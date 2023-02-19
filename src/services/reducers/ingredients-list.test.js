@@ -1,11 +1,6 @@
 import * as ingredients from "../actions/ingredients-list"
 import ingredientsReducer from "./ingredients-list"
-
-const initialState = {
-    ingredients: [],
-    ingredientsRequest: false,
-    ingredientsFailed: false
-}
+import { initialState } from "./ingredients-list"
 
 const testIngredient1 = {
     _id: '123',

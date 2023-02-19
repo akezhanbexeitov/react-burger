@@ -1,11 +1,6 @@
 import * as order from "../actions/order-details"
 import orderDetailsReducer from "./order-details"
-
-const initialState = {
-    orderNumber: 0,
-    orderRequest: false,
-    orderFailed: false
-}
+import { initialState } from "./order-details"
 
 const orderNumber = '40255'
 
