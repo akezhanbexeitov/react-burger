@@ -1,6 +1,8 @@
+import { testUrl } from '../../src/constants/constants'
+
 describe('Constructor page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
+    cy.visit(testUrl)
     cy.viewport(1440, 1080)
   })
 
