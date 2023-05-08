@@ -48,3 +48,10 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ### `npm run cypress:open`
 
 Runs Cypress library to test UI of the application.
+
+## TODO list
+- Write unit tests for all functions
+- Write end-to-end tests for all pages
+- Show success modals when user successfully logs in or registers
+- Show fail modals when user did not log in or register
+- Reduce amount of repeated code in the order page where the same code is written twice
