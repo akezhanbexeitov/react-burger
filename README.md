@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Stellar Burgers
+It is a neon future styled website where you can construct your own burger by dragging and dropping the needed ingredients from the left side to the right side. Eventually you can place an order but in order to do that you have to be logged in to the system. After registration you may proceed to the profile where you can change your email or name. Moreover, you can check you previous orders there. Authorization logic, JSON Web Tokens (JWT) generation, and design were made by Yandex.Practicum.
+
+Tech stack used:  
+
+[![My Skills](https://skillicons.dev/icons?i=react,redux,webpack,typescript,jest)](https://skillicons.dev)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
