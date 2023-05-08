@@ -20,7 +20,7 @@ type TAuthState = {
     forgotPasswordRequest: boolean
 }
 
-const initialState: TAuthState = {
+export const initialState: TAuthState = {
     isAuthChecked: false,
 
     user: {} as TUser,

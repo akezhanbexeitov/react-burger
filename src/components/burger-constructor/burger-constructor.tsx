@@ -57,6 +57,7 @@ const BurgerConstructor: FC = () => {
                     }}
                 >
                     <Button 
+                        data-testid='make_order_button'
                         className='button button_type_primary button_size_medium ml-10' 
                         type="primary" 
                         size="medium" 

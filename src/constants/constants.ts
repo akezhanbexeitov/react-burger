@@ -8,3 +8,5 @@ export const DND_TYPES = {
 }
 
 export const INGREDIENT_TYPE = 'bun'
+
+export const testUrl = 'http://localhost:3000'

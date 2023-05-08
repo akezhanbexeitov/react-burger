@@ -8,7 +8,7 @@ type TIngredientsListState = {
     ingredientsFailed: boolean
 }
 
-const initialState: TIngredientsListState = {
+export const initialState: TIngredientsListState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsFailed: false
@@ -34,7 +34,6 @@ const ingredientsReducer = (state = initialState, action: TIngredientsListAction
                 ...state,
                 ingredientsFailed: true,
                 ingredientsRequest: false
-
             }
         }
         default: {
