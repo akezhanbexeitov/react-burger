@@ -48,11 +48,3 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ### `npm run cypress:open`
 
 Runs Cypress library to test UI of the application.
-
-# Website link
-
-https://stellar-burgers-ten.vercel.app/
-
-# Description
-
-Stellar burgers is a website where you can order burgers of your choice. The main feature of this website is that you are able to make your own burgers by dragging and dropping the ingredients you want to the burger constructor!
